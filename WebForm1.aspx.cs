@@ -137,7 +137,7 @@ namespace DocumentReportBuilder
 
         protected void ButtonToTeacher_Click(object sender, EventArgs e)
         {
-           
+            Server.Transfer("~/WebForm2.aspx");
         }
     }
 }
