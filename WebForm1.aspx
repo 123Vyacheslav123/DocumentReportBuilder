@@ -1,11 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="Report_Generator.WebForm1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="DocumentReportBuilder.WebForm1" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>
+
+    </title>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -20,6 +22,8 @@
 
             <asp:Button ID="ButtonChoose" runat="server" Height="40px" Width="120px" OnClick="ButtonChoose_Click" style="position:absolute; top: 146px; left: 638px;" Text="Выбрать" /> <%-- Кнопка выбора элемента --%>
         <asp:Button ID="ButtonTable" runat="server" Height="40px" style="position:absolute; top: 422px; left: 219px;" Width="120px" OnClick="ButtonTable_Click" Text="Таблица" />
+
+            <asp:Button ID="ButtonToTeacher" runat="server" Height="40px" style="position:absolute; top: 80px; left: 166px;" Width="200px" OnClick="ButtonToTeacher_Click" Text="Создание шаблона" PostBackUrl="~/Views/Home/Index.cshtml" />
 
         </p>
         <asp:DropDownList ID="DropDownListForElements" Width="250px" runat="server" style="position:absolute; top: 156px; left: 190px;" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged"> <%-- Список элементов --%>
@@ -39,6 +43,7 @@
         <asp:TextBox ID="TextBoxColumns" style="position:absolute; top: 518px; left: 193px;" runat="server" OnTextChanged="TextBoxColumns_TextChanged"></asp:TextBox>
         <asp:Button ID="ButtonAddTable" runat="server" Height="40px" Width="120px" style="position:absolute; top: 567px; left: 210px;" OnClick="ButtonAddTable_Click" Text="Добавить" />
         <asp:Button ID="ButtonCreateFile" runat="server" Height="40px" Width="200px" style="position:absolute; top: 503px; left: 583px;" Text="Создать документ" OnClick="ButtonCreateFile_Click" />
+         
     </form>
 </body>
 </html>

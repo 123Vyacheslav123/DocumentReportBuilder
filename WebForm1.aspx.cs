@@ -11,11 +11,14 @@ using Xceed.Document.NET;
 using System.Web.Mvc;
 using System.Drawing;
 using System.IO;
+using Syroot.Windows.IO;
 
-namespace Report_Generator
+namespace DocumentReportBuilder
 {
     public partial class WebForm1 : System.Web.UI.Page
     { 
+
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,7 +31,9 @@ namespace Report_Generator
         {
             string text;
             text = MainTextBox.Text; // берем текст из MainTextBox
-            var doc = DocX.Load("C://Users//Shoker//Downloads//Test.docx");
+            string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
+            string filepath = String.Concat(downloadsPath, "/Test.docx");
+            var doc = DocX.Load(filepath);
             var par = doc.InsertParagraph();
             par.Append(text)    // форматирование документа
             .Font(new Xceed.Document.NET.Font("Times New Roman"))
@@ -85,13 +90,15 @@ namespace Report_Generator
 
         protected void ButtonAddTable_Click(object sender, EventArgs e)
         {
+            string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
+            string filepath = String.Concat(downloadsPath, "/Test.docx");
 
             string Rows = TextBoxRows.Text.ToString();
             int Rows_int = Int32.Parse(Rows);
             string Columns = TextBoxColumns.Text.ToString();
             int Columns_int = Int32.Parse(Columns);
             
-                var doc = DocX.Load("C://Users//Shoker//Downloads//Test.docx");
+                var doc = DocX.Load(filepath);
                 Border b = new Border();
                 b.Color = Color.Black;
                 var t = doc.AddTable(Rows_int, Columns_int);
@@ -105,7 +112,7 @@ namespace Report_Generator
                 t.Rows[1].Cells[0].Paragraphs.First().Append("");
                 t.Rows[2].Cells[0].Paragraphs.First().Append("");
                 doc.InsertTable(t);
-                doc.SaveAs("C://Users//Shoker//Downloads//Test.docx");
+                doc.SaveAs(filepath);
 
         }
 
@@ -121,10 +128,16 @@ namespace Report_Generator
 
         protected void ButtonCreateFile_Click(object sender, EventArgs e)
         {
-            string filename = "C://Users//Shoker//Downloads//Test.docx";
-            var doc = DocX.Create(filename);
+            string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
+            string filepath = String.Concat(downloadsPath, "/Test.docx");
+            var doc = DocX.Create(filepath);
             doc.Save();
 
+        }
+
+        protected void ButtonToTeacher_Click(object sender, EventArgs e)
+        {
+           
         }
     }
 }

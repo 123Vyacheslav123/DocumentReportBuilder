@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="row">
+    <script src="~/Scripts/ckeditor5/ckeditor.js"></script>
+    <div>
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+        {
+            <div>
+                <textarea id="content" name="content"></textarea>
+            </div>
+            <div>
+                <input type="submit" value="Отправить" />
+            </div>
+        }
+    </div>
+</div>
+
+
+<div class="row">
+    <div>
+        @if (ViewBag.Content != default(string))
+        {
+            @Html.Raw(ViewBag.Content)
+        }
+    </div>
+
+</div>
+
+
+@{Html.BeginForm("CreateDocument", "Home", FormMethod.Get);
+    {
+        <div>
+            <input type="submit" value="Create Document" style="width:150px;height:27px" />
+        </div>
+    }
+    Html.EndForm();
+}
+
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+
+        /*var editor = CKEDITOR.replace('content');*/
+        ClassicEditor.create(document.querySelector('#content'));
+    });
+</script>

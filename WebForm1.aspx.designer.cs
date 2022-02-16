@@ -7,7 +7,7 @@
 // </автоматически создаваемое>
 //------------------------------------------------------------------------------
 
-namespace Report_Generator
+namespace DocumentReportBuilder
 {
 
 
@@ -67,6 +67,15 @@ namespace Report_Generator
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonTable;
+
+        /// <summary>
+        /// ButtonToTeacher элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonToTeacher;
 
         /// <summary>
         /// DropDownListForElements элемент управления.
