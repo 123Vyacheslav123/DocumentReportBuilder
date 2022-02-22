@@ -16,14 +16,13 @@
         <p>
             <asp:Button ID="Button1" runat="server" Height="40px" Width="120px" OnClick="ButtonDownload_Click" Text="Скачать" style="position:absolute;left:674px; bottom:65px;" />  <%-- Кнопка скачивания --%>
 
-            <asp:TextBox ID="TextBoxEditing" runat="server" Height="200px" Width="700px" AcceptsTab="True" TextAlign="Distribute" Wrap="true" style="position:absolute;bottom:515px; left: 93px;" TextMode="MultiLine"></asp:TextBox> <%-- Вспомогательный ТекстБокс --%>
+            <asp:TextBox ID="TextBoxEditing" runat="server" Height="200px" Width="700px" AcceptsTab="True" TextAlign="Distribute" Wrap="true" style="position:absolute;bottom:515px; left: 93px;" TextMode="MultiLine" OnTextChanged="TextBoxEditing_TextChanged1"></asp:TextBox> <%-- Вспомогательный ТекстБокс --%>
 
             <asp:TextBox ID="MainTextBox" runat="server" Height="850px" Width="700px" AcceptsTab="True" TextAlign="Distribute" TextMode="MultiLine" style="position:absolute;left:843px; top: 49px;" OnTextChanged="MainTextBox_TextChanged"></asp:TextBox> <%-- Главный ТекстБокс --%>
 
             <asp:Button ID="ButtonChoose" runat="server" Height="40px" Width="120px" OnClick="ButtonChoose_Click" style="position:absolute; top: 146px; left: 638px;" Text="Выбрать" /> <%-- Кнопка выбора элемента --%>
-        <asp:Button ID="ButtonTable" runat="server" Height="40px" style="position:absolute; top: 422px; left: 219px;" Width="120px" OnClick="ButtonTable_Click" Text="Таблица" />
 
-            <asp:Button ID="ButtonToTeacher" runat="server" Height="40px" style="position:absolute; top: 80px; left: 166px;" Width="200px" OnClick="ButtonToTeacher_Click" Text="Создание шаблона" PostBackUrl="~/Views/Home/Index.cshtml" />
+            <asp:Button ID="ButtonToWebForm2" runat="server" Height="40px" Width="250px" style="position:absolute; top: 80px; width: 251px; left: 307px;" OnClick="ButtonToWebForm2_Click" Text="Создание конфигурации" />
 
         </p>
         <asp:DropDownList ID="DropDownListForElements" Width="250px" runat="server" style="position:absolute; top: 156px; left: 190px;" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged"> <%-- Список элементов --%>
@@ -39,10 +38,9 @@
             &nbsp;</p>
         <p>
             &nbsp;</p>
-        <asp:TextBox ID="TextBoxRows" style="position:absolute; top: 474px; left: 194px;" runat="server" OnTextChanged="TextBoxRows_TextChanged"></asp:TextBox>
-        <asp:TextBox ID="TextBoxColumns" style="position:absolute; top: 518px; left: 193px;" runat="server" OnTextChanged="TextBoxColumns_TextChanged"></asp:TextBox>
-        <asp:Button ID="ButtonAddTable" runat="server" Height="40px" Width="120px" style="position:absolute; top: 567px; left: 210px;" OnClick="ButtonAddTable_Click" Text="Добавить" />
         <asp:Button ID="ButtonCreateFile" runat="server" Height="40px" Width="200px" style="position:absolute; top: 503px; left: 583px;" Text="Создать документ" OnClick="ButtonCreateFile_Click" />
+         
+        <asp:Button ID="ButtonAddList" runat="server" style="position:absolute; top: 523px; left: 120px;" OnClick="ButtonAddList_Click" Text="Следующий пункт" Visible="False" />
          
     </form>
 </body>

@@ -18,13 +18,9 @@ namespace DocumentReportBuilder
     public partial class WebForm1 : System.Web.UI.Page
     { 
 
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            TextBoxRows.Visible = false;
-            TextBoxColumns.Visible = false;
-            ButtonAddTable.Visible = false;
+            
         }
 
         protected void ButtonDownload_Click(object sender, EventArgs e)   // кнопка скачивания документа
@@ -50,9 +46,9 @@ namespace DocumentReportBuilder
 
         }
 
-        protected void TextBoxEditing_TextChanged(object sender, EventArgs e)
+        protected void TextBoxEditing_TextChanged1(object sender, EventArgs e)
         {
-
+           
         }
 
         protected void DropDownListForElements_SelectedIndexChanged(object sender, EventArgs e)
@@ -62,15 +58,38 @@ namespace DocumentReportBuilder
 
         protected void ButtonChoose_Click(object sender, EventArgs e)  // поиск по Value из DropDownListForElements
         {
+            string redline = "\u2007\u2007\u2007\u2007\u2007"; // красная строка
+            
+
            if ((DropDownListForElements.SelectedItem.Value) =="0") // если найдено Value для текста
             {
-                TextBoxEditing.Text ="\u2007\u2007\u2007\u2007\u2007"; // красная строка
-            }
-            else                                                   // для остальных(пока что)
+                ButtonAddList.Visible = false;
+                TextBoxEditing.Visible = true;
+                TextBoxEditing.Text = redline; // красная строка
+            }  
+            else if ((DropDownListForElements.SelectedItem.Value) == "1") // если найдено Value для Таблицы
             {
-                TextBoxEditing.Text = "Пока что не доступно";
+                ButtonAddList.Visible = false;
+                TextBoxEditing.Visible = false;
+            }   
+            else if ((DropDownListForElements.SelectedItem.Value) == "2") // если найдено Value для Списка
+            {
+                ButtonAddList.Visible = true;
+                TextBoxEditing.Visible = true;
+                TextBoxEditing.Text = String.Concat(redline,"1.","\u2007"); // красная строка
+            }   
+                
+            else if ((DropDownListForElements.SelectedItem.Value) == "3") // если найдено Value для картинки
+            {
+                ButtonAddList.Visible = false;
+                TextBoxEditing.Visible = false;
             }
-           
+            else
+            {
+                ButtonAddList.Visible = false;
+                TextBoxEditing.Visible = true;
+                TextBoxEditing.Text = "Ошибка";
+            }
         }
 
         protected void ButtonAddToMain_Click(object sender, EventArgs e)   // добавление текста на главный лист
@@ -81,51 +100,6 @@ namespace DocumentReportBuilder
             TextBoxEditing.Text = "\u2007\u2007\u2007\u2007\u2007"; // очистка листа после добавления текста
         }
 
-        protected void ButtonTable_Click(object sender, EventArgs e)
-        {
-            TextBoxRows.Visible = true;
-            TextBoxColumns.Visible = true;
-            ButtonAddTable.Visible = true;
-        }
-
-        protected void ButtonAddTable_Click(object sender, EventArgs e)
-        {
-            string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
-            string filepath = String.Concat(downloadsPath, "/Test.docx");
-
-            string Rows = TextBoxRows.Text.ToString();
-            int Rows_int = Int32.Parse(Rows);
-            string Columns = TextBoxColumns.Text.ToString();
-            int Columns_int = Int32.Parse(Columns);
-            
-                var doc = DocX.Load(filepath);
-                Border b = new Border();
-                b.Color = Color.Black;
-                var t = doc.AddTable(Rows_int, Columns_int);
-                t.SetBorder(TableBorderType.Bottom, b);
-                t.SetBorder(TableBorderType.InsideH, b);
-                t.SetBorder(TableBorderType.InsideV, b);
-                t.SetBorder(TableBorderType.Left, b);
-                t.SetBorder(TableBorderType.Right, b);
-                t.SetBorder(TableBorderType.Top, b);
-                t.Rows[0].Cells[0].Paragraphs.First().Append("");
-                t.Rows[1].Cells[0].Paragraphs.First().Append("");
-                t.Rows[2].Cells[0].Paragraphs.First().Append("");
-                doc.InsertTable(t);
-                doc.SaveAs(filepath);
-
-        }
-
-        protected void TextBoxRows_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void TextBoxColumns_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         protected void ButtonCreateFile_Click(object sender, EventArgs e)
         {
             string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
@@ -134,10 +108,17 @@ namespace DocumentReportBuilder
             doc.Save();
 
         }
-
-        protected void ButtonToTeacher_Click(object sender, EventArgs e)
+        protected void ButtonToWebForm2_Click(object sender, EventArgs e)
         {
             Server.Transfer("~/WebForm2.aspx");
+        }
+
+        protected void ButtonAddList_Click(object sender, EventArgs e)
+        {
+            string redline = "\u2007\u2007\u2007\u2007\u2007"; // красная строка
+            int listID = 2;
+            TextBoxEditing.Text += String.Concat(Environment.NewLine,redline,listID,".", "/u2007");
+            listID++;
         }
     }
 }

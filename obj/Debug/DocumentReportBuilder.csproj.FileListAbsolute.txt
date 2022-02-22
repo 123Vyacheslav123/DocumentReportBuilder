@@ -141,8 +141,8 @@ C:\Users\Shoker\source\repos\123Vyacheslav123\DocumentReportBuilder\bin\roslyn\v
 C:\Users\Shoker\source\repos\123Vyacheslav123\DocumentReportBuilder\bin\roslyn\vbc.rsp
 C:\Users\Shoker\source\repos\123Vyacheslav123\DocumentReportBuilder\bin\roslyn\VBCSCompiler.exe
 C:\Users\Shoker\source\repos\123Vyacheslav123\DocumentReportBuilder\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\Shoker\source\repos\123Vyacheslav123\DocumentReportBuilder\obj\Debug\DocumentReportBuilder.csproj.AssemblyReference.cache
 C:\Users\Shoker\source\repos\123Vyacheslav123\DocumentReportBuilder\obj\Debug\DocumentReportBuilder.csproj.CoreCompileInputs.cache
 C:\Users\Shoker\source\repos\123Vyacheslav123\DocumentReportBuilder\obj\Debug\DocumentReportBuilder.csproj.CopyComplete
 C:\Users\Shoker\source\repos\123Vyacheslav123\DocumentReportBuilder\obj\Debug\DocumentReportBuilder.dll
 C:\Users\Shoker\source\repos\123Vyacheslav123\DocumentReportBuilder\obj\Debug\DocumentReportBuilder.pdb
+C:\Users\Shoker\source\repos\123Vyacheslav123\DocumentReportBuilder\obj\Debug\DocumentReportBuilder.csproj.AssemblyReference.cache

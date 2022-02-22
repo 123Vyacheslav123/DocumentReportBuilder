@@ -60,22 +60,13 @@ namespace DocumentReportBuilder
         protected global::System.Web.UI.WebControls.Button ButtonChoose;
 
         /// <summary>
-        /// ButtonTable элемент управления.
+        /// ButtonToWebForm2 элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonTable;
-
-        /// <summary>
-        /// ButtonToTeacher элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonToTeacher;
+        protected global::System.Web.UI.WebControls.Button ButtonToWebForm2;
 
         /// <summary>
         /// DropDownListForElements элемент управления.
@@ -96,33 +87,6 @@ namespace DocumentReportBuilder
         protected global::System.Web.UI.WebControls.Button ButtonAddToMain;
 
         /// <summary>
-        /// TextBoxRows элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxRows;
-
-        /// <summary>
-        /// TextBoxColumns элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxColumns;
-
-        /// <summary>
-        /// ButtonAddTable элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAddTable;
-
-        /// <summary>
         /// ButtonCreateFile элемент управления.
         /// </summary>
         /// <remarks>
@@ -130,5 +94,14 @@ namespace DocumentReportBuilder
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonCreateFile;
+
+        /// <summary>
+        /// ButtonAddList элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonAddList;
     }
 }
