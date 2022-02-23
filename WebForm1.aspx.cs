@@ -137,7 +137,7 @@ namespace DocumentReportBuilder
             string filepath = String.Concat(downloadsPath, "/Test.docx");
             var doc = DocX.Create(filepath);
             doc.Save();
-
+            TextBoxCounter.Text = "2";
         }
         protected void ButtonToWebForm2_Click(object sender, EventArgs e)
         {
@@ -147,9 +147,11 @@ namespace DocumentReportBuilder
         protected void ButtonAddList_Click(object sender, EventArgs e)
         {
             string redline = "\u2007\u2007\u2007\u2007\u2007"; // красная строка
-            int listID = 2;
+            int listID = Int32.Parse(TextBoxCounter.Text);
             TextBoxEditing.Text += String.Concat(Environment.NewLine,redline,listID,".", "\u2007");
             listID++;
+            TextBoxCounter.Text = listID.ToString();
+
         }
 
         protected void UploadFile(object sender, EventArgs e)
@@ -181,6 +183,11 @@ namespace DocumentReportBuilder
         }
 
         protected void TextBoxStorage_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void TextBoxCounter_TextChanged(object sender, EventArgs e)
         {
 
         }

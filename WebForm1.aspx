@@ -14,7 +14,7 @@
         <p>
             <asp:Button ID="Button1" runat="server" Height="40px" Width="120px" OnClick="ButtonDownload_Click" Text="Скачать" style="position:absolute;left:674px; bottom:65px;" />  <%-- Кнопка скачивания --%>
 
-            <asp:TextBox ID="TextBoxEditing" runat="server" Height="200px" Width="700px" AcceptsTab="True" TextAlign="Distribute" Wrap="true" style="position:absolute;bottom:515px; left: 93px;" TextMode="MultiLine" OnTextChanged="TextBoxEditing_TextChanged1"></asp:TextBox> <%-- Вспомогательный ТекстБокс --%>
+            <asp:TextBox ID="TextBoxEditing" runat="server" Height="200px" Width="700px" AcceptsTab="True" TextAlign="Distribute" Wrap="true" style="position:absolute;bottom:516px; left: 92px;" TextMode="MultiLine" OnTextChanged="TextBoxEditing_TextChanged1"></asp:TextBox> <%-- Вспомогательный ТекстБокс --%>
             
             <asp:FileUpload ID="FileUpload" style="position:absolute;bottom:515px; left: 300px;" Visible="False" runat="server" /><br/>
 
@@ -52,6 +52,10 @@
        
          
         <asp:TextBox ID="TextBoxStorage" runat="server" OnTextChanged="TextBoxStorage_TextChanged" Visible="False"></asp:TextBox>
+         
+       
+         
+        <asp:TextBox ID="TextBoxCounter" runat="server" OnTextChanged="TextBoxCounter_TextChanged" Visible="False"></asp:TextBox>
          
        
          
