@@ -139,7 +139,8 @@ namespace DocumentReportBuilder
             string filepath = String.Concat(downloadsPath, "/Test.docx");
             var doc = DocX.Create(filepath);
             doc.Save();
-            TextBoxCounter.Text = "2";
+            Session["COUNTERIMG"] = "1";
+            Session["COUNTERLIST"] = "2";
         }
         protected void ButtonToWebForm2_Click(object sender, EventArgs e)
         {
@@ -149,10 +150,11 @@ namespace DocumentReportBuilder
         protected void ButtonAddList_Click(object sender, EventArgs e)
         {
             string redline = "\u2007\u2007\u2007\u2007\u2007"; // красная строка
-            int listID = Int32.Parse(TextBoxCounter.Text);
+            string LISTID = (string)Session["COUNTERLIST"];
+            int listID = Int32.Parse(LISTID);
             TextBoxEditing.Text += String.Concat(Environment.NewLine,redline,listID,".", "\u2007");
             listID++;
-            TextBoxCounter.Text = listID.ToString();
+            Session["COUNTERLIST"] = listID.ToString();
 
         }
 
@@ -166,27 +168,27 @@ namespace DocumentReportBuilder
 
             //Display the Picture in Image control.
             Image1.ImageUrl = "~/Images/" + Path.GetFileName(FileUpload.FileName);
-            TextBoxStorage.Text=Path.GetFileName(FileUpload.FileName);
+            Session["IMGPATH"]= Path.GetFileName(FileUpload.FileName);
         }
 
         protected void ButtonAddImage_Click(object sender, EventArgs e)
         {
-            string folderPath = MapPath("~/Images/");
+           
             string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
             string filepath = String.Concat(downloadsPath, "/Test.docx");
             var doc = DocX.Load(filepath);
-            string imgPath = TextBoxStorage.Text;
+            string imgPath = (string)Session["IMGPATH"];
             Image img = doc.AddImage(MapPath("~/Images/")+imgPath);
             Picture p = img.CreatePicture(200,200);
-            Paragraph par = doc.InsertParagraph("Рисунок 1 - ");
+            string counterimg = (string)Session["COUNTERIMG"];
+            int ImgID = Int32.Parse(counterimg);
+            string imginsert = String.Concat("Рисунок ", counterimg," -");
+            Paragraph par = doc.InsertParagraph(imginsert);
             par.AppendPicture(p);
             doc.Save();
-            TextBoxStorage.Text = "";
-        }
-
-        protected void TextBoxStorage_TextChanged(object sender, EventArgs e)
-        {
-
+            Session["IMGPATH"]="";
+            ImgID++;
+            Session["COUNTERIMG"] = ImgID.ToString();
         }
 
         protected void TextBoxCounter_TextChanged(object sender, EventArgs e)

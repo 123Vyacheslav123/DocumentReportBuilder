@@ -44,8 +44,6 @@
          
         <asp:Button ID="ButtonAddImage" runat="server" Height="40px" Width="200px" Visible="False" style="position:absolute; top: 418px; left: 588px;" OnClick="ButtonAddImage_Click" Text="Добавить фото" />
          
-        <asp:TextBox ID="TextBoxStorage" runat="server" OnTextChanged="TextBoxStorage_TextChanged" Visible="False"></asp:TextBox>
-         
         <asp:TextBox ID="TextBoxCounter" runat="server" OnTextChanged="TextBoxCounter_TextChanged" Visible="False"></asp:TextBox>
          
         
