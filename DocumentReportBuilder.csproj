@@ -755,6 +755,7 @@
     <Content Include="Scripts\ckeditor\skins\moono-lisa\images\spinner.gif" />
     <Content Include="Scripts\ckeditor\styles.js" />
     <Content Include="Scripts\ckeditor\vendor\promise.js" />
+    <Content Include="Styles\TextBoxes.css" />
     <Content Include="WebForm1.aspx" />
     <Content Include="WebForm2.aspx" />
     <Content Include="packages\Antlr.3.5.0.2\.signature.p7s" />

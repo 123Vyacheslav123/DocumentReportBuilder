@@ -26,8 +26,7 @@ namespace DocumentReportBuilder
 
         protected void ButtonDownload_Click(object sender, EventArgs e)   // кнопка скачивания документа
         {
-            string text;
-            text = MainTextBox.Text; // берем текст из MainTextBox
+            string text ="1";
             string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
             string filepath = String.Concat(downloadsPath, "/Test.docx");
             var doc = DocX.Load(filepath);
@@ -60,9 +59,12 @@ namespace DocumentReportBuilder
         protected void ButtonChoose_Click(object sender, EventArgs e)  // поиск по Value из DropDownListForElements
         {
             string redline = "\u2007\u2007\u2007\u2007\u2007"; // красная строка
-            
+            TopBoxes.Style.Add("visibility", "hidden");
+            LeftBoxes.Style.Add("visibility", "hidden");
+            RightBoxes.Style.Add("visibility", "hidden");
+            BotBoxes.Style.Add("visibility", "hidden");
 
-           if ((DropDownListForElements.SelectedItem.Value) =="0") // если найдено Value для текста
+            if ((DropDownListForElements.SelectedItem.Value) =="0") // если найдено Value для текста
             {
                 Image1.Visible = false;
                 FileUpload.Visible = false;
@@ -159,7 +161,7 @@ namespace DocumentReportBuilder
             
             string folderPath = MapPath("~/Images/");
 
-            ////Save the File to the Directory (Folder).
+            //Save the File to the Directory (Folder).
             FileUpload.SaveAs(folderPath + Path.GetFileName(FileUpload.FileName));
 
             //Display the Picture in Image control.
@@ -188,6 +190,117 @@ namespace DocumentReportBuilder
         }
 
         protected void TextBoxCounter_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ButtonTitle_Click(object sender, EventArgs e)
+        {
+            TopBoxes.Style.Add("visibility","visible");
+            LeftBoxes.Style.Add("visibility", "visible");
+            RightBoxes.Style.Add("visibility", "visible");
+            BotBoxes.Style.Add("visibility", "visible");
+            TextBoxTop1.Text = (string)Session["TBT1"];
+            TextBoxTop2.Text = (string)Session["TBT2"];
+            TextBoxTop3.Text = (string)Session["TBT3"];
+            TextBoxTop4.Text = (string)Session["TBT4"];
+            TextBoxLeft1.Text = (string)Session["TBL1"];
+            TextBoxRight1.Text = (string)Session["TBR1"];
+            TextBoxBot1.Text = (string)Session["TBB1"];
+            TextBoxBot1.Text = (string)Session["TBB2"];
+            TextBoxBot1.Text = (string)Session["TBB3"];
+            TextBoxBot1.Text = (string)Session["TBB5"];
+            TextBoxBot1.Text = (string)Session["TBB6"];
+        }
+
+
+        ////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////
+
+        protected void TextBoxTop1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxTop2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxTop3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxTop4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxLeft1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxLeft2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxLeft3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxLeft4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxRight1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxRight2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxRight3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxRight4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxBot1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxBot2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxBot3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxBot4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxBot5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxBot6_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxBot7_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxBot8_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxBot9_TextChanged(object sender, EventArgs e)
         {
 
         }
