@@ -207,10 +207,10 @@ namespace DocumentReportBuilder
             TextBoxLeft1.Text = (string)Session["TBL1"];
             TextBoxRight1.Text = (string)Session["TBR1"];
             TextBoxBot1.Text = (string)Session["TBB1"];
-            TextBoxBot1.Text = (string)Session["TBB2"];
-            TextBoxBot1.Text = (string)Session["TBB3"];
-            TextBoxBot1.Text = (string)Session["TBB5"];
-            TextBoxBot1.Text = (string)Session["TBB6"];
+            TextBoxBot2.Text = (string)Session["TBB2"];
+            TextBoxBot3.Text = (string)Session["TBB3"];
+            TextBoxBot5.Text = (string)Session["TBB5"];
+            TextBoxBot7.Text = (string)Session["TBB7"];
         }
 
 
