@@ -24,10 +24,10 @@ namespace DocumentReportBuilder
             Session["TBL1"] = TextBoxLeft1.Text;
             Session["TBR1"] = TextBoxRight1.Text;
             Session["TBB1"] = TextBoxBot1.Text;
-            Session["TBb2"] = TextBoxBot2.Text;
             Session["TBB3"] = TextBoxBot3.Text;
             Session["TBB5"] = TextBoxBot5.Text;
             Session["TBB7"] = TextBoxBot7.Text;
+            Session["TBB9"] = TextBoxBot9.Text;
 
         }
 
@@ -120,6 +120,11 @@ namespace DocumentReportBuilder
 
         }
         protected void TextBoxBot8_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void TextBoxBot9_TextChanged(object sender, EventArgs e)
         {
 
         }

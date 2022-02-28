@@ -24,28 +24,6 @@ namespace DocumentReportBuilder
             
         }
 
-        protected void ButtonDownload_Click(object sender, EventArgs e)   // кнопка скачивания документа
-        {
-            string text ="1";
-            string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
-            string filepath = String.Concat(downloadsPath, "/Test.docx");
-            var doc = DocX.Load(filepath);
-            var par = doc.InsertParagraph();
-            par.Append(text)    // форматирование документа
-            .Font(new Xceed.Document.NET.Font("Times New Roman"))
-            .FontSize(14)
-            .SpacingBefore(0)
-            .SpacingAfter(6)
-            .SpacingLine(18);
-
-            doc.Save();
-        }
-
-        protected void MainTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         protected void TextBoxEditing_TextChanged1(object sender, EventArgs e)
         {
            
@@ -58,6 +36,7 @@ namespace DocumentReportBuilder
 
         protected void ButtonChoose_Click(object sender, EventArgs e)  // поиск по Value из DropDownListForElements
         {
+             ButtonAddTtitle.Visible = false;
             string redline = "\u2007\u2007\u2007\u2007\u2007"; // красная строка
             TopBoxes.Style.Add("visibility", "hidden");
             LeftBoxes.Style.Add("visibility", "hidden");
@@ -133,6 +112,209 @@ namespace DocumentReportBuilder
             TextBoxEditing.Text = "\u2007\u2007\u2007\u2007\u2007"; // очистка листа после добавления текста
         }
 
+        protected void ButtonAddTitle_Click(object sender, EventArgs e)   // добавление текста на главный лист
+        {
+            string tbt1 = TextBoxTop1.Text;
+            string tbt2 = TextBoxTop2.Text;
+            string tbt3 = TextBoxTop3.Text;
+            string tbt4 = TextBoxTop4.Text;
+            string tbl1 = TextBoxLeft1.Text;
+            string tbl2 = TextBoxLeft2.Text;
+            string tbl3 = TextBoxLeft3.Text;
+            string tbl4 = TextBoxLeft4.Text;
+            string tbr1 = TextBoxRight1.Text;
+            string tbr2 = TextBoxRight2.Text;
+            string tbr3 = TextBoxRight3.Text;
+            string tbr4 = TextBoxRight4.Text;
+            string tbb1 = TextBoxBot1.Text;
+            string tbb2 = TextBoxBot2.Text;
+            string tbb3 = TextBoxBot3.Text;
+            string tbb4 = TextBoxBot4.Text;
+            string tbb5 = TextBoxBot5.Text;
+            string tbb6 = TextBoxBot6.Text;
+            string tbb7 = TextBoxBot7.Text;
+            string tbb8 = TextBoxBot8.Text;
+            string tbb9 = TextBoxBot9.Text;
+
+
+            ///////////////////////////////////////////////////////////////
+            ///////////////////    ТЕКСТ ДЛЯ ТИТУЛЬНИКА    ////////////////
+            ///////////////////////////////////////////////////////////////
+
+            string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
+            string filepath = String.Concat(downloadsPath, "/Test.docx");
+            var doc = DocX.Load(filepath);
+            var part1 = doc.InsertParagraph();
+            part1.Append(tbt1)    // форматирование документа
+            .Font(new Xceed.Document.NET.Font("Times New Roman"))
+            .FontSize(14)
+            .SpacingBefore(0)
+            .SpacingAfter(10);
+            part1.Alignment = Alignment.center;
+
+            /////////////////////////////////////////////////////////////
+
+            var part2 = doc.InsertParagraph();
+            part2.Append(tbt2)
+            .Font(new Xceed.Document.NET.Font("Times New Roman"))
+            .FontSize(14)
+            .SpacingBefore(0)
+            .SpacingAfter(10);
+            part2.Alignment = Alignment.center;
+            part2.CapsStyle(CapsStyle.caps);
+            part2.UnderlineColor(System.Drawing.Color.Black);
+
+            /////////////////////////////////////////////////////////////
+
+            var part3 = doc.InsertParagraph();
+            part3.Append(tbt3)
+            .Font(new Xceed.Document.NET.Font("Times New Roman"))
+            .FontSize(14)
+            .SpacingBefore(0)
+            .SpacingAfter(10);
+            part3.Alignment = Alignment.center;
+            part3.CapsStyle(CapsStyle.caps);
+
+            /////////////////////////////////////////////////////////////
+
+            var part4 = doc.InsertParagraph();
+            part4.Append(tbt4)
+            .Font(new Xceed.Document.NET.Font("Times New Roman"))
+            .FontSize(14)
+            .SpacingBefore(0)
+            .SpacingAfter(54);
+            part4.Alignment = Alignment.center;
+            part4.CapsStyle(CapsStyle.caps);
+
+            /////////////////////////////////////////////////////////////
+
+            var parm1 = doc.InsertParagraph();
+            string strm1 = String.Concat(tbl1, "\t", tbr1);
+            parm1.Append(strm1)
+            .Font(new Xceed.Document.NET.Font("Times New Roman"))
+            .FontSize(14)
+            .SpacingBefore(0)
+            .Bold()
+            .SpacingAfter(10);
+            parm1.Alignment = Alignment.left;
+            parm1.CapsStyle(CapsStyle.caps);
+            parm1.InsertTabStopPosition(Alignment.right, 456);
+
+            /////////////////////////////////////////////////////////////
+
+            var parm2 = doc.InsertParagraph();
+            string strm2 = String.Concat(tbl2, "\t", tbr2);
+            parm2.Append(strm2)
+            .Font(new Xceed.Document.NET.Font("Times New Roman"))
+            .FontSize(14)
+            .SpacingBefore(0)
+            .SpacingAfter(10);
+            parm2.Alignment = Alignment.left;
+            parm2.InsertTabStopPosition(Alignment.right, 456);
+
+            /////////////////////////////////////////////////////////////
+
+            var parm3 = doc.InsertParagraph();
+            string strm3 = String.Concat(tbl3, "\t", tbr3);
+            parm3.Append(strm3)
+            .Font(new Xceed.Document.NET.Font("Times New Roman"))
+            .FontSize(14)
+            .SpacingBefore(0)
+            .SpacingAfter(10);
+            parm3.Alignment = Alignment.left;
+            parm3.InsertTabStopPosition(Alignment.right, 456);
+
+            /////////////////////////////////////////////////////////////
+
+            var parm4 = doc.InsertParagraph();
+            string strm4 = String.Concat(tbl4, "\t", tbr4);
+            parm4.Append(strm4)
+            .Font(new Xceed.Document.NET.Font("Times New Roman"))
+            .FontSize(14)
+            .SpacingBefore(0)
+            .SpacingAfter(10);
+            parm4.Alignment = Alignment.left;
+            parm4.InsertTabStopPosition(Alignment.right,456);
+
+            /////////////////////////////////////////////////////////////
+
+            var parb1 = doc.InsertParagraph();
+            string tbnumb = String.Concat(tbb1," ",tbb2);
+            parb1.Append(tbnumb)    // форматирование документа
+            .Font(new Xceed.Document.NET.Font("Times New Roman"))
+            .FontSize(24)
+            .SpacingBefore(0)
+            .Bold()
+            .SpacingAfter(10);
+            parb1.Alignment = Alignment.center;
+
+            /////////////////////////////////////////////////////////////
+
+            var parb3 = doc.InsertParagraph();
+            parb3.Append(tbb3)    // форматирование документа
+            .Font(new Xceed.Document.NET.Font("Times New Roman"))
+            .FontSize(11)
+            .SpacingBefore(0)
+            .SpacingAfter(10);
+            parb3.Alignment = Alignment.center;
+
+            /////////////////////////////////////////////////////////////
+
+            var parb4 = doc.InsertParagraph();
+            parb4.Append(tbb4)    // форматирование документа
+            .Font(new Xceed.Document.NET.Font("Times New Roman"))
+            .FontSize(22)
+            .SpacingBefore(0)
+            .SpacingAfter(10);
+            parb4.Alignment = Alignment.center;
+
+            /////////////////////////////////////////////////////////////
+
+            var parb5 = doc.InsertParagraph();
+            string tbvar=String.Concat(tbb5," ",tbb6);
+            parb5.Append(tbvar)    // форматирование документа
+            .Font(new Xceed.Document.NET.Font("Times New Roman"))
+            .FontSize(11)
+            .SpacingBefore(0)
+            .SpacingAfter(48);
+            parb5.Alignment = Alignment.center;
+
+            /////////////////////////////////////////////////////////////
+
+            var parb7 = doc.InsertParagraph();
+            parb7.Append(tbb7)    // форматирование документа
+            .Font(new Xceed.Document.NET.Font("Times New Roman"))
+            .FontSize(11)
+            .SpacingBefore(0)
+            .SpacingAfter(10);
+            parb7.Alignment = Alignment.center;
+
+            /////////////////////////////////////////////////////////////
+
+            var parb8 = doc.InsertParagraph();
+            parb8.Append(tbb8)    // форматирование документа
+            .Font(new Xceed.Document.NET.Font("Times New Roman"))
+            .FontSize(22)
+            .SpacingBefore(0)
+            .SpacingAfter(168);
+            parb8.Alignment = Alignment.center;
+
+            /////////////////////////////////////////////////////////////
+
+            var parb9 = doc.InsertParagraph();
+            parb9.Append(tbb9)    // форматирование документа
+            .Font(new Xceed.Document.NET.Font("Times New Roman"))
+            .FontSize(11)
+            .Bold()
+            .SpacingBefore(0)
+            .SpacingAfter(10);
+            parb9.Alignment = Alignment.center;
+
+            /////////////////////////////////////////////////////////////
+
+            doc.Save();
+        }
+
         protected void ButtonCreateFile_Click(object sender, EventArgs e)
         {
             string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
@@ -198,6 +380,10 @@ namespace DocumentReportBuilder
 
         protected void ButtonTitle_Click(object sender, EventArgs e)
         {
+            ButtonAddTtitle.Visible = true;
+            ButtonAddImage.Visible = false;
+            ButtonAddToMain.Visible = false;
+
             TopBoxes.Style.Add("visibility","visible");
             LeftBoxes.Style.Add("visibility", "visible");
             RightBoxes.Style.Add("visibility", "visible");
@@ -209,10 +395,10 @@ namespace DocumentReportBuilder
             TextBoxLeft1.Text = (string)Session["TBL1"];
             TextBoxRight1.Text = (string)Session["TBR1"];
             TextBoxBot1.Text = (string)Session["TBB1"];
-            TextBoxBot2.Text = (string)Session["TBB2"];
             TextBoxBot3.Text = (string)Session["TBB3"];
             TextBoxBot5.Text = (string)Session["TBB5"];
             TextBoxBot7.Text = (string)Session["TBB7"];
+            TextBoxBot9.Text = (string)Session["TBB9"];
         }
 
 
