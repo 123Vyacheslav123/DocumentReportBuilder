@@ -766,6 +766,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Boxes.css" />
     <Content Include="Styles\TextBoxes.css" />
     <Content Include="WebForm1.aspx" />
     <Content Include="WebForm2.aspx" />

@@ -36,6 +36,52 @@ namespace DocumentReportBuilder
             Server.Transfer("~/WebForm1.aspx");
         }
 
+        protected void ButtonCreateTitleList_Click(object sender, EventArgs e)
+        {
+            TopBoxes.Style.Add("visibility", "visible");
+            LeftBoxes.Style.Add("visibility", "visible");
+            RightBoxes.Style.Add("visibility", "visible");
+            BotBoxes.Style.Add("visibility", "visible");
+            ButtonCreateMainList.Style.Add("visibility", "visible");
+        }
+
+        protected void ButtonCreateStyle_Click(object sender, EventArgs e)
+        {
+            if ((DropDownListForElements.SelectedItem.Value) == "0") // если найдено Value для текста
+            {
+                TextStyle.Style.Add("visibility","visible");
+                MainButtons.Style.Add("visibility", "visible");
+
+            }
+            else if ((DropDownListForElements.SelectedItem.Value) == "1") // если найдено Value для Таблицы
+            {
+                
+            }
+            else if ((DropDownListForElements.SelectedItem.Value) == "2") // если найдено Value для Списка
+            {
+                
+            }
+
+            else if ((DropDownListForElements.SelectedItem.Value) == "3") // если найдено Value для картинки
+            {
+                
+            }
+            else
+            {
+                
+            }
+        }
+
+        protected void ButtonSaveStyle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ButtonGoBack_Click(object sender, EventArgs e)
+        {
+            TextStyle.Style.Add("visibility", "hidden");
+            MainButtons.Style.Add("visibility", "hidden");
+        }
 
 
         ////////////////////////////////////////////////////////
@@ -129,5 +175,9 @@ namespace DocumentReportBuilder
 
         }
 
+        protected void DropDownListForElements_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

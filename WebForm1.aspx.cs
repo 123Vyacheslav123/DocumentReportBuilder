@@ -43,7 +43,7 @@ namespace DocumentReportBuilder
             RightBoxes.Style.Add("visibility", "hidden");
             BotBoxes.Style.Add("visibility", "hidden");
 
-            if ((DropDownListForElements.SelectedItem.Value) =="0") // если найдено Value для текста
+            if ((DropDownListForElements.SelectedItem.Value) == "0") // если найдено Value для текста
             {
                 Image1.Visible = false;
                 FileUpload.Visible = false;
