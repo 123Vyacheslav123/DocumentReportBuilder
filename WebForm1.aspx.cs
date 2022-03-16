@@ -24,6 +24,14 @@ namespace DocumentReportBuilder
             
         }
 
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            int Columns = 10;
+            int Rows = 10;
+            string style = "hidden";
+            this.CreateTextBoxes(Rows, Columns, style);
+        }
+
         protected void TextBoxEditing_TextChanged1(object sender, EventArgs e)
         {
            
@@ -42,49 +50,32 @@ namespace DocumentReportBuilder
             LeftBoxes.Style.Add("visibility", "hidden");
             RightBoxes.Style.Add("visibility", "hidden");
             BotBoxes.Style.Add("visibility", "hidden");
+            Images.Style.Add("visibility", "hidden");
+            List.Style.Add("visibility", "hidden");
+            TextAndList.Style.Add("visibility", "hidden");
+            Title.Style.Add("visibility", "hidden");
+            Tables.Style.Add("visibility", "hidden");
 
             if ((DropDownListForElements.SelectedItem.Value) == "0") // если найдено Value для текста
             {
-                Image1.Visible = false;
-                FileUpload.Visible = false;
-                ButtonUploadImg.Visible = false;
-                ButtonAddImage.Visible = false;
-                ButtonAddToMain.Visible = true;
-                ButtonAddList.Visible = false;
-                TextBoxEditing.Visible = true;
+                TextAndList.Style.Add("visibility", "visible");
                 TextBoxEditing.Text = redline; // красная строка
             }  
             else if ((DropDownListForElements.SelectedItem.Value) == "1") // если найдено Value для Таблицы
             {
-                Image1.Visible = false;
-                FileUpload.Visible = false;
-                ButtonUploadImg.Visible = false;
-                ButtonAddImage.Visible = false;
-                ButtonAddToMain.Visible = false;
-                ButtonAddList.Visible = false;
-                TextBoxEditing.Visible = false;
+                Tables.Style.Add("visibility", "visible");
+
             }   
             else if ((DropDownListForElements.SelectedItem.Value) == "2") // если найдено Value для Списка
             {
-                Image1.Visible = false;
-                FileUpload.Visible = false;
-                ButtonUploadImg.Visible = false;
-                ButtonAddImage.Visible = false;
-                ButtonAddToMain.Visible = true;
-                ButtonAddList.Visible = true;
-                TextBoxEditing.Visible = true;
+                TextAndList.Style.Add("visibility", "visible");
+                List.Style.Add("visibility", "visible");
                 TextBoxEditing.Text = String.Concat(redline,"1.","\u2007"); // красная строка
             }   
                 
             else if ((DropDownListForElements.SelectedItem.Value) == "3") // если найдено Value для картинки
             {
-                ButtonAddToMain.Visible = false;
-                ButtonAddList.Visible = false;
-                TextBoxEditing.Visible = false;
-                Image1.Visible = true;
-                FileUpload.Visible = true;
-                ButtonUploadImg.Visible = true;
-                ButtonAddImage.Visible = true;
+                Images.Style.Add("visibility", "visible");
             }
             else
             {
@@ -380,10 +371,7 @@ namespace DocumentReportBuilder
 
         protected void ButtonTitle_Click(object sender, EventArgs e)
         {
-            ButtonAddTtitle.Visible = true;
-            ButtonAddImage.Visible = false;
-            ButtonAddToMain.Visible = false;
-
+            Title.Style.Add("visibility", "visible"); ;
             TopBoxes.Style.Add("visibility","visible");
             LeftBoxes.Style.Add("visibility", "visible");
             RightBoxes.Style.Add("visibility", "visible");
@@ -401,6 +389,83 @@ namespace DocumentReportBuilder
             TextBoxBot9.Text = (string)Session["TBB9"];
         }
 
+
+        protected void ButtonTableCreate_Click(object sender, EventArgs e)
+        {
+
+            int Columns = Int32.Parse(TextBoxColumn.Text);
+            int Rows = Int32.Parse(TextBoxRows.Text);
+            int index = pnlTextBoxes.Controls.OfType<TextBox>().ToList().Count + (Rows * Columns);
+            string style = "visible";
+            this.CreateTextBoxes(Rows, Columns, style);
+
+        }
+
+        protected void ButtonToWord_Click(object sender, EventArgs e)
+        {
+            int Columns = Int32.Parse(TextBoxColumn.Text);
+            int Rows = Int32.Parse(TextBoxRows.Text);
+            string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
+            string filepath = String.Concat(downloadsPath, "/Test.docx");
+            var doc = DocX.Load(filepath);
+
+            // создаём таблицу
+            Xceed.Document.NET.Table table = doc.AddTable(Rows, Columns);
+
+            // располагаем таблицу по центру
+            table.Alignment = Alignment.center;
+
+            // меняем стандартный дизайн таблицы
+            table.Design = TableDesign.TableGrid;
+
+            //заполнение ячейки текстом
+            for (int Rows_X = 0; Rows_X < Rows; Rows_X++)
+            {
+                for (int Columns_Y = 0; Columns_Y < Columns; Columns_Y++)
+                {
+                    string cellid = "cell_ID" + Columns_Y + Rows_X;
+                    TextBox text = (TextBox)pnlTextBoxes.FindControl(cellid);
+                    table.Rows[Rows_X].Cells[Columns_Y].Paragraphs.First().Append(text.Text);
+
+                }
+            }
+            // создаём параграф и вставляем таблицу
+            doc.InsertTable(table);
+            // сохраняем документ
+            doc.Save();
+        }
+
+        protected void CreateTextBoxes(int Rows, int Columns, string style)
+        {
+
+            int counter_rows = 1;
+            int posleftCounter = 250;
+            int postopCounter = 160;
+            for (int i = 0; i < Rows; i++)
+            {
+                for (int j = 0; j < Columns; j++)
+                {
+                    TextBox tb = new TextBox();
+                    tb.ID = "cell_ID" + i + j;
+                    tb.Width = 80;
+                    tb.Style["position"] = "absolute";
+                    tb.Style["left"] = posleftCounter.ToString() + "px";
+                    tb.Style["top"] = postopCounter.ToString() + "px";
+                    tb.Style["visibility"] = style;
+                    posleftCounter = posleftCounter + 100;
+                    pnlTextBoxes.Controls.Add(tb);
+                    counter_rows++;
+
+                    Literal lt = new Literal();
+                    lt.Text = "<br />";
+                    pnlTextBoxes.Controls.Add(lt);
+
+
+                }
+                postopCounter = postopCounter + 30;
+                posleftCounter = 250;
+            }
+        }
 
         ////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////

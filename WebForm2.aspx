@@ -106,7 +106,7 @@
 
             <asp:Label ID="LabelInterval" style="position:absolute; top:600px; left:170px" runat="server" Text="Интервал"></asp:Label>
 
-             <asp:Label ID="LabelBefore" style="position:absolute; top:700px; left:250px" runat="server" Text="До"></asp:Label>
+            <asp:Label ID="LabelBefore" style="position:absolute; top:700px; left:250px" runat="server" Text="До"></asp:Label>
 
             <asp:TextBox ID="TextBoxBefore" Width="50px" style="position:absolute; top:700px; left:330px" runat="server"></asp:TextBox>
 
