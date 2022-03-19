@@ -47,24 +47,33 @@ namespace DocumentReportBuilder
 
         protected void ButtonCreateStyle_Click(object sender, EventArgs e)
         {
+            TopBoxes.Style.Add("visibility", "hidden");
+            LeftBoxes.Style.Add("visibility", "hidden");
+            RightBoxes.Style.Add("visibility", "hidden");
+            BotBoxes.Style.Add("visibility", "hidden");
+            TextStyle.Style.Add("visibility", "hidden");
+            Liststyle.Style.Add("visibility", "hidden");
+            Picstyle.Style.Add("visibility", "hidden");
+            TableStyle.Style.Add("visibility","hidden");
+
             if ((DropDownListForElements.SelectedItem.Value) == "0") // если найдено Value для текста
             {
-                TextStyle.Style.Add("visibility","visible");
+                TextStyle.Style.Add("visibility", "visible");
                 MainButtons.Style.Add("visibility", "visible");
 
             }
             else if ((DropDownListForElements.SelectedItem.Value) == "1") // если найдено Value для Таблицы
             {
-                
+                TableStyle.Style.Add("visibility", "visible");
             }
             else if ((DropDownListForElements.SelectedItem.Value) == "2") // если найдено Value для Списка
             {
-                
+                Liststyle.Style.Add("visibility", "visible");
             }
 
             else if ((DropDownListForElements.SelectedItem.Value) == "3") // если найдено Value для картинки
             {
-                
+                Picstyle.Style.Add("visibility", "visible");
             }
             else
             {
@@ -176,6 +185,11 @@ namespace DocumentReportBuilder
         }
 
         protected void DropDownListForElements_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void TextFontList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

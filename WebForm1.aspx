@@ -15,11 +15,8 @@
         <div id="Based" style="visibility:visible" runat="server">
 
             <asp:Button ID="ButtonChoose" runat="server" Height="40px" Width="120px" OnClick="ButtonChoose_Click" style="position:absolute; top: 146px; left: 638px;" Text="Выбрать" /> <%-- Кнопка выбора элемента --%>
-
             <asp:Button ID="ButtonTitle" Height="40px" Width="250px" style="position:absolute; top: 80px; width: 251px; left: 30px;" runat="server" Text="Заполнить Титульник" OnClick="ButtonTitle_Click" />
-
             <asp:Button ID="ButtonToWebForm2" runat="server" Height="40px" Width="250px" style="position:absolute; top: 80px; width: 251px; left: 307px;" OnClick="ButtonToWebForm2_Click" Text="Создание конфигурации" />
-
             <asp:DropDownList ID="DropDownListForElements" Width="250px" runat="server" style="position:absolute; top: 156px; left: 190px;" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged"> <%-- Список элементов --%>
                 <asp:ListItem Value="0">Текст</asp:ListItem>
                 <asp:ListItem Value="1">Таблица</asp:ListItem>
@@ -34,7 +31,6 @@
         <div id ="TextAndList" style="visibility:hidden" runat="server">
 
             <asp:TextBox ID="TextBoxEditing" runat="server" Height="200px" Width="700px" AcceptsTab="True" TextAlign="Distribute" Wrap="true" style="position:absolute;bottom:516px; left: 92px;" TextMode="MultiLine" OnTextChanged="TextBoxEditing_TextChanged1"></asp:TextBox> <%-- Вспомогательный ТекстБокс --%>
-
             <asp:Button ID="ButtonAddToMain" Height="40px" Width="200px" runat="server" style="position:absolute; top: 418px; left: 588px;" OnClick="ButtonAddToMain_Click" Text="Добавить Текст" />
 
         </div>
@@ -48,11 +44,8 @@
         <div id="Images" style="visibility:hidden" runat="server">
          
             <asp:Button ID="ButtonAddImage" runat="server" Height="40px" Width="200px" style="position:absolute; top: 550px; left: 200px;" OnClick="ButtonAddImage_Click" Text="Добавить фото" />
-
             <asp:FileUpload ID="FileUpload" style="position:absolute;top:500px; left: 300px;" runat="server" /><br/>
-
             <asp:Button ID="ButtonUploadImg" runat="server" style="position:absolute;top:500px; left: 150px;" Text="Загрузить фото" OnClick="UploadFile" /><br/>
-
             <asp:Image ID="Image1" style="position:absolute;top:250px; left: 150px; width:400px; height:250px" runat="server" />
             
         </div>
