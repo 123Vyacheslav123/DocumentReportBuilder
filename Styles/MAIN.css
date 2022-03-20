@@ -1,0 +1,57 @@
+﻿.RE, .RE3 {
+    position: relative;
+    left: 15%;
+    margin-bottom: 15px;
+}
+
+.RE1, .RE2 {
+    position: relative;
+    left: 15%;
+}
+
+.RE4 {
+    position: relative;
+    left: 35%;
+    margin-bottom: 20px;
+    border: none;
+    color: white;
+    padding: 10px;
+}
+
+.RE5 {
+    position: relative;
+    left: 30%;
+    border: none;
+    color: white;
+    padding: 10px;
+    margin-bottom: 27px;
+}
+
+.RE6 {
+    position: relative;
+    left: 25%;
+    margin-bottom: 2px;
+    border: none;
+    color: white;
+}
+
+.RE3_1 {
+    position: relative;
+    left: 15%;
+    margin-bottom: 25px;
+}
+
+.RE4_Welc {
+    position: relative;
+    left: 20%;
+    margin-bottom: 25px;
+    border: none;
+    color: white;
+    padding: 10px;
+}
+
+.DROP {
+    position: relative;
+    left: 15%;
+    margin-bottom: 25px;
+}
