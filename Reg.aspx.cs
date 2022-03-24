@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -16,6 +17,12 @@ namespace Registration
         {
            
         }
+
+        protected void Page_PreInit(object sender,EventArgs e)
+        {
+    
+        }
+
         protected void Button1_Click(object sender, EventArgs e)
         {
 
@@ -23,6 +30,16 @@ namespace Registration
 
         protected  void ButtonRegistration_Click(object sender, EventArgs e)
         {
+            /////Подключение БД
+            MongoClient client = new MongoClient(
+            ConfigurationManager.AppSettings["connectionString"]);
+            MongoServer server = client.GetServer();
+
+            string databaseName = "ReportBuilderDB"; // Имя БД
+            string collectionName = "Users"; // Имя коллекции с пользователями
+
+            MongoDatabase db = server.GetDatabase(databaseName);
+            MongoCollection<PersonModel> collection = db.GetCollection<PersonModel>(collectionName);
             
         }
     }

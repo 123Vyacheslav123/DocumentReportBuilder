@@ -172,4 +172,5 @@ C:\Users\Shoker\source\repos\123Vyacheslav123\DocumentReportBuilder\bin\System.N
 C:\Users\Shoker\source\repos\123Vyacheslav123\DocumentReportBuilder\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Shoker\source\repos\123Vyacheslav123\DocumentReportBuilder\bin\System.Security.AccessControl.xml
 C:\Users\Shoker\source\repos\123Vyacheslav123\DocumentReportBuilder\bin\System.Text.Encoding.CodePages.xml
-C:\Users\Shoker\source\repos\123Vyacheslav123\DocumentReportBuilder\obj\Debug\DocumentReportBuilder.csproj.AssemblyReference.cache
+C:\Users\Shoker\source\repos\123Vyacheslav123\DocumentReportBuilder\bin\MongoDB.Driver.Legacy.dll
+C:\Users\Shoker\source\repos\123Vyacheslav123\DocumentReportBuilder\bin\MongoDB.Driver.Legacy.xml
