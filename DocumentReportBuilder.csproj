@@ -205,6 +205,7 @@
     </Compile>
     <Compile Include="Profile.aspx.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Profile.aspx.designer.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
@@ -212,24 +213,31 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reg.aspx.cs">
       <DependentUpon>Reg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Reg.aspx.designer.cs">
       <DependentUpon>Reg.aspx</DependentUpon>
     </Compile>
     <Compile Include="StudentBuilder.aspx.cs">
       <DependentUpon>StudentBuilder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="StudentBuilder.aspx.designer.cs">
       <DependentUpon>StudentBuilder.aspx</DependentUpon>
     </Compile>
     <Compile Include="TeacherBuilder.aspx.cs">
       <DependentUpon>TeacherBuilder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="TeacherBuilder.aspx.designer.cs">
       <DependentUpon>TeacherBuilder.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\ReportBuilderDB.mdf" />
+    <Content Include="App_Data\ReportBuilderDB_log.ldf">
+      <DependentUpon>ReportBuilderDB.mdf</DependentUpon>
+    </Content>
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\DocumentReportBuilder.dll" />
@@ -995,7 +1003,6 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Functions\Db\" />
     <Folder Include="Models\" />
   </ItemGroup>
