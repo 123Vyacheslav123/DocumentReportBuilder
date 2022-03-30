@@ -51,13 +51,13 @@ namespace DocumentReportBuilder
         protected global::System.Web.UI.WebControls.Label LabelPassTeacherAutho;
 
         /// <summary>
-        /// TextBoxPassTeacheAuthor элемент управления.
+        /// TextBoxPassTeacherAutho элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxPassTeacheAuthor;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxPassTeacherAutho;
 
         /// <summary>
         /// ButtonTeacherAutho элемент управления.

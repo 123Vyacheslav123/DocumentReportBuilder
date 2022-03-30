@@ -42,7 +42,7 @@
   </ul>
 </nav>
 
-        <%--Авторизация препода--%>
+        <%--Авторизация преподавателя--%>
 
         <div class="First" id="FIRST" style="position:absolute; display: flex; flex-direction: column; left: 40%; top: 25%; background-color: lightgray; width: 250px; height: 400px; visibility: hidden; border-radius: 10px;">
           <p class="Text_1" style="position:relative; left:0; margin-bottom: 5px; background-color: #387ebf; color: white; padding-left: 5px;">Авторизация</p>
@@ -52,12 +52,12 @@
        <asp:TextBox ID="TextBoxMailTeacherAutho" CssClass="RE" runat="server" Width="70%"></asp:TextBox>
 
         <asp:Label ID="LabelPassTeacherAutho" CssClass="RE2" runat="server" Text="Пароль" Width="70%"></asp:Label>
-        <asp:TextBox ID="TextBoxPassTeacheAuthor" CssClass="RE3" runat="server" Width="70%"></asp:TextBox>
+        <asp:TextBox ID="TextBoxPassTeacherAutho" CssClass="RE3" runat="server" Width="70%"></asp:TextBox>
 
-        <asp:Button ID="ButtonTeacherAutho" CssClass="RE4" runat="server" OnClick="Button1_Click" Text="Войти" Width="30%" BackColor="#387ebf" />
+        <asp:Button ID="ButtonTeacherAutho" CssClass="RE4" runat="server" OnClick="ButtonTeacherAutho_Click" Text="Войти" Width="30%" BackColor="#387ebf" />
         <p class="Text_3" style="position:relative; width:80%; left: 10%">Ещё не зарегистрированы?</p>
 
-        <asp:Button ID="ButtonTeacherAuthoReg" CssClass="RE5" Width="40%" runat="server" Text="Регистрация" BackColor="#387ebf" />
+        <asp:Button ID="ButtonTeacherAuthoReg" CssClass="RE5" Width="40%" runat="server" OnClick="ButtonTeacherAuthoReg_Click" Text="Регистрация" BackColor="#387ebf" />
         <asp:Button ID="Button3TeacherAuthoForgotPass" CssClass="RE6" Width="50%" runat="server" Text="Забыли пароль?" BackColor="#387ebf" />
         </div>
        
@@ -74,7 +74,7 @@
         <asp:Label ID="LabelPassStudAutho" CssClass="RE2" runat="server" Text="Пароль:" Width="70%"></asp:Label>
         <asp:TextBox ID="TextBoxPassStudAutho" CssClass="RE3" runat="server" Width="70%"></asp:TextBox>
 
-        <asp:Button ID="ButtonStudAutho" CssClass="RE4" runat="server" OnClick="Button1_Click" Text="Войти" Width="30%" BackColor="#387ebf" />
+        <asp:Button ID="ButtonStudAutho" CssClass="RE4" runat="server" OnClick="ButtonStudAutho_Click" Text="Войти" Width="30%" BackColor="#387ebf" />
         <p class="Text_3" style="position:relative; width:80%; left: 10%">Ещё не зарегистрированы?</p>
 
         <asp:Button ID="ButtonStudAuthoReg" CssClass="RE5" Width="40%" runat="server" Text="Регистрация" BackColor="#387ebf"/>

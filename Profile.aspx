@@ -124,8 +124,8 @@
          <div class="Blok3">
         <asp:Image ID="Image2" runat="server" ImageUrl="Empty.png" Height="70px" Width="70px" BorderStyle="Solid" BorderWidth="1px" />
              <div class="SubBlock3">
-        <asp:Label ID="Label5" runat="server"></asp:Label>
-        <asp:Label ID="Label6" runat="server"></asp:Label>
+        <asp:Label ID="LabelName" runat="server"></asp:Label>
+        <asp:Label ID="LabelUserType" runat="server"></asp:Label>
              </div>
         </div>
 
@@ -145,6 +145,11 @@
             <asp:Label ID="Label4" runat="server" Text="О себе"></asp:Label>
         <asp:TextBox ID="TextBox1" placeholder="Напишите о себе" runat="server" TextMode="MultiLine" Height="200px" Width="100%"></asp:TextBox>
         </div>
+       
+       
+ 
+         
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [USERS]"></asp:SqlDataSource>
        
        
  
