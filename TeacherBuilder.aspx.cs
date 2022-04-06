@@ -4,11 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Data;
+using System.Configuration;
 
 namespace DocumentReportBuilder
 {
     public partial class TeacherBuilder : System.Web.UI.Page
     {
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -83,7 +87,47 @@ namespace DocumentReportBuilder
 
         protected void ButtonSaveStyle_Click(object sender, EventArgs e)
         {
+            con.Open();
+            if ((DropDownListForElements.SelectedItem.Value) == "0") // если найдено Value для текста
+            {
+                string DropDownValue = TextFontList.SelectedValue.ToString();
+                int textSize = Int32.Parse(TextBoxSize.Text);
+                int indentRight = Int32.Parse(TextBoxRight.Text);
+                int indentLeft = Int32.Parse(TextBoxLeft.Text);
+                int firstLine = Int32.Parse(TextBox1stString.Text);
+                int firstLineTo = Int32.Parse(TextBoxOn.Text);
+                int intervalAfter = Int32.Parse(TextBoxAfter.Text);
+                int intervalBefore = Int32.Parse(TextBoxBefore.Text);
+                int interline = Int32.Parse(TextBoxInterline.Text);
+                int value = Int32.Parse(TextBoxAfter.Text);
+                string TextStyle = "INSERT INTO[TEXT]([StyleName],[Font],[FontSize],[IndentRight],[IndentLeft],[FirstLine],[FirsLineTo],[IntervalAfter],[IntervalBefore],[Interline],[Value])VALUES('"+TextBoxName.Text+"', '"+DropDownValue+"', "+textSize+","+indentRight+","+indentLeft+", '"+firstLine+"',"+firstLineTo+","+intervalAfter+","+intervalBefore+", '"+interline+"',"+value+")";
+                SqlCommand TextStyleInsert = new SqlCommand(TextStyle, con);
+                TextStyleInsert.ExecuteNonQuery();
+            }
+            else if ((DropDownListForElements.SelectedItem.Value) == "1") // если найдено Value для Таблицы
+            {
+                string DropDownName = TableFontList.SelectedValue.ToString();
+                int textSize = Int32.Parse(TextBoxTableFontSize.Text);
+                string DropDownTableAlignment = TableAlignList.SelectedValue.ToString(); ;
+                string DropDownCellAlignment = CellAlignList.SelectedValue.ToString(); ;
+                string TableStyle = "INSERT INTO [TABLE] ([StyleName],[Font],[FontSize],[TableAlignment],[CellAlignment])VALUES('"+TableStyleNameBox.Text+"', '"+DropDownName+"',"+textSize+", '"+DropDownTableAlignment+"', '"+DropDownCellAlignment+"')";
+                SqlCommand TableStyleInsert = new SqlCommand(TableStyle, con);
+                TableStyleInsert.ExecuteNonQuery();
+            }
+            else if ((DropDownListForElements.SelectedItem.Value) == "2") // если найдено Value для Списка
+            {
+                
+            }
 
+            else if ((DropDownListForElements.SelectedItem.Value) == "3") // если найдено Value для картинки
+            {
+                
+            }
+            else
+            {
+
+            }
+            con.Close();
         }
 
         protected void ButtonGoBack_Click(object sender, EventArgs e)

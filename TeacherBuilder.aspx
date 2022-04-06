@@ -154,6 +154,9 @@
             <asp:Label ID="TableStyleName" style="position:absolute; top:350px; margin-left:80px;margin-right:0px;" runat="server">Название:</asp:Label>
             <asp:TextBox ID="TableStyleNameBox" Width="300px" style="position:absolute; top:350px; margin-left:170px;margin-right:0px;" runat="server"></asp:TextBox>
 
+            <asp:Label ID="LabelTableFontSize" style="position:absolute; top:350px; left:600px" runat="server" Text="Размер шрифта"></asp:Label>
+            <asp:TextBox ID="TextBoxTableFontSize" Width="50px" style="position:absolute; top:400px; left:600px" TextMode="Number" runat="server"></asp:TextBox>
+
             <asp:Label ID="LabelTableFont" style="position:absolute; top:400px; margin-left:80px;margin-right:0px;" runat="server">Шрифт:</asp:Label>
                 <asp:DropDownList ID="TableFontList" Width="300px" runat="server" style="position:absolute; top: 400px; left: 170px;" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
                     <asp:ListItem Value="Times New Roman">Times New Roman</asp:ListItem>
@@ -188,6 +191,17 @@
 
                </div>
                 
+        <div id="sql" runat="server">
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [USERS]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [TEXT]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [TABLE]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [LIST]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [IMAGE]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [StyleList]"></asp:SqlDataSource>
+        </div>
+
+
+
          </form>
 
 </body>
