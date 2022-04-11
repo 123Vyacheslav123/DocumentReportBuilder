@@ -203,6 +203,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Main.aspx.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Main.aspx.designer.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Profile.aspx.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -323,7 +330,11 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\Empty.png" />
+    <Content Include="Main.aspx" />
     <Content Include="Profile.aspx" />
+    <Content Include="Styles\Main\CARDS.css" />
+    <Content Include="Styles\Main\FIR.css" />
+    <Content Include="Styles\Main\MENU.css" />
     <Content Include="Styles\Profile\FIR.css" />
     <Content Include="Styles\Registration\MAIN.css" />
     <Content Include="Styles\Registration\Menu.css" />
