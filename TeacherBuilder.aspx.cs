@@ -104,7 +104,7 @@ namespace DocumentReportBuilder
                 SqlCommand TextStyleInsert = new SqlCommand(TextStyle, con);
                 TextStyleInsert.ExecuteNonQuery();
             }
-            else if ((DropDownListForElements.SelectedItem.Value) == "1") // если найдено Value для Таблицы
+            else if ((DropDownListForElements.SelectedItem.Value) == "1") // если найдено Value для таблицы
             {
                 string DropDownName = TableFontList.SelectedValue.ToString();
                 int textSize = Int32.Parse(TextBoxTableFontSize.Text);
@@ -114,14 +114,21 @@ namespace DocumentReportBuilder
                 SqlCommand TableStyleInsert = new SqlCommand(TableStyle, con);
                 TableStyleInsert.ExecuteNonQuery();
             }
-            else if ((DropDownListForElements.SelectedItem.Value) == "2") // если найдено Value для Списка
+            else if ((DropDownListForElements.SelectedItem.Value) == "2") // если найдено Value для списка
             {
-                
+                string DropDownListValue = TStyle_List.SelectedValue.ToString();
+                int ListSize = Int32.Parse(TextBoxTSize.Text);
+                string ListStyle = "INSERT INTO [LIST] ([StyleName],[Font],[FontSize])VALUES('"+TextBoxSName.Text+"','"+DropDownListValue+"','"+ListSize+"')";
+                SqlCommand ListStyleInsert = new SqlCommand(ListStyle, con);
+                ListStyleInsert.ExecuteNonQuery();
             }
 
             else if ((DropDownListForElements.SelectedItem.Value) == "3") // если найдено Value для картинки
             {
-                
+                string DropDownIMGValue = PAlign_List.SelectedValue.ToString();
+                string ImageStyle = "INSERT INTO [IMAGE] ([StyleName],[Name],[Alignment])VALUES('"+TextBoxPName.Text+"', '"+TextBoxPTitle.Text+"', '"+DropDownIMGValue+"')";
+                SqlCommand IMGStyleInsert = new SqlCommand(ImageStyle, con);
+                IMGStyleInsert.ExecuteNonQuery();
             }
             else
             {
