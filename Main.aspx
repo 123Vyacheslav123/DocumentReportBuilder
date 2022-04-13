@@ -9,7 +9,7 @@
     <link href="Styles/Main/MENU.css" rel="stylesheet" />
     <link href="Styles/Main/CARDS.css" rel="stylesheet" />
     <title></title>
-   
+
 </head>
 <body>
     <form id="form1" runat="server">
@@ -92,30 +92,30 @@
                font-size: 16px;
                margin-left: 5px;
            }
-        
-       
-       
-
-         
-         
 
         </style>
       
 
             <ul class="FIR">
-              <li class="CL1"><a class="CL1a" href="#">Главная</a></li>
+              <li class="CL1"><a class="CL1a" href="/Main.aspx">Главная</a></li>
               <li class="CL2"><a class="CL2a" href="#">Задания</a></li>
               <li class="CL3"><a class="CL3a" href="#">Отправленные</a></li>
               <li class="CL4"><a class="CL4a" href="#">Сохранённые</a></li>
            
   <nav>
-<ul class="topmenu">
-    <li><a href="" class="down">СОН.Х.М</a>
+<ul class="topmenu" id ="MenuList" runat="server">
+
+
+    <%--Заменено генерацией в Page_load--%>
+
+    <%--<li><a href="/Profile.aspx" class="down">СОН.Х.М</a>
       <ul class="submenu">
-        <li><a href="">Профиль</a></li>
-        <li><a href="">Выход</a></li>
+        <li><a href="/Profile.aspx">Профиль</a></li>
+        <li><a href="/Reg.aspx">Выход</a></li>
       </ul>
-    </li>
+    </li>--%>
+
+
   </ul>
       </nav>   
              </ul>
@@ -337,7 +337,8 @@
             </div>
 
 
-
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [USERS]"></asp:SqlDataSource>
+       <asp:ScriptManager ID="ScriptManager" runat="server"> </asp:ScriptManager>
 
 
        

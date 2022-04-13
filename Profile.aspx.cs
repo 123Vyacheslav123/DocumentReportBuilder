@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
-
+using System.Web.UI.HtmlControls;
 
 namespace DocumentReportBuilder
 {
@@ -34,6 +34,43 @@ namespace DocumentReportBuilder
                 string UserName = string.Concat(Firstname," ",Surname," ",Patronymic);
                 LabelName.Text = UserName;
                 LabelUserType.Text = Typeofaccount;
+                TextBoxUserName.Text = UserName;
+                TextBoxUserMail.Text = UserMail;
+
+                char name = Firstname.FirstOrDefault();
+                char pat = Patronymic.FirstOrDefault();
+                string ShortUserName = string.Concat(Surname, ".", name, ".", pat);
+
+                HtmlGenericControl li = new HtmlGenericControl("li");
+                MenuList.Controls.Add(li);
+
+                HtmlGenericControl anchor = new HtmlGenericControl("a");
+                anchor.Attributes.Add("href", "/Profile.aspx");
+                anchor.Attributes.Add("class", "down");
+                anchor.InnerText = ShortUserName;
+
+                li.Controls.Add(anchor);
+
+
+
+                HtmlGenericControl ul = new HtmlGenericControl("ul");
+                ul.Attributes.Add("class", "submenu");
+                li.Controls.Add(ul);
+
+                HtmlGenericControl li1 = new HtmlGenericControl("li");
+                ul.Controls.Add(li1);
+
+
+                HtmlGenericControl anchor1 = new HtmlGenericControl("a");
+                anchor1.Attributes.Add("href", "/Profile.aspx");
+                anchor1.InnerText = "Профиль";
+                li1.Controls.Add(anchor1);
+
+                HtmlGenericControl anchor2 = new HtmlGenericControl("a");
+                anchor2.Attributes.Add("href", "/Reg.aspx");
+                anchor2.InnerText = "Выход";
+                li1.Controls.Add(anchor2);
+
             }
             con.Close();
 
