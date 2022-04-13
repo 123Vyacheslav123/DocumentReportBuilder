@@ -239,6 +239,20 @@
     <Compile Include="TeacherBuilder.aspx.designer.cs">
       <DependentUpon>TeacherBuilder.aspx</DependentUpon>
     </Compile>
+    <Compile Include="TeacherMain.aspx.cs">
+      <DependentUpon>TeacherMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TeacherMain.aspx.designer.cs">
+      <DependentUpon>TeacherMain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TeacherProfile.aspx.cs">
+      <DependentUpon>TeacherProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TeacherProfile.aspx.designer.cs">
+      <DependentUpon>TeacherProfile.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\ReportBuilderDB.mdf" />
@@ -972,6 +986,8 @@
     <Content Include="packages\Newtonsoft.Json.12.0.2\Newtonsoft.Json.12.0.2.nupkg" />
     <Content Include="packages\WebGrease.1.6.0\.signature.p7s" />
     <Content Include="packages\WebGrease.1.6.0\WebGrease.1.6.0.nupkg" />
+    <Content Include="TeacherMain.aspx" />
+    <Content Include="TeacherProfile.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -41,7 +41,7 @@ namespace DocumentReportBuilder
             if (status == true) //// проверка на существование пользователя с задаными параметрами
             {
                 Session["USERMAIL"] = TextBoxMailTeacherAutho.Text;
-                Server.Transfer("~/Profile.aspx");
+                Server.Transfer("~/TeacherMain.aspx");
             }
             else
             {

@@ -13,7 +13,7 @@ using System.Web.UI.HtmlControls;
 
 namespace DocumentReportBuilder
 {
-    public partial class Profile : System.Web.UI.Page
+    public partial class TeacherProfile : System.Web.UI.Page
     {
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
@@ -22,7 +22,7 @@ namespace DocumentReportBuilder
             Image1.ImageUrl = "Images/Empty.png";
             Image2.ImageUrl = "Images/Empty.png";
             string UserMail = (string)Session["USERMAIL"];
-            string sqlName = "SELECT [Firstname], [Surname], [Patronymic], [Typeofaccount] FROM [USERS] WHERE [Mail]='"+UserMail+"' ";
+            string sqlName = "SELECT [Firstname], [Surname], [Patronymic], [Typeofaccount] FROM [USERS] WHERE [Mail]='" + UserMail + "' ";
             SqlCommand profile = new SqlCommand(sqlName, con);
             SqlDataReader ProfileReader = profile.ExecuteReader();
             while (ProfileReader.Read())
@@ -31,11 +31,11 @@ namespace DocumentReportBuilder
                 string Surname = (string)ProfileReader["Surname"];
                 string Patronymic = (string)ProfileReader["Patronymic"];
                 string Typeofaccount = (string)ProfileReader["Typeofaccount"];
-                string UserName = string.Concat(Firstname," ",Surname," ",Patronymic);
+                string UserName = string.Concat(Firstname, " ", Surname, " ", Patronymic);
                 LabelName.Text = UserName;
                 LabelUserType.Text = Typeofaccount;
                 TextBoxUserName.Text = UserName;
-                TextBoxUserMail.Text =UserMail;
+                TextBoxUserMail.Text = UserMail;
 
                 char name = Firstname.FirstOrDefault();
                 char pat = Patronymic.FirstOrDefault();
@@ -45,7 +45,7 @@ namespace DocumentReportBuilder
                 MenuList.Controls.Add(li);
 
                 HtmlGenericControl anchor = new HtmlGenericControl("a");
-                anchor.Attributes.Add("href", "/Profile.aspx");
+                anchor.Attributes.Add("href", "/TeacherProfile.aspx");
                 anchor.Attributes.Add("class", "down");
                 anchor.InnerText = ShortUserName;
 
@@ -62,7 +62,7 @@ namespace DocumentReportBuilder
 
 
                 HtmlGenericControl anchor1 = new HtmlGenericControl("a");
-                anchor1.Attributes.Add("href", "/Profile.aspx");
+                anchor1.Attributes.Add("href", "/TeacherProfile.aspx");
                 anchor1.InnerText = "Профиль";
                 li1.Controls.Add(anchor1);
 
