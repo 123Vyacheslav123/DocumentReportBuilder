@@ -6,12 +6,129 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="Styles/Boxes.css" />
+    <link href="Styles/Builder/FIR.css" rel="stylesheet" />
+    <link href="Styles/Builder/Menu.css" rel="stylesheet" />
+    <link href="Styles/Builder/STYLE.css" rel="stylesheet" />
     <title></title>
+    <style>
+        .ZAD_TIT {
+            position: absolute;
+            background-color: gray;
+            left: 30%;
+            top: 20%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+         padding-left: 15px;
+         padding-right: 15px;
+            border: none;
+            border-radius: 15px;
+             font-size: 16px; /*меняем размер шрифта*/
+            font-weight: bold;
+            transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
+        }
+        .ZAD_TIT:hover {
+            background-color: cornflowerblue;
+        }
+         .Buttons {
+    position: absolute;
+    left: 2%;
+    top: 25%;
+    border: 2px solid black;
+    list-style-type: none;
+    width: 17%;
+    height: 60%;
+    padding-top: 20px;
+    text-align: center;
+    padding-left: 0;
+}
+         #Button2, #Button3, #Button4 {
+             border: none;
+             background-color: gainsboro;
+             transition: .3s;
+         }
+          #Button2:hover, #Button3:hover, #Button4:hover {
+             background-color: cornflowerblue;
+         }
+
+    </style>
 </head>
 <body>
 
 
     <form id="form1" runat="server">
+
+        
+
+
+
+        <div>
+
+            <ul class="FIR">
+              <li class="CL1"><a class="CL1a" href="/TeacherMain.aspx">Главная</a></li>
+              <li class="CL2"><a class="CL2a" href="/TeacherBuilder.aspx">Создать шаблон</a></li>
+              <li class="CL3"><a class="CL3a" href="#">Сохранённые конфигурации</a></li>
+              <li class="CL4"><a class="CL4a" href="#">Отправленные</a></li>
+           
+  <nav>
+
+<ul class="topmenu" id ="MenuList" runat="server">
+
+    <%--Заменено генерацией в Page_load--%>
+
+    <%--<li><a href="/TeacherProfile.aspx" class="down">СОН.Х.М</a>
+      <ul class="submenu">
+        <li><a href="/TeacherProfile.aspx">Профиль</a></li>
+        <li><a href="/Reg.aspx">Выход</a></li>
+      </ul>
+    </li>--%>
+  </ul>
+
+
+      </nav>   
+             </ul>
+
+            
+        </div>
+        <asp:Button ID="ButtonCreateTitleList_" CssClass="ZAD_TIT" runat="server" Text="Задать титульник" OnClick="ButtonCreateTitleList_Click" />
+        <nav>
+<ul class="topmenu1">
+    <li><a href="" class="down1">Задать стиль</a>
+      <ul class="submenu1">
+        <li><a><asp:Button ID="ButtonTextStyle" BackColor="White" BorderStyle="None" runat="server" Text="Текст" OnClick="ButtonTextStyle_Click" /></a></li>
+        <li><a><asp:Button ID="ButtonListStyle" BackColor="White" BorderStyle="None" runat="server" Text="Список" OnClick="ButtonListStyle_Click" /></a></li>
+          <li><a><asp:Button ID="ButtonTableStyle" BackColor="White" BorderStyle="None" runat="server" Text="Таблица" OnClick="ButtonTableStyle_Click"/></a></li>
+          <li><a><asp:Button ID="ButtonPicStyle" BackColor="White" BorderStyle="None" runat="server" Text="Рисунок" OnClick="ButtonPicStyle_Click"/></a></li>
+      </ul>
+    </li>
+  </ul>
+      </nav>
+        
+        <ul class="Buttons">
+            <p>Сохранённые стили</p>
+            <li>
+                 <asp:Button ID="Button2" runat="server" Height="22px" style="margin-left: 0px; margin-bottom: 20px" Text="Таблица" Width="152px"/>
+                <asp:Button ID="Button3" runat="server" Height="22px" style="margin-left: 0px; margin-bottom: 20px" Text="Стиль текста" Width="152px" />
+        <asp:Button ID="Button4" runat="server" Height="22px" style="margin-left: 0px; margin-bottom: 20px" Text="Изображение" Width="152px" />
+            </li>
+           
+            </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <div id="Title" runat="server">
             <div id="TopBoxes" style="visibility:hidden;" runat="server">
@@ -50,20 +167,8 @@
             
         </div>
 
-    <div id="Header" runat="server">
-        <asp:Button ID="ButtonTest" style="position:absolute; top:50px; margin-left:300px;margin-right:0px;" runat="server" Text="Студент" OnClick="ButtonTest_Click" />
-        <asp:Button ID="ButtonCreateTitleList" style="position:absolute; top:150px; left:250px" runat="server" Text="Задать титульник" OnClick="ButtonCreateTitleList_Click" />
-        <asp:DropDownList ID="DropDownListForElements" Width="250px" runat="server" style="position:absolute; top:200px; margin-left:550px;margin-right:0px;" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged"> <%-- Список элементов --%>
-            <asp:ListItem Value="0">Текст</asp:ListItem>
-            <asp:ListItem Value="1">Таблица</asp:ListItem>
-            <asp:ListItem Value="2">Список</asp:ListItem>
-            <asp:ListItem Value="3">Рисунок</asp:ListItem>
-        </asp:DropDownList>
-    </div>
-
       <div id="SaveButtons" runat="server" >
         <asp:Button ID="ButtonCreateMainList" style="position:absolute; top:880px; margin-left:600px;margin-right:0px;" runat="server" Text="Сохранить титульник" OnClick="ButtonCreateMainList_Click" />
-        <asp:Button ID="ButtonCreateStyle" style="position:absolute; top:150px; margin-left:550px;margin-right:0px;" runat="server" Text="Создать стиль" OnClick="ButtonCreateStyle_Click" />
       </div>
 
         <div id="TextStyle" style="visibility:hidden" runat="server">

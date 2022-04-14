@@ -346,6 +346,9 @@
     <Content Include="Images\Empty.png" />
     <Content Include="Main.aspx" />
     <Content Include="Profile.aspx" />
+    <Content Include="Styles\Builder\FIR.css" />
+    <Content Include="Styles\Builder\Menu.css" />
+    <Content Include="Styles\Builder\STYLE.css" />
     <Content Include="Styles\Main\CARDS.css" />
     <Content Include="Styles\Main\FIR.css" />
     <Content Include="Styles\Main\MENU.css" />
@@ -882,7 +885,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Styles\Registration\Boxes.css" />
+    <Content Include="Styles\Boxes.css" />
     <Content Include="StudentBuilder.aspx" />
     <Content Include="Styles\Profile\MENU.css" />
     <Content Include="TeacherBuilder.aspx" />

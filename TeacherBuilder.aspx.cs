@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using System.Web.UI.HtmlControls;
 
 namespace DocumentReportBuilder
 {
@@ -15,6 +16,54 @@ namespace DocumentReportBuilder
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
+            con.Open();
+            string UserMail = (string)Session["USERMAIL"];
+            string sqlName = "SELECT [Firstname], [Surname], [Patronymic], [Typeofaccount] FROM [USERS] WHERE [Mail]='" + UserMail + "' ";
+            SqlCommand profile = new SqlCommand(sqlName, con);
+            SqlDataReader ProfileReader = profile.ExecuteReader();
+            while (ProfileReader.Read())
+            {
+                string Firstname = (string)ProfileReader["Firstname"];
+                string Surname = (string)ProfileReader["Surname"];
+                string Patronymic = (string)ProfileReader["Patronymic"];
+
+                char name = Firstname.FirstOrDefault();
+                char pat = Patronymic.FirstOrDefault();
+                string ShortUserName = string.Concat(Surname, ".", name, ".", pat);
+
+
+                HtmlGenericControl li = new HtmlGenericControl("li");
+                MenuList.Controls.Add(li);
+
+                HtmlGenericControl anchor = new HtmlGenericControl("a");
+                anchor.Attributes.Add("href", "/TeacherProfile.aspx");
+                anchor.Attributes.Add("class", "down");
+                anchor.InnerText = ShortUserName;
+
+                li.Controls.Add(anchor);
+
+
+
+                HtmlGenericControl ul = new HtmlGenericControl("ul");
+                ul.Attributes.Add("class", "submenu");
+                li.Controls.Add(ul);
+
+                HtmlGenericControl li1 = new HtmlGenericControl("li");
+                ul.Controls.Add(li1);
+
+
+                HtmlGenericControl anchor1 = new HtmlGenericControl("a");
+                anchor1.Attributes.Add("href", "/TeacherProfile.aspx");
+                anchor1.InnerText = "Профиль";
+                li1.Controls.Add(anchor1);
+
+                HtmlGenericControl anchor2 = new HtmlGenericControl("a");
+                anchor2.Attributes.Add("href", "/Reg.aspx");
+                anchor2.InnerText = "Выход";
+                li1.Controls.Add(anchor2);
+            }
+
+            con.Close();
 
         }
 
@@ -35,11 +84,6 @@ namespace DocumentReportBuilder
 
         }
 
-        protected void ButtonTest_Click(object sender, EventArgs e)
-        {
-            Server.Transfer("~/StudentBuilder.aspx");
-        }
-
         protected void ButtonCreateTitleList_Click(object sender, EventArgs e)
         {
             TopBoxes.Style.Add("visibility", "visible");
@@ -49,7 +93,8 @@ namespace DocumentReportBuilder
             ButtonCreateMainList.Style.Add("visibility", "visible");
         }
 
-        protected void ButtonCreateStyle_Click(object sender, EventArgs e)
+
+        protected void ButtonTextStyle_Click(object sender, EventArgs e)
         {
             TopBoxes.Style.Add("visibility", "hidden");
             LeftBoxes.Style.Add("visibility", "hidden");
@@ -58,37 +103,76 @@ namespace DocumentReportBuilder
             TextStyle.Style.Add("visibility", "hidden");
             Liststyle.Style.Add("visibility", "hidden");
             Picstyle.Style.Add("visibility", "hidden");
-            TableStyle.Style.Add("visibility","hidden");
+            TableStyle.Style.Add("visibility", "hidden");
 
-            if ((DropDownListForElements.SelectedItem.Value) == "0") // если найдено Value для текста
-            {
-                TextStyle.Style.Add("visibility", "visible");
-                MainButtons.Style.Add("visibility", "visible");
+            TextStyle.Style.Add("visibility", "visible");
+            MainButtons.Style.Add("visibility", "visible");
 
-            }
-            else if ((DropDownListForElements.SelectedItem.Value) == "1") // если найдено Value для Таблицы
-            {
-                TableStyle.Style.Add("visibility", "visible");
-            }
-            else if ((DropDownListForElements.SelectedItem.Value) == "2") // если найдено Value для Списка
-            {
-                Liststyle.Style.Add("visibility", "visible");
-            }
 
-            else if ((DropDownListForElements.SelectedItem.Value) == "3") // если найдено Value для картинки
-            {
-                Picstyle.Style.Add("visibility", "visible");
-            }
-            else
-            {
-                
-            }
+            Session["STATUS"] = "Text";
+
         }
+
+
+        protected void ButtonListStyle_Click(object sender, EventArgs e)
+        {
+            TopBoxes.Style.Add("visibility", "hidden");
+            LeftBoxes.Style.Add("visibility", "hidden");
+            RightBoxes.Style.Add("visibility", "hidden");
+            BotBoxes.Style.Add("visibility", "hidden");
+            TextStyle.Style.Add("visibility", "hidden");
+            Liststyle.Style.Add("visibility", "hidden");
+            Picstyle.Style.Add("visibility", "hidden");
+            TableStyle.Style.Add("visibility", "hidden");
+
+            Liststyle.Style.Add("visibility", "visible");
+
+
+            Session["STATUS"] = "List";
+        }
+
+        protected void ButtonTableStyle_Click(object sender, EventArgs e)
+        {
+            TopBoxes.Style.Add("visibility", "hidden");
+            LeftBoxes.Style.Add("visibility", "hidden");
+            RightBoxes.Style.Add("visibility", "hidden");
+            BotBoxes.Style.Add("visibility", "hidden");
+            TextStyle.Style.Add("visibility", "hidden");
+            Liststyle.Style.Add("visibility", "hidden");
+            Picstyle.Style.Add("visibility", "hidden");
+            TableStyle.Style.Add("visibility", "hidden");
+
+            TableStyle.Style.Add("visibility", "visible");
+
+
+            Session["STATUS"] = "Table";
+        }
+
+        protected void ButtonPicStyle_Click(object sender, EventArgs e)
+        {
+            TopBoxes.Style.Add("visibility", "hidden");
+            LeftBoxes.Style.Add("visibility", "hidden");
+            RightBoxes.Style.Add("visibility", "hidden");
+            BotBoxes.Style.Add("visibility", "hidden");
+            TextStyle.Style.Add("visibility", "hidden");
+            Liststyle.Style.Add("visibility", "hidden");
+            Picstyle.Style.Add("visibility", "hidden");
+            TableStyle.Style.Add("visibility", "hidden");
+
+            Picstyle.Style.Add("visibility", "visible");
+
+
+            Session["STATUS"] = "Pic";
+        }
+
+
+
 
         protected void ButtonSaveStyle_Click(object sender, EventArgs e)
         {
             con.Open();
-            if ((DropDownListForElements.SelectedItem.Value) == "0") // если найдено Value для текста
+            string status = (string)Session["STATUS"];
+            if (status == "Text") // если найдено Value для текста
             {
                 string DropDownValue = TextFontList.SelectedValue.ToString();
                 int textSize = Int32.Parse(TextBoxSize.Text);
@@ -104,7 +188,7 @@ namespace DocumentReportBuilder
                 SqlCommand TextStyleInsert = new SqlCommand(TextStyle, con);
                 TextStyleInsert.ExecuteNonQuery();
             }
-            else if ((DropDownListForElements.SelectedItem.Value) == "1") // если найдено Value для таблицы
+            else if (status == "Table") // если найдено Value для таблицы
             {
                 string DropDownName = TableFontList.SelectedValue.ToString();
                 int textSize = Int32.Parse(TextBoxTableFontSize.Text);
@@ -114,7 +198,7 @@ namespace DocumentReportBuilder
                 SqlCommand TableStyleInsert = new SqlCommand(TableStyle, con);
                 TableStyleInsert.ExecuteNonQuery();
             }
-            else if ((DropDownListForElements.SelectedItem.Value) == "2") // если найдено Value для списка
+            else if (status == "List") // если найдено Value для списка
             {
                 string DropDownListValue = TStyle_List.SelectedValue.ToString();
                 int ListSize = Int32.Parse(TextBoxTSize.Text);
@@ -123,7 +207,7 @@ namespace DocumentReportBuilder
                 ListStyleInsert.ExecuteNonQuery();
             }
 
-            else if ((DropDownListForElements.SelectedItem.Value) == "3") // если найдено Value для картинки
+            else if (status == "Pic") // если найдено Value для картинки
             {
                 string DropDownIMGValue = PAlign_List.SelectedValue.ToString();
                 string ImageStyle = "INSERT INTO [IMAGE] ([StyleName],[Name],[Alignment])VALUES('"+TextBoxPName.Text+"', '"+TextBoxPTitle.Text+"', '"+DropDownIMGValue+"')";
@@ -139,8 +223,15 @@ namespace DocumentReportBuilder
 
         protected void ButtonGoBack_Click(object sender, EventArgs e)
         {
+            TopBoxes.Style.Add("visibility", "hidden");
+            LeftBoxes.Style.Add("visibility", "hidden");
+            RightBoxes.Style.Add("visibility", "hidden");
+            BotBoxes.Style.Add("visibility", "hidden");
             TextStyle.Style.Add("visibility", "hidden");
-            MainButtons.Style.Add("visibility", "hidden");
+            Liststyle.Style.Add("visibility", "hidden");
+            Picstyle.Style.Add("visibility", "hidden");
+            TableStyle.Style.Add("visibility", "hidden");
+            TextStyle.Style.Add("visibility", "hidden");
         }
 
 
@@ -239,7 +330,6 @@ namespace DocumentReportBuilder
         {
 
         }
-
         protected void TextFontList_SelectedIndexChanged(object sender, EventArgs e)
         {
 

@@ -1,0 +1,60 @@
+﻿body {
+    background-color: #b0cece;
+}
+
+.FIR {
+    position: absolute;
+    list-style: none; /*убираем маркеры списка*/
+    left: 0px;
+    padding-top: 25px; /*убираем отступы*/
+    padding-bottom: 25px;
+    border-radius: 20px;
+    width: 97%;
+    height: auto;
+    background-color: mediumslateblue;
+    display: flex;
+    flex-direction: row;
+    top: 0;
+}
+
+.CL1a, .CL2a, .CL3a, .CL4a {
+    position: relative;
+    margin: 0;
+    text-decoration: none; /*убираем подчеркивание текста ссылок*/
+    background-color: cadetblue;
+    color: #fff; /*меняем цвет ссылок*/
+    padding-top: 10px; /*добавляем отступ*/
+    padding-bottom: 10px; /*добавляем отступ*/
+    padding-left: 20px; /*добавляем отступ*/
+    padding-right: 20px; /*добавляем отступ*/
+    font-family: arial; /*меняем шрифт*/
+    font-size: 16px; /*меняем размер шрифта*/
+    border-radius: 20px; /*добавляем скругление*/
+    transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
+    -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
+    -o-transition: all 0.3s 0.01s ease;
+    -webkit-transition: all 0.3s 0.01s ease;
+}
+
+    .CL1a:hover {
+        background-color: darkcyan;
+    }
+
+    .CL2a:hover {
+        background: darkcyan;
+    }
+
+    .CL3a:hover {
+        background: darkcyan;
+    }
+
+    .CL4a:hover {
+        background: darkcyan;
+    }
+
+
+
+.CL1, .CL2, .CL3, .CL4 {
+    float: left; /*Размещаем список горизонтально для реализации меню*/
+    margin-right: 70px;
+}
