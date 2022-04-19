@@ -13,6 +13,7 @@ namespace DocumentReportBuilder
 {
     public partial class TeacherBuilder : System.Web.UI.Page
     {
+
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -64,8 +65,34 @@ namespace DocumentReportBuilder
             }
 
             con.Close();
+        }
+
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            
+        }
+
+
+        // пока что не работает(добавление сохраненных стилей в список слева)
+        protected void AddSavedStyleToList(string Text, int id)
+        {
+            Button style = new Button();
+            style.Click += ButtonRecreateStyle_Click;
+            style.Text = Text;
+            style.ID =String.Concat("style_" ,id);
+            style.Height = 22;
+            style.Width = 152;
+            style.Attributes.Add("margin-left", "0px");
+            style.Attributes.Add("magin-bottom", "20px");
+            style.Attributes.Add("runat", "server");
+            SavedStyles.Controls.Add(style);
+        }
+
+        protected void ButtonRecreateStyle_Click(object sender, EventArgs e)
+        {
 
         }
+
 
 
         protected void ButtonCreateMainList_Click(object sender, EventArgs e)
@@ -91,6 +118,7 @@ namespace DocumentReportBuilder
             RightBoxes.Style.Add("visibility", "visible");
             BotBoxes.Style.Add("visibility", "visible");
             ButtonCreateMainList.Style.Add("visibility", "visible");
+            
         }
 
 
@@ -172,6 +200,21 @@ namespace DocumentReportBuilder
         {
             con.Open();
             string status = (string)Session["STATUS"];
+
+            string Styletext = (string)Session["STYLETEXT"];
+            int styletext = Int32.Parse(Styletext);
+
+            string Styletable = (string)Session["STYLETABLE"];
+            int styletable = Int32.Parse(Styletable);
+
+            string Stylelist = (string)Session["STYLELIST"];
+            int stylelist = Int32.Parse(Stylelist);
+
+            string Stylepic = (string)Session["STYLEPIC"];
+            int stylepic = Int32.Parse(Stylepic);
+
+            string UserMail = (string)Session["USERMAIL"];
+
             if (status == "Text") // если найдено Value для текста
             {
                 string DropDownValue = TextFontList.SelectedValue.ToString();
@@ -184,9 +227,28 @@ namespace DocumentReportBuilder
                 int intervalBefore = Int32.Parse(TextBoxBefore.Text);
                 int interline = Int32.Parse(TextBoxInterline.Text);
                 int value = Int32.Parse(TextBoxAfter.Text);
-                string TextStyle = "INSERT INTO[TEXT]([StyleName],[Font],[FontSize],[IndentRight],[IndentLeft],[FirstLine],[FirsLineTo],[IntervalAfter],[IntervalBefore],[Interline],[Value])VALUES('"+TextBoxName.Text+"', '"+DropDownValue+"', "+textSize+","+indentRight+","+indentLeft+", '"+firstLine+"',"+firstLineTo+","+intervalAfter+","+intervalBefore+", '"+interline+"',"+value+")";
+                string TextStyle = "INSERT INTO[TEXT]([CREATEDBY],[StyleName],[Font],[FontSize],[IndentRight],[IndentLeft],[FirstLine],[FirsLineTo],[IntervalAfter],[IntervalBefore],[Interline],[Value])VALUES('"+UserMail+"','"+TextBoxName.Text+"', '"+DropDownValue+"', "+textSize+","+indentRight+","+indentLeft+", "+firstLine+","+firstLineTo+","+intervalAfter+","+intervalBefore+", "+interline+","+value+")";
                 SqlCommand TextStyleInsert = new SqlCommand(TextStyle, con);
                 TextStyleInsert.ExecuteNonQuery();
+
+
+
+                //string LastTextStyles = "SELECT TOP 1 StyleName FROM [TEXT] ORDER BY ID DESC";
+                //SqlCommand command = new SqlCommand(LastTextStyles, con);
+                ////command.Parameters.AddWithValue("@num", styletext);
+                //SqlDataReader TextReader = command.ExecuteReader();
+
+                //int textcounter = 1;
+                //while (TextReader.Read())
+                //{
+
+                //        string TextName = TextReader.GetString(2);
+                //        AddSavedStyleToList(TextName, textcounter);
+                //}
+                //TextReader.Close();
+
+                styletext++;
+                Session["STYLETEXT"] = styletext.ToString();
             }
             else if (status == "Table") // если найдено Value для таблицы
             {
@@ -194,25 +256,34 @@ namespace DocumentReportBuilder
                 int textSize = Int32.Parse(TextBoxTableFontSize.Text);
                 string DropDownTableAlignment = TableAlignList.SelectedValue.ToString(); ;
                 string DropDownCellAlignment = CellAlignList.SelectedValue.ToString(); ;
-                string TableStyle = "INSERT INTO [TABLE] ([StyleName],[Font],[FontSize],[TableAlignment],[CellAlignment])VALUES('"+TableStyleNameBox.Text+"', '"+DropDownName+"',"+textSize+", '"+DropDownTableAlignment+"', '"+DropDownCellAlignment+"')";
+                string TableStyle = "INSERT INTO [TABLE] ([CREATEDBY],[StyleName],[Font],[FontSize],[TableAlignment],[CellAlignment])VALUES('"+UserMail+"','"+TableStyleNameBox.Text+"', '"+DropDownName+"',"+textSize+", '"+DropDownTableAlignment+"', '"+DropDownCellAlignment+"')";
                 SqlCommand TableStyleInsert = new SqlCommand(TableStyle, con);
                 TableStyleInsert.ExecuteNonQuery();
+                //AddSavedStyleToList(TableStyleNameBox.Text, stylenumber);
+                styletable++;
+                Session["STYLETABLE"] = styletable.ToString();
             }
             else if (status == "List") // если найдено Value для списка
             {
                 string DropDownListValue = TStyle_List.SelectedValue.ToString();
                 int ListSize = Int32.Parse(TextBoxTSize.Text);
-                string ListStyle = "INSERT INTO [LIST] ([StyleName],[Font],[FontSize])VALUES('"+TextBoxSName.Text+"','"+DropDownListValue+"','"+ListSize+"')";
+                string ListStyle = "INSERT INTO [LIST] ([CREATEDBY],[StyleName],[Font],[FontSize])VALUES('"+UserMail+"','" +TextBoxSName.Text+"','"+DropDownListValue+"','"+ListSize+"')";
                 SqlCommand ListStyleInsert = new SqlCommand(ListStyle, con);
                 ListStyleInsert.ExecuteNonQuery();
+                //AddSavedStyleToList(TextBoxSName.Text, stylenumber);
+                stylelist++;
+                Session["STYLELIST"] = stylelist.ToString();
             }
 
             else if (status == "Pic") // если найдено Value для картинки
             {
                 string DropDownIMGValue = PAlign_List.SelectedValue.ToString();
-                string ImageStyle = "INSERT INTO [IMAGE] ([StyleName],[Name],[Alignment])VALUES('"+TextBoxPName.Text+"', '"+TextBoxPTitle.Text+"', '"+DropDownIMGValue+"')";
+                string ImageStyle = "INSERT INTO [IMAGE] ([CREATEDBY],[StyleName],[Name],[Alignment])VALUES('"+ UserMail + "','"+TextBoxPName.Text+"', '"+TextBoxPTitle.Text+"', '"+DropDownIMGValue+"')";
                 SqlCommand IMGStyleInsert = new SqlCommand(ImageStyle, con);
                 IMGStyleInsert.ExecuteNonQuery();
+                //AddSavedStyleToList(TextBoxPName.Text,stylenumber);
+                stylepic++;
+                Session["STYLEPIC"] = stylepic.ToString();
             }
             else
             {
@@ -232,6 +303,100 @@ namespace DocumentReportBuilder
             Picstyle.Style.Add("visibility", "hidden");
             TableStyle.Style.Add("visibility", "hidden");
             TextStyle.Style.Add("visibility", "hidden");
+        }
+
+
+        protected void ButtonSaveConf_Click(object sender, EventArgs e)
+        {
+            con.Open();
+
+            string Styletext = (string)Session["STYLETEXT"];
+            int styletext = Int32.Parse(Styletext);
+
+            TextBoxTop1.Text = Styletext;
+
+            string Styletable = (string)Session["STYLETABLE"];
+            int styletable = Int32.Parse(Styletable);
+
+            string Stylelist = (string)Session["STYLELIST"];
+            int stylelist = Int32.Parse(Stylelist);
+
+            string Stylepic = (string)Session["STYLEPIC"];
+            int stylepic = Int32.Parse(Stylepic);
+
+            string UserMail = (string)Session["USERMAIL"];
+
+            string[] text = new string[5];
+            string[] table = new string[5];
+            string[] list = new string[5];
+            string[] pic = new string[5];
+
+
+
+
+            string textselect = "SELECT TOP " + styletext + " * FROM [TEXT] WHERE [CREATEDBY]='" + UserMail + "' ORDER BY [ID] DESC ";
+            SqlCommand selecttext = new SqlCommand(textselect, con);
+            SqlDataReader textreader = selecttext.ExecuteReader();
+            int i = 0;
+            while (textreader.Read())
+            {
+                
+                text[i]= textreader.GetString(textreader.GetOrdinal("StyleName"));
+                i++;
+
+            }
+            textreader.Close();
+
+            i = 0;
+
+
+            string tableselect = "SELECT TOP " + styletable + " * FROM [TABLE] WHERE [CREATEDBY]='" + UserMail + "' ORDER BY [ID] DESC ";
+            SqlCommand selecttable = new SqlCommand(tableselect, con);
+            SqlDataReader tablereader = selecttable.ExecuteReader();
+
+            while (tablereader.Read())
+            {
+
+                table[i] = tablereader.GetString(tablereader.GetOrdinal("StyleName"));
+                i++;
+            }
+            tablereader.Close();
+
+            i = 0;
+
+            string listselect = "SELECT TOP " + stylelist + " * FROM [LIST] WHERE [CREATEDBY]='" + UserMail + "' ORDER BY [ID] DESC ";
+            SqlCommand selectlist = new SqlCommand(listselect, con);
+            SqlDataReader listreader = selectlist.ExecuteReader();
+
+            while (listreader.Read())
+            {
+
+                list[i] = listreader.GetString(listreader.GetOrdinal("StyleName"));
+                i++;
+            }
+            listreader.Close();
+
+            i = 0;
+
+
+            string picselect = "SELECT TOP " + stylepic + " * FROM [IMAGE] WHERE [CREATEDBY]='" + UserMail + "' ORDER BY [ID] DESC ";
+            SqlCommand selectpic = new SqlCommand(picselect, con);
+            SqlDataReader picreader = selectpic.ExecuteReader();
+
+            while (picreader.Read())
+            {
+
+                pic[i] = picreader.GetString(picreader.GetOrdinal("StyleName"));
+                i++;
+            }
+            picreader.Close();
+            i = 0;
+
+            string confinsert = "INSERT INTO [Configuration] ([CREATEDBY],[TEXT1],[TEXT2],[TEXT3],[TEXT4],[TEXT5],[TABLE1],[TABLE2],[TABLE3],[TABLE4],[TABLE5],[LIST1],[LIST2],[LIST3],[LIST4],[LIST5],[IMG1],[IMG2],[IMG3],[IMG4],[IMG5]) VALUES('"+UserMail+"','" + text[0] + "','" + text[1] + "','" + text[2] + "','" + text[3] + "','" + text[4] + "','" + table[0] + "','" + table[1] + "','" + table[2] + "','" + table[3] + "','" + table[4] + "','" + list[0] + "','" + list[1] + "','" + list[2] + "','" + list[3] + "','" + list[4] + "','" + pic[0] + "','" + pic[1] + "','" + pic[2] + "','" + pic[3] + "','" + pic[4] + "')";
+            SqlCommand insertconf = new SqlCommand(confinsert, con);
+            insertconf.ExecuteNonQuery();
+
+            con.Close();
         }
 
 

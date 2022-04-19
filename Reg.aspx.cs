@@ -16,7 +16,10 @@ namespace DocumentReportBuilder
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session["STYLETEXT"] = "0";
+            Session["STYLETABLE"] = "0";
+            Session["STYLEPIC"] = "0";
+            Session["STYLELIST"] = "0";
         }
 
         protected void Page_PreInit(object sender, EventArgs e)

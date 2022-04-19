@@ -105,23 +105,18 @@
         
         <ul class="Buttons">
             <p>Сохранённые стили</p>
-            <li>
-                 <asp:Button ID="Button2" runat="server" Height="22px" style="margin-left: 0px; margin-bottom: 20px" Text="Таблица" Width="152px"/>
+
+            <li id="SavedStyles" runat="server">
+                 
+                <%--Динамическое заполнение--%>
+
+                <%--<asp:Button ID="Button2" runat="server" Height="22px" style="margin-left: 0px; margin-bottom: 20px" Text="Таблица" Width="152px"/>
                 <asp:Button ID="Button3" runat="server" Height="22px" style="margin-left: 0px; margin-bottom: 20px" Text="Стиль текста" Width="152px" />
-        <asp:Button ID="Button4" runat="server" Height="22px" style="margin-left: 0px; margin-bottom: 20px" Text="Изображение" Width="152px" />
+                <asp:Button ID="Button4" runat="server" Height="22px" style="margin-left: 0px; margin-bottom: 20px" Text="Изображение" Width="152px" />--%>
+
             </li>
            
             </ul>
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -291,6 +286,8 @@
                 <div id="MainButtons" runat="server" >
 
             <asp:Button ID="ButtonSaveStyle" style="position:absolute; top:800px; left:600px" runat="server" Text="Сохранить" OnClick="ButtonSaveStyle_Click" />
+
+            <asp:Button ID="ButtonSaveConf" style="position:absolute; top:800px; left:400px" runat="server" Text="Отправить" OnClick="ButtonSaveConf_Click" />
             
             <asp:Button ID="ButtonGoBack" style="position:absolute; top:800px; left:800px" runat="server" Text="Отмена" OnClick="ButtonGoBack_Click" />
 
