@@ -16,6 +16,7 @@ namespace DocumentReportBuilder
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
+            // это нужно для того чтобы работало создание конфигурации
             Session["STYLETEXT"] = "0";
             Session["STYLETABLE"] = "0";
             Session["STYLEPIC"] = "0";

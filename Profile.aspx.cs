@@ -19,6 +19,7 @@ namespace DocumentReportBuilder
         protected void Page_Load(object sender, EventArgs e)
         {
             con.Open();
+            // находим имя текущего пользвателя
             Image1.ImageUrl = "Images/Empty.png";
             Image2.ImageUrl = "Images/Empty.png";
             string UserMail = (string)Session["USERMAIL"];
@@ -37,9 +38,13 @@ namespace DocumentReportBuilder
                 TextBoxUserName.Text = UserName;
                 TextBoxUserMail.Text =UserMail;
 
+                // фамилия и иницаиалы текущего пользователя
+
                 char name = Firstname.FirstOrDefault();
                 char pat = Patronymic.FirstOrDefault();
                 string ShortUserName = string.Concat(Surname, ".", name, ".", pat);
+
+                ////// Генерация меня в правом верхнем углу
 
                 HtmlGenericControl li = new HtmlGenericControl("li");
                 MenuList.Controls.Add(li);

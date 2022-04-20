@@ -232,6 +232,13 @@
     <Compile Include="StudentBuilder.aspx.designer.cs">
       <DependentUpon>StudentBuilder.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Tasks.aspx.cs">
+      <DependentUpon>Tasks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tasks.aspx.designer.cs">
+      <DependentUpon>Tasks.aspx</DependentUpon>
+    </Compile>
     <Compile Include="TeacherBuilder.aspx.cs">
       <DependentUpon>TeacherBuilder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -888,6 +895,7 @@
     <Content Include="Styles\Boxes.css" />
     <Content Include="StudentBuilder.aspx" />
     <Content Include="Styles\Profile\MENU.css" />
+    <Content Include="Tasks.aspx" />
     <Content Include="TeacherBuilder.aspx" />
     <Content Include="packages\Antlr.3.5.0.2\.signature.p7s" />
     <Content Include="packages\Antlr.3.5.0.2\Antlr.3.5.0.2.nupkg" />

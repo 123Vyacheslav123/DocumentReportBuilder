@@ -18,6 +18,7 @@ namespace DocumentReportBuilder
         protected void Page_Load(object sender, EventArgs e)
         {
             con.Open();
+            // находим имя текущего пользвателя
             string UserMail = (string)Session["USERMAIL"];
             string sqlName = "SELECT [Firstname], [Surname], [Patronymic], [Typeofaccount] FROM [USERS] WHERE [Mail]='" + UserMail + "' ";
             SqlCommand profile = new SqlCommand(sqlName, con);
@@ -28,10 +29,13 @@ namespace DocumentReportBuilder
                 string Surname = (string)ProfileReader["Surname"];
                 string Patronymic = (string)ProfileReader["Patronymic"];
 
+                // фамилия и иницаиалы текущего пользователя
+
                 char name = Firstname.FirstOrDefault();
                 char pat = Patronymic.FirstOrDefault();
                 string ShortUserName = string.Concat(Surname, ".", name, ".", pat);
 
+                ////// Генерация меня в правом верхнем углу
 
                 HtmlGenericControl li = new HtmlGenericControl("li");
                 MenuList.Controls.Add(li);
@@ -199,21 +203,21 @@ namespace DocumentReportBuilder
         protected void ButtonSaveStyle_Click(object sender, EventArgs e)
         {
             con.Open();
-            string status = (string)Session["STATUS"];
+            string status = (string)Session["STATUS"]; // стиль для чего создает пользователь
 
-            string Styletext = (string)Session["STYLETEXT"];
+            string Styletext = (string)Session["STYLETEXT"]; // количество созданных стилей для текста
             int styletext = Int32.Parse(Styletext);
 
-            string Styletable = (string)Session["STYLETABLE"];
+            string Styletable = (string)Session["STYLETABLE"]; // количество созданных стилей для таблицы
             int styletable = Int32.Parse(Styletable);
 
-            string Stylelist = (string)Session["STYLELIST"];
+            string Stylelist = (string)Session["STYLELIST"]; // количество созданных стилей для списка
             int stylelist = Int32.Parse(Stylelist);
 
-            string Stylepic = (string)Session["STYLEPIC"];
+            string Stylepic = (string)Session["STYLEPIC"]; // количество созданных стилей для картинки
             int stylepic = Int32.Parse(Stylepic);
 
-            string UserMail = (string)Session["USERMAIL"];
+            string UserMail = (string)Session["USERMAIL"]; // почта пользователя
 
             if (status == "Text") // если найдено Value для текста
             {
@@ -227,6 +231,7 @@ namespace DocumentReportBuilder
                 int intervalBefore = Int32.Parse(TextBoxBefore.Text);
                 int interline = Int32.Parse(TextBoxInterline.Text);
                 int value = Int32.Parse(TextBoxAfter.Text);
+                // заносим стиль текста в базу
                 string TextStyle = "INSERT INTO[TEXT]([CREATEDBY],[StyleName],[Font],[FontSize],[IndentRight],[IndentLeft],[FirstLine],[FirsLineTo],[IntervalAfter],[IntervalBefore],[Interline],[Value])VALUES('"+UserMail+"','"+TextBoxName.Text+"', '"+DropDownValue+"', "+textSize+","+indentRight+","+indentLeft+", "+firstLine+","+firstLineTo+","+intervalAfter+","+intervalBefore+", "+interline+","+value+")";
                 SqlCommand TextStyleInsert = new SqlCommand(TextStyle, con);
                 TextStyleInsert.ExecuteNonQuery();
@@ -254,8 +259,10 @@ namespace DocumentReportBuilder
             {
                 string DropDownName = TableFontList.SelectedValue.ToString();
                 int textSize = Int32.Parse(TextBoxTableFontSize.Text);
-                string DropDownTableAlignment = TableAlignList.SelectedValue.ToString(); ;
-                string DropDownCellAlignment = CellAlignList.SelectedValue.ToString(); ;
+                string DropDownTableAlignment = TableAlignList.SelectedValue.ToString();
+                string DropDownCellAlignment = CellAlignList.SelectedValue.ToString();
+
+                // заносим стиль таблицы в базу
                 string TableStyle = "INSERT INTO [TABLE] ([CREATEDBY],[StyleName],[Font],[FontSize],[TableAlignment],[CellAlignment])VALUES('"+UserMail+"','"+TableStyleNameBox.Text+"', '"+DropDownName+"',"+textSize+", '"+DropDownTableAlignment+"', '"+DropDownCellAlignment+"')";
                 SqlCommand TableStyleInsert = new SqlCommand(TableStyle, con);
                 TableStyleInsert.ExecuteNonQuery();
@@ -267,6 +274,8 @@ namespace DocumentReportBuilder
             {
                 string DropDownListValue = TStyle_List.SelectedValue.ToString();
                 int ListSize = Int32.Parse(TextBoxTSize.Text);
+
+                // заносим стиль списка в базу
                 string ListStyle = "INSERT INTO [LIST] ([CREATEDBY],[StyleName],[Font],[FontSize])VALUES('"+UserMail+"','" +TextBoxSName.Text+"','"+DropDownListValue+"','"+ListSize+"')";
                 SqlCommand ListStyleInsert = new SqlCommand(ListStyle, con);
                 ListStyleInsert.ExecuteNonQuery();
@@ -278,6 +287,8 @@ namespace DocumentReportBuilder
             else if (status == "Pic") // если найдено Value для картинки
             {
                 string DropDownIMGValue = PAlign_List.SelectedValue.ToString();
+
+                // заносим стиль картинки в базу
                 string ImageStyle = "INSERT INTO [IMAGE] ([CREATEDBY],[StyleName],[Name],[Alignment])VALUES('"+ UserMail + "','"+TextBoxPName.Text+"', '"+TextBoxPTitle.Text+"', '"+DropDownIMGValue+"')";
                 SqlCommand IMGStyleInsert = new SqlCommand(ImageStyle, con);
                 IMGStyleInsert.ExecuteNonQuery();
@@ -310,6 +321,7 @@ namespace DocumentReportBuilder
             con.Open();
             string UserMail = (string)Session["USERMAIL"];
             int conftosend = 0;
+
             // пока что берем последнюю созданную конфигурацию
             string sqldatatosend = "SELECT TOP 1 * FROM [CONFIGURATION] WHERE [CREATEDBY] = '"+UserMail+"' ORDER BY [ID] DESC";
             SqlCommand sendconf = new SqlCommand(sqldatatosend, con);
@@ -320,6 +332,7 @@ namespace DocumentReportBuilder
             }
             datatosend.Close();
 
+            // привязываем конфигурацию к пользователю
             string sendingconf = "INSERT INTO [ReportUsers] ([Configuration],[User]) VALUES('"+conftosend+"',14)";
             SqlCommand confsending = new SqlCommand(sendingconf, con);
             confsending.ExecuteNonQuery();
@@ -330,29 +343,31 @@ namespace DocumentReportBuilder
         {
             con.Open();
 
-            string Styletext = (string)Session["STYLETEXT"];
+            string Styletext = (string)Session["STYLETEXT"]; // количество созданных стилей для текста
             int styletext = Int32.Parse(Styletext);
 
-            TextBoxTop1.Text = Styletext;
-
-            string Styletable = (string)Session["STYLETABLE"];
+            
+            string Styletable = (string)Session["STYLETABLE"]; // количество созданных стилей для таблицы
             int styletable = Int32.Parse(Styletable);
 
-            string Stylelist = (string)Session["STYLELIST"];
+            
+            string Stylelist = (string)Session["STYLELIST"]; // количество созданных стилей для списка
             int stylelist = Int32.Parse(Stylelist);
 
-            string Stylepic = (string)Session["STYLEPIC"];
+            
+            string Stylepic = (string)Session["STYLEPIC"]; // количество созданных стилей для картинки
             int stylepic = Int32.Parse(Stylepic);
 
-            string UserMail = (string)Session["USERMAIL"];
+            
+            string UserMail = (string)Session["USERMAIL"]; // почта пользователя
 
-            int[] text = new int[5];
-            int[] table = new int[5];
-            int[] list = new int[5];
-            int[] pic = new int[5];
+            int[] text = new int[5]; // массив для айди созданных стилей текста
+            int[] table = new int[5]; // массив для айди созданных стилей таблицы
+            int[] list = new int[5]; // массив для айди созданных стилей списка
+            int[] pic = new int[5]; // массив для айди созданных стилей картинки
 
 
-
+            // Находим айди стилей текста которые надо внести в конфигурацию
 
             string textselect = "SELECT TOP " + styletext + " * FROM [TEXT] WHERE [CREATEDBY]='" + UserMail + "' ORDER BY [ID] DESC ";
             SqlCommand selecttext = new SqlCommand(textselect, con);
@@ -369,6 +384,7 @@ namespace DocumentReportBuilder
 
             i = 0;
 
+            // Находим айди стилей таблицы которые надо внести в конфигурацию
 
             string tableselect = "SELECT TOP " + styletable + " * FROM [TABLE] WHERE [CREATEDBY]='" + UserMail + "' ORDER BY [ID] DESC ";
             SqlCommand selecttable = new SqlCommand(tableselect, con);
@@ -384,6 +400,8 @@ namespace DocumentReportBuilder
 
             i = 0;
 
+            // Находим айди стилей списка которые надо внести в конфигурацию
+
             string listselect = "SELECT TOP " + stylelist + " * FROM [LIST] WHERE [CREATEDBY]='" + UserMail + "' ORDER BY [ID] DESC ";
             SqlCommand selectlist = new SqlCommand(listselect, con);
             SqlDataReader listreader = selectlist.ExecuteReader();
@@ -398,6 +416,7 @@ namespace DocumentReportBuilder
 
             i = 0;
 
+            // Находим айди стилей картинки которые надо внести в конфигурацию
 
             string picselect = "SELECT TOP " + stylepic + " * FROM [IMAGE] WHERE [CREATEDBY]='" + UserMail + "' ORDER BY [ID] DESC ";
             SqlCommand selectpic = new SqlCommand(picselect, con);
@@ -412,6 +431,8 @@ namespace DocumentReportBuilder
             picreader.Close();
             i = 0;
 
+            // Заносим айди стилей в общую конфигурацию
+            
             string confinsert = "INSERT INTO [CONFIGURATION] ([CONFNAME],[CREATEDBY],[TEXT1],[TEXT2],[TEXT3],[TEXT4],[TEXT5],[TABLE1],[TABLE2],[TABLE3],[TABLE4],[TABLE5],[LIST1],[LIST2],[LIST3],[LIST4],[LIST5],[IMG1],[IMG2],[IMG3],[IMG4],[IMG5]) VALUES('"+TextBoxConfName.Text+"','"+UserMail+"','" + text[0] + "','" + text[1] + "','" + text[2] + "','" + text[3] + "','" + text[4] + "','" + table[0] + "','" + table[1] + "','" + table[2] + "','" + table[3] + "','" + table[4] + "','" + list[0] + "','" + list[1] + "','" + list[2] + "','" + list[3] + "','" + list[4] + "','" + pic[0] + "','" + pic[1] + "','" + pic[2] + "','" + pic[3] + "','" + pic[4] + "')";
             SqlCommand insertconf = new SqlCommand(confinsert, con);
             insertconf.ExecuteNonQuery();

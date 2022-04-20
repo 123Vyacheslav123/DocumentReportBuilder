@@ -19,6 +19,7 @@ namespace DocumentReportBuilder
         protected void Page_Load(object sender, EventArgs e)
         {
             con.Open();
+            // находим имя текущего пользвателя
             string UserMail = (string)Session["USERMAIL"];
             string sqlName = "SELECT [Firstname], [Surname], [Patronymic], [Typeofaccount] FROM [USERS] WHERE [Mail]='" + UserMail + "' ";
             SqlCommand profile = new SqlCommand(sqlName, con);
@@ -29,10 +30,13 @@ namespace DocumentReportBuilder
                 string Surname = (string)ProfileReader["Surname"];
                 string Patronymic = (string)ProfileReader["Patronymic"];
 
+                // фамилия и иницаиалы текущего пользователя
+
                 char name = Firstname.FirstOrDefault();
                 char pat = Patronymic.FirstOrDefault();
                 string ShortUserName = string.Concat(Surname, ".", name, ".", pat);
 
+                ////// Генерация меня в правом верхнем углу
 
                 HtmlGenericControl li = new HtmlGenericControl("li");
                 MenuList.Controls.Add(li);
@@ -67,6 +71,11 @@ namespace DocumentReportBuilder
 
             con.Close();
 
+            // это нужно для того чтобы работало создание конфигурации
+            Session["STYLETEXT"] = "0";
+            Session["STYLETABLE"] = "0";
+            Session["STYLEPIC"] = "0";
+            Session["STYLELIST"] = "0";
         }
 
 

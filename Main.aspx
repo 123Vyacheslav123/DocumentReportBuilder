@@ -98,7 +98,7 @@
 
             <ul class="FIR">
               <li class="CL1"><a class="CL1a" href="/Main.aspx">Главная</a></li>
-              <li class="CL2"><a class="CL2a" href="#">Задания</a></li>
+              <li class="CL2"><a class="CL2a" href="/Tasks.aspx">Задания</a></li>
               <li class="CL3"><a class="CL3a" href="#">Отправленные</a></li>
               <li class="CL4"><a class="CL4a" href="#">Сохранённые</a></li>
            
@@ -338,7 +338,7 @@
 
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [USERS]"></asp:SqlDataSource>
-       <asp:ScriptManager ID="ScriptManager" runat="server"> </asp:ScriptManager>
+       
 
 
        

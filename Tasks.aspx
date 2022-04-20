@@ -1,16 +1,19 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Profile.aspx.cs" Inherits="DocumentReportBuilder.Profile" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Tasks.aspx.cs" Inherits="DocumentReportBuilder.Tasks" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link href="Styles/Profile/FIR.css" rel="stylesheet" />
-    <link href="Styles/Profile/MENU.css" rel="stylesheet" />
+    <link href="Styles/Main/FIR.css" rel="stylesheet" />
+    <link href="Styles/Main/MENU.css" rel="stylesheet" />
+    <link href="Styles/Main/CARDS.css" rel="stylesheet" />
     <title></title>
+
 </head>
 <body>
     <form id="form1" runat="server">
+         
         <style>
             body {
                     background-color: #b0cece;
@@ -89,25 +92,19 @@
                font-size: 16px;
                margin-left: 5px;
            }
-        
-       
-       
-
-         
-         
 
         </style>
       
 
             <ul class="FIR">
               <li class="CL1"><a class="CL1a" href="/Main.aspx">Главная</a></li>
-              <li class="CL2"><a class="CL2a" href="/Tasks.aspx">Задания</a></li>
+              <li class="CL2"><a class="CL2a" href="#">Задания</a></li>
               <li class="CL3"><a class="CL3a" href="#">Отправленные</a></li>
               <li class="CL4"><a class="CL4a" href="#">Сохранённые</a></li>
            
   <nav>
-<ul class="topmenu" id="MenuList" runat="server">
-    
+<ul class="topmenu" id ="MenuList" runat="server">
+
 
     <%--Заменено генерацией в Page_load--%>
 
@@ -124,43 +121,13 @@
              </ul>
 
 
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [USERS]"></asp:SqlDataSource>
+       <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [ReportUsers]"></asp:SqlDataSource> 
+
+
        
 
       
-         <div class="Blok3">
-        <asp:Image ID="Image2" runat="server" ImageUrl="Empty.png" Height="70px" Width="70px" BorderStyle="Solid" BorderWidth="1px" />
-             <div class="SubBlock3">
-        <asp:Label ID="LabelName" runat="server"></asp:Label>
-        <asp:Label ID="LabelUserType" runat="server"></asp:Label>
-             </div>
-        </div>
-
-        <div class="Blok">
-            <asp:Label ID="Label1" runat="server" Text="Фото профиля"></asp:Label>
-            <asp:Image ID="Image1" runat="server" CssClass="PICT" BorderStyle="Solid" BorderWidth="2px" ImageUrl="Empty.png" Width="100%" Height="200px" />
-            <asp:Button ID="ButtonChangePic" runat="server" Text="Изменить" OnClick="Button1_Click" />
-        </div>
-        
-        
-
-        <div class="Blok2">
-            <asp:Label ID="LabelUserName" runat="server" Text="ФИО"></asp:Label>
-            <asp:TextBox ID="TextBoxUserName" runat="server"></asp:TextBox>
-             <asp:Label ID="LabelUserMail" runat="server" Text="Почта"></asp:Label>
-        <asp:TextBox ID="TextBoxUserMail" runat="server"></asp:TextBox>
-            <asp:Label ID="LabelUserAbout" runat="server" Text="О себе"></asp:Label>
-        <asp:TextBox ID="TextBoxUserAbout" placeholder="Напишите о себе" runat="server" TextMode="MultiLine" Height="200px" Width="100%"></asp:TextBox>
-        </div>
-       
-       
- 
-         
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [USERS]"></asp:SqlDataSource>
-       
-       
- 
-         
     </form>
 </body>
 </html>
-
