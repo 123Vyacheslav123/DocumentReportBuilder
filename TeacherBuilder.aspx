@@ -285,11 +285,15 @@
 
                 <div id="MainButtons" runat="server" >
 
-            <asp:Button ID="ButtonSaveStyle" style="position:absolute; top:800px; left:600px" runat="server" Text="Сохранить" OnClick="ButtonSaveStyle_Click" />
+            <asp:Button ID="ButtonSaveStyle" style="position:absolute; top:800px; left:600px" runat="server" Text="Сохранить стиль" OnClick="ButtonSaveStyle_Click" />
 
-            <asp:Button ID="ButtonSaveConf" style="position:absolute; top:800px; left:400px" runat="server" Text="Отправить" OnClick="ButtonSaveConf_Click" />
+            <asp:Button ID="ButtonSaveConf" style="position:absolute; top:800px; left:400px" runat="server" Text="Сохранить конфигурацию" OnClick="ButtonSaveConf_Click" />
             
             <asp:Button ID="ButtonGoBack" style="position:absolute; top:800px; left:800px" runat="server" Text="Отмена" OnClick="ButtonGoBack_Click" />
+
+            <asp:Button ID="ButtonSend" style="position:absolute; top:800px; left:200px" runat="server" Text="Отправить конфигурацию" OnClick="ButtonSend_Click" />
+
+            <asp:TextBox ID="TextBoxConfName" Width="200px" style="position:absolute; top:1000px; left:200px;" runat="server"></asp:TextBox>
 
                </div>
                 
@@ -299,7 +303,8 @@
             <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [TABLE]"></asp:SqlDataSource>
             <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [LIST]"></asp:SqlDataSource>
             <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [IMAGE]"></asp:SqlDataSource>
-            <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [StyleList]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [CONFIGURATION]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [ReportUsers]"></asp:SqlDataSource>     
         </div>
 
 

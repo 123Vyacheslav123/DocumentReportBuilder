@@ -305,6 +305,26 @@ namespace DocumentReportBuilder
             TextStyle.Style.Add("visibility", "hidden");
         }
 
+        protected void ButtonSend_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            string UserMail = (string)Session["USERMAIL"];
+            int conftosend = 0;
+            // пока что берем последнюю созданную конфигурацию
+            string sqldatatosend = "SELECT TOP 1 * FROM [CONFIGURATION] WHERE [CREATEDBY] = '"+UserMail+"' ORDER BY [ID] DESC";
+            SqlCommand sendconf = new SqlCommand(sqldatatosend, con);
+            SqlDataReader datatosend = sendconf.ExecuteReader();
+            while (datatosend.Read())
+            {
+                conftosend = datatosend.GetInt32(datatosend.GetOrdinal("ID"));
+            }
+            datatosend.Close();
+
+            string sendingconf = "INSERT INTO [ReportUsers] ([Configuration],[User]) VALUES('"+conftosend+"',14)";
+            SqlCommand confsending = new SqlCommand(sendingconf, con);
+            confsending.ExecuteNonQuery();
+            con.Close();
+        }
 
         protected void ButtonSaveConf_Click(object sender, EventArgs e)
         {
@@ -326,10 +346,10 @@ namespace DocumentReportBuilder
 
             string UserMail = (string)Session["USERMAIL"];
 
-            string[] text = new string[5];
-            string[] table = new string[5];
-            string[] list = new string[5];
-            string[] pic = new string[5];
+            int[] text = new int[5];
+            int[] table = new int[5];
+            int[] list = new int[5];
+            int[] pic = new int[5];
 
 
 
@@ -341,7 +361,7 @@ namespace DocumentReportBuilder
             while (textreader.Read())
             {
                 
-                text[i]= textreader.GetString(textreader.GetOrdinal("StyleName"));
+                text[i]= textreader.GetInt32(textreader.GetOrdinal("ID"));
                 i++;
 
             }
@@ -357,7 +377,7 @@ namespace DocumentReportBuilder
             while (tablereader.Read())
             {
 
-                table[i] = tablereader.GetString(tablereader.GetOrdinal("StyleName"));
+                table[i] = tablereader.GetInt32(tablereader.GetOrdinal("ID"));
                 i++;
             }
             tablereader.Close();
@@ -371,7 +391,7 @@ namespace DocumentReportBuilder
             while (listreader.Read())
             {
 
-                list[i] = listreader.GetString(listreader.GetOrdinal("StyleName"));
+                list[i] = listreader.GetInt32(listreader.GetOrdinal("ID"));
                 i++;
             }
             listreader.Close();
@@ -386,13 +406,13 @@ namespace DocumentReportBuilder
             while (picreader.Read())
             {
 
-                pic[i] = picreader.GetString(picreader.GetOrdinal("StyleName"));
+                pic[i] = picreader.GetInt32(picreader.GetOrdinal("ID"));
                 i++;
             }
             picreader.Close();
             i = 0;
 
-            string confinsert = "INSERT INTO [Configuration] ([CREATEDBY],[TEXT1],[TEXT2],[TEXT3],[TEXT4],[TEXT5],[TABLE1],[TABLE2],[TABLE3],[TABLE4],[TABLE5],[LIST1],[LIST2],[LIST3],[LIST4],[LIST5],[IMG1],[IMG2],[IMG3],[IMG4],[IMG5]) VALUES('"+UserMail+"','" + text[0] + "','" + text[1] + "','" + text[2] + "','" + text[3] + "','" + text[4] + "','" + table[0] + "','" + table[1] + "','" + table[2] + "','" + table[3] + "','" + table[4] + "','" + list[0] + "','" + list[1] + "','" + list[2] + "','" + list[3] + "','" + list[4] + "','" + pic[0] + "','" + pic[1] + "','" + pic[2] + "','" + pic[3] + "','" + pic[4] + "')";
+            string confinsert = "INSERT INTO [CONFIGURATION] ([CONFNAME],[CREATEDBY],[TEXT1],[TEXT2],[TEXT3],[TEXT4],[TEXT5],[TABLE1],[TABLE2],[TABLE3],[TABLE4],[TABLE5],[LIST1],[LIST2],[LIST3],[LIST4],[LIST5],[IMG1],[IMG2],[IMG3],[IMG4],[IMG5]) VALUES('"+TextBoxConfName.Text+"','"+UserMail+"','" + text[0] + "','" + text[1] + "','" + text[2] + "','" + text[3] + "','" + text[4] + "','" + table[0] + "','" + table[1] + "','" + table[2] + "','" + table[3] + "','" + table[4] + "','" + list[0] + "','" + list[1] + "','" + list[2] + "','" + list[3] + "','" + list[4] + "','" + pic[0] + "','" + pic[1] + "','" + pic[2] + "','" + pic[3] + "','" + pic[4] + "')";
             SqlCommand insertconf = new SqlCommand(confinsert, con);
             insertconf.ExecuteNonQuery();
 
@@ -403,8 +423,8 @@ namespace DocumentReportBuilder
         ////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////
         protected void TextBoxTop1_TextChanged(object sender, EventArgs e)
         {
 
