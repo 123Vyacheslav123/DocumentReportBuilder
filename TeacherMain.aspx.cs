@@ -68,7 +68,7 @@ namespace DocumentReportBuilder
                 anchor2.InnerText = "Выход";
                 li1.Controls.Add(anchor2);
             }
-
+            ProfileReader.Close();
             con.Close();
 
             // это нужно для того чтобы работало создание конфигурации

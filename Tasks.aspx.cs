@@ -68,6 +68,7 @@ namespace DocumentReportBuilder
                 anchor2.InnerText = "Выход";
                 li1.Controls.Add(anchor2);
             }
+            ProfileReader.Close();
 
             string getuserid = "SELECT [ID] FROM [USERS] WHERE [Mail] = '" + UserMail + "' ";
             SqlCommand getid = new SqlCommand(getuserid,con);
@@ -77,7 +78,7 @@ namespace DocumentReportBuilder
             {
                 id = (int)finduserid["ID"];
             }
-
+            finduserid.Close();
 
             string sqlgetconf = "SELECT [Configuration] FROM [ReportUsers] WHERE [User]='"+id+"'";
 
