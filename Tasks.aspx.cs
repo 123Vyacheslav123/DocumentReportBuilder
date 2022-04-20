@@ -5,7 +5,6 @@ using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
@@ -70,6 +69,9 @@ namespace DocumentReportBuilder
             }
             ProfileReader.Close();
 
+            // пока что генерирую кнопки на каждую конфигурацию у пользователя
+
+            // находим айди пользователя
             string getuserid = "SELECT [ID] FROM [USERS] WHERE [Mail] = '" + UserMail + "' ";
             SqlCommand getid = new SqlCommand(getuserid,con);
             SqlDataReader finduserid = getid.ExecuteReader();
@@ -80,17 +82,67 @@ namespace DocumentReportBuilder
             }
             finduserid.Close();
 
-            string sqlgetconf = "SELECT [Configuration] FROM [ReportUsers] WHERE [User]='"+id+"'";
+            // находим конфигурации привязанные к пользователю
+            string sqlgetconf = "SELECT [Configuration] FROM [ReportUsers] WHERE [User]='"+id+ "' ORDER BY [ID] DESC ";
+            SqlCommand allconf = new SqlCommand(sqlgetconf,con);
+            SqlDataReader confreader = allconf.ExecuteReader();
+            int i = 0;
+            int[] confids = new int[100]; // список айди конфиуграций отправленных пользователю
+            while (confreader.Read())
+            {
+                confids[i] = (int)confreader["Configuration"];
+                i++;
+            }
+            confreader.Close();
+
+            string[] confnames = new string[100]; // список названий конфигураций отправленных пользователю
+            string[] confcheck = new string[1000];
+            int[] idscheck = new int[1000];
+
+            string sqlgetnames = "SELECT [ID],[CONFNAME] FROM [CONFIGURATION] ORDER BY [ID] DESC ";
+                SqlCommand getconfname = new SqlCommand(sqlgetnames, con);
+                SqlDataReader confnamereader = getconfname.ExecuteReader();
+            int j = 0;
+            while (confnamereader.Read()) { 
+
+                confcheck[j] = (string)confnamereader["CONFNAME"];
+                idscheck[j] = (int)confnamereader["ID"];
+                    j++;
+            }
+            int count=0;
+
+            for (int k=0;k<j;k++)
+            {
+                for(int l = 0; l < j; l++)
+                {
+                    if (idscheck[k]==confids[l])
+                    {
+                        confnames[count] = confcheck[k];
+                        count++;
+                    }
+                }
+
+            }
 
 
 
+            confnamereader.Close();
 
-
-
-
-
-
-
+            int postopCounter = 200;
+            for (int k = 0; k < i; k++) { 
+            Button config = new Button();
+               // config.Click += ButtonRecreateStyle_Click;
+                config.Text = confnames[k];
+               // config.ID = String.Concat("config_", id);
+                config.Height = 40;
+                config.Width = 200;
+                config.Style.Add("position", "absolute");
+                config.Style.Add("left", "550px");
+                config.Style["top"] = postopCounter.ToString() + "px";
+                postopCounter = postopCounter + 50;
+                config.Attributes.Add("runat", "server");
+            Configs.Controls.Add(config);
+            }
 
             con.Close();
 
