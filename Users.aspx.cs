@@ -12,7 +12,7 @@ using System.Web.UI.HtmlControls;
 
 namespace DocumentReportBuilder
 {
-    public partial class Tasks : System.Web.UI.Page
+    public partial class Users : System.Web.UI.Page
     {
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
@@ -34,7 +34,7 @@ namespace DocumentReportBuilder
                 char name = Firstname.FirstOrDefault();
                 char pat = Patronymic.FirstOrDefault();
                 string ShortUserName = string.Concat(Surname, ".", name, ".", pat);
-
+                Session["SHORTUSERNAME"] = ShortUserName;
                 ////// Генерация меня в правом верхнем углу
 
                 HtmlGenericControl li = new HtmlGenericControl("li");
@@ -69,82 +69,90 @@ namespace DocumentReportBuilder
             }
             ProfileReader.Close();
 
-            // пока что генерирую кнопки на каждую конфигурацию у пользователя
 
             // находим айди пользователя
             string getuserid = "SELECT [ID] FROM [USERS] WHERE [Mail] = '" + UserMail + "' ";
-            SqlCommand getid = new SqlCommand(getuserid,con);
+            SqlCommand getid = new SqlCommand(getuserid, con);
             SqlDataReader finduserid = getid.ExecuteReader();
-            int id=0;
+            int id = 0;
             while (finduserid.Read())
             {
                 id = (int)finduserid["ID"];
             }
             finduserid.Close();
 
-            // находим конфигурации привязанные к пользователю
-            string sqlgetconf = "SELECT [Configuration] FROM [ReportUsers] WHERE [User]='"+id+ "' ORDER BY [ID] DESC ";
-            SqlCommand allconf = new SqlCommand(sqlgetconf,con);
-            SqlDataReader confreader = allconf.ExecuteReader();
-            int i = 0;
-            int[] confids = new int[100]; // список айди конфиуграций отправленных пользователю
-            while (confreader.Read())
+            if (!IsPostBack)
             {
-                confids[i] = (int)confreader["Configuration"];
-                i++;
-            }
-            confreader.Close();
 
-            string[] confnames = new string[100]; // список названий конфигураций отправленных пользователю
-            string[] confcheck = new string[1000];
-            int[] idscheck = new int[1000];
-            
-            // находим названия конфигураций привязанных к пользователю
-            string sqlgetnames = "SELECT [ID],[CONFNAME] FROM [CONFIGURATION] ORDER BY [ID] DESC ";
-                SqlCommand getconfname = new SqlCommand(sqlgetnames, con);
-                SqlDataReader confnamereader = getconfname.ExecuteReader();
-            int j = 0;
-            while (confnamereader.Read()) { 
+                string UsersTable = "SELECT [Firstname], [Surname], [Patronymic],[Mail] FROM [USERS] WHERE [TypeofAccount]= 'Student'";
 
-                confcheck[j] = (string)confnamereader["CONFNAME"];
-                idscheck[j] = (int)confnamereader["ID"];
-                    j++;
-            }
-            confnamereader.Close();
-            int count=0;
+                SqlCommand users = new SqlCommand(UsersTable, con);
+                SqlDataReader usersreader = users.ExecuteReader();
 
-            for (int k=0;k<j;k++)
-            {
-                for(int l = 0; l < j; l++)
+                if (usersreader.HasRows == true)
                 {
-                    if (idscheck[k]==confids[l])
-                    {
-                        confnames[count] = confcheck[k];
-                        count++;
-                    }
+
+                    GridViewTableUsers.DataSource = usersreader;
+                    GridViewTableUsers.DataBind();
                 }
+                usersreader.Close();
 
+                string confname = (string)Session["NAMEOFCONF"];
+                LabelTest.Text = confname;
             }
-
-            // генерация списка конфигураций у пользователя(временно)
-            int postopCounter = 200;
-            for (int k = 0; k < i; k++) { 
-            Button config = new Button();
-               // config.Click += ButtonRecreateStyle_Click;
-                config.Text = confnames[k];
-               // config.ID = String.Concat("config_", id);
-                config.Height = 40;
-                config.Width = 200;
-                config.Style.Add("position", "absolute");
-                config.Style.Add("left", "550px");
-                config.Style["top"] = postopCounter.ToString() + "px";
-                postopCounter = postopCounter + 50;
-                config.Attributes.Add("runat", "server");
-            Configs.Controls.Add(config);
-            }
-
             con.Close();
-
         }
+
+
+        protected void ButtonChoose_Click(object sender, EventArgs e)
+        {
+            //находим на какую кнопку нажали
+            Button btn = (Button)sender;
+            GridViewRow row = (GridViewRow)btn.NamingContainer;
+            string mailtosend = row.Cells[3].Text;
+
+
+            // берем текст из текстбокса для даты
+            TextBox tb = row.FindControl("TextBoxDate") as TextBox;
+            string datetosend = tb.Text;
+        
+
+            string confname = (string)Session["NAMEOFCONF"];
+
+
+            con.Open();
+            string UserMail = (string)Session["USERMAIL"];
+            int conftosend = 0;
+
+            // находим нужную конфигурацию
+            string sqldatatosend = "SELECT [ID] FROM [CONFIGURATION] WHERE [CREATEDBY] = '" + UserMail + "' AND [CONFNAME] = '" + confname + "'  ";
+            SqlCommand sendconf = new SqlCommand(sqldatatosend, con);
+            SqlDataReader datatosend = sendconf.ExecuteReader();
+            while (datatosend.Read())
+            {
+                conftosend = datatosend.GetInt32(datatosend.GetOrdinal("ID"));
+            }
+            datatosend.Close();
+
+            // находим айди пользователя которому отправляем
+            string getuserid = "SELECT [ID] FROM [USERS] WHERE [Mail] = '" + mailtosend + "' ";
+            SqlCommand getid = new SqlCommand(getuserid, con);
+            SqlDataReader finduserid = getid.ExecuteReader();
+            int id = 0;
+            while (finduserid.Read())
+            {
+                id = (int)finduserid["ID"];
+            }
+            finduserid.Close();
+
+
+
+            // привязываем конфигурацию к пользователю
+            string sendingconf = "INSERT INTO [ReportUsers] ([Configuration],[User],[Date]) VALUES('" + conftosend + "'," + id + ",'"+datetosend+"')";
+            SqlCommand confsending = new SqlCommand(sendingconf, con);
+            confsending.ExecuteNonQuery();
+            con.Close();
+        }
+
     }
 }

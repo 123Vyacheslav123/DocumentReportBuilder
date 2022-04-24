@@ -99,7 +99,7 @@
             <ul class="FIR">
               <li class="CL1"><a class="CL1a" href="/TeacherMain.aspx">Главная</a></li>
               <li class="CL2"><a class="CL2a" href="/TeacherBuilder.aspx">Создать Шаблон</a></li>
-              <li class="CL3"><a class="CL3a" href="#">Сохраненные конфигурации</a></li>
+              <li class="CL3"><a class="CL3a" href="/Configurations.aspx"">Сохраненные конфигурации</a></li>
               <li class="CL4"><a class="CL4a" href="#">Отправленные</a></li>
            
   <nav>

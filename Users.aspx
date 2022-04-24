@@ -1,16 +1,19 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TeacherProfile.aspx.cs" Inherits="DocumentReportBuilder.TeacherProfile" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Users.aspx.cs" Inherits="DocumentReportBuilder.Users" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link href="Styles/Profile/FIR.css" rel="stylesheet" />
-    <link href="Styles/Profile/MENU.css" rel="stylesheet" />
+    <link href="Styles/Main/FIR.css" rel="stylesheet" />
+    <link href="Styles/Main/MENU.css" rel="stylesheet" />
+    <link href="Styles/Main/CARDS.css" rel="stylesheet" />
     <title></title>
+
 </head>
 <body>
     <form id="form1" runat="server">
+         
         <style>
             body {
                     background-color: #b0cece;
@@ -89,12 +92,6 @@
                font-size: 16px;
                margin-left: 5px;
            }
-        
-       
-       
-
-         
-         
 
         </style>
       
@@ -106,14 +103,14 @@
               <li class="CL4"><a class="CL4a" href="#">Отправленные</a></li>
            
   <nav>
-<ul class="topmenu" id="MenuList" runat="server">
-    
+<ul class="topmenu" id ="MenuList" runat="server">
+
 
     <%--Заменено генерацией в Page_load--%>
 
-    <%--<li><a href="/TeacherProfile.aspx" class="down">СОН.Х.М</a>
+    <%--<li><a href="/Profile.aspx" class="down">СОН.Х.М</a>
       <ul class="submenu">
-        <li><a href="/TeacherProfile.aspx">Профиль</a></li>
+        <li><a href="/Profile.aspx">Профиль</a></li>
         <li><a href="/Reg.aspx">Выход</a></li>
       </ul>
     </li>--%>
@@ -124,42 +121,41 @@
              </ul>
 
 
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [USERS]"></asp:SqlDataSource>
+       <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [CONFIGURATION]"></asp:SqlDataSource> 
+
+
+        <asp:Label runat="server"  ID="LabelTest" style="position:absolute;left:300px;top:250px"></asp:Label>
+
+    <asp:GridView ID="GridViewTableUsers" AutoGenerateColumns="false" style="left:300px;top:400px;position:absolute" runat="server">
+             <Columns>
+                 <asp:BoundField DataField ="Firstname" HeaderText ="Имя" ReadOnly="true" />
+                  <asp:BoundField DataField ="Surname" HeaderText ="Фамилия" ReadOnly="true" />
+                  <asp:BoundField DataField ="Patronymic" HeaderText ="Отчество" ReadOnly="true" />
+                 <asp:BoundField DataField ="Mail" HeaderText ="Почта" ReadOnly="true" />
+                 <asp:TemplateField HeaderText="Дата сдачи">
+                     <ItemTemplate>
+                         <asp:TextBox ID="TextBoxDate" runat="server"></asp:TextBox>
+                     </ItemTemplate>  
+                 </asp:TemplateField>
+                 <asp:TemplateField HeaderText="Отправить">
+                     <ItemTemplate>
+                        <asp:Button runat="server" Text="Выбрать" OnClick="ButtonChoose_Click" />
+                     </ItemTemplate>    
+                 </asp:TemplateField>
+                     
+             </Columns>
+
+
+         </asp:GridView>
+
+
        
 
       
-         <div class="Blok3">
-        <asp:Image ID="Image2" runat="server" ImageUrl="Empty.png" Height="70px" Width="70px" BorderStyle="Solid" BorderWidth="1px" />
-             <div class="SubBlock3">
-        <asp:Label ID="LabelName" runat="server"></asp:Label>
-        <asp:Label ID="LabelUserType" runat="server"></asp:Label>
-             </div>
-        </div>
-
-        <div class="Blok">
-            <asp:Label ID="Label1" runat="server" Text="Фото профиля"></asp:Label>
-            <asp:Image ID="Image1" runat="server" CssClass="PICT" BorderStyle="Solid" BorderWidth="2px" ImageUrl="Empty.png" Width="100%" Height="200px" />
-            <asp:Button ID="ButtonChangePic" runat="server" Text="Изменить" OnClick="Button1_Click" />
-        </div>
-        
-        
-
-        <div class="Blok2">
-            <asp:Label ID="LabelUserName" runat="server" Text="ФИО"></asp:Label>
-            <asp:TextBox ID="TextBoxUserName" runat="server"></asp:TextBox>
-             <asp:Label ID="LabelUserMail" runat="server" Text="Почта"></asp:Label>
-        <asp:TextBox ID="TextBoxUserMail" runat="server"></asp:TextBox>
-            <asp:Label ID="LabelUserAbout" runat="server" Text="О себе"></asp:Label>
-        <asp:TextBox ID="TextBoxUserAbout" placeholder="Напишите о себе" runat="server" TextMode="MultiLine" Height="200px" Width="100%"></asp:TextBox>
-        </div>
-       
-       
- 
-         
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [USERS]"></asp:SqlDataSource>
-       
-       
- 
-         
     </form>
+
+
+
 </body>
 </html>

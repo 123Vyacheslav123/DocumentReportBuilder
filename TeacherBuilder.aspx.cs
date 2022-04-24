@@ -316,28 +316,6 @@ namespace DocumentReportBuilder
             TextStyle.Style.Add("visibility", "hidden");
         }
 
-        protected void ButtonSend_Click(object sender, EventArgs e)
-        {
-            con.Open();
-            string UserMail = (string)Session["USERMAIL"];
-            int conftosend = 0;
-
-            // пока что берем последнюю созданную конфигурацию
-            string sqldatatosend = "SELECT TOP 1 * FROM [CONFIGURATION] WHERE [CREATEDBY] = '"+UserMail+"' ORDER BY [ID] DESC";
-            SqlCommand sendconf = new SqlCommand(sqldatatosend, con);
-            SqlDataReader datatosend = sendconf.ExecuteReader();
-            while (datatosend.Read())
-            {
-                conftosend = datatosend.GetInt32(datatosend.GetOrdinal("ID"));
-            }
-            datatosend.Close();
-
-            // привязываем конфигурацию к пользователю
-            string sendingconf = "INSERT INTO [ReportUsers] ([Configuration],[User]) VALUES('"+conftosend+"',14)";
-            SqlCommand confsending = new SqlCommand(sendingconf, con);
-            confsending.ExecuteNonQuery();
-            con.Close();
-        }
 
         protected void ButtonSaveConf_Click(object sender, EventArgs e)
         {

@@ -200,6 +200,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Configurations.aspx.cs">
+      <DependentUpon>Configurations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configurations.aspx.designer.cs">
+      <DependentUpon>Configurations.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -259,6 +266,13 @@
     </Compile>
     <Compile Include="TeacherProfile.aspx.designer.cs">
       <DependentUpon>TeacherProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users.aspx.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users.aspx.designer.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -342,6 +356,7 @@
     <Content Include="bin\WebGrease.dll" />
     <Content Include="bin\Xceed.Document.NET.dll" />
     <Content Include="bin\Xceed.Words.NET.dll" />
+    <Content Include="Configurations.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -999,6 +1014,7 @@
     <Content Include="packages\WebGrease.1.6.0\WebGrease.1.6.0.nupkg" />
     <Content Include="TeacherMain.aspx" />
     <Content Include="TeacherProfile.aspx" />
+    <Content Include="Users.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

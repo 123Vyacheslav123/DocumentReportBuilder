@@ -66,7 +66,7 @@
             <ul class="FIR">
               <li class="CL1"><a class="CL1a" href="/TeacherMain.aspx">Главная</a></li>
               <li class="CL2"><a class="CL2a" href="/TeacherBuilder.aspx">Создать шаблон</a></li>
-              <li class="CL3"><a class="CL3a" href="#">Сохранённые конфигурации</a></li>
+              <li class="CL3"><a class="CL3a" href="/Configurations.aspx">Сохранённые конфигурации</a></li>
               <li class="CL4"><a class="CL4a" href="#">Отправленные</a></li>
            
   <nav>
@@ -290,8 +290,6 @@
             <asp:Button ID="ButtonSaveConf" style="position:absolute; top:800px; left:400px" runat="server" Text="Сохранить конфигурацию" OnClick="ButtonSaveConf_Click" />
             
             <asp:Button ID="ButtonGoBack" style="position:absolute; top:800px; left:800px" runat="server" Text="Отмена" OnClick="ButtonGoBack_Click" />
-
-            <asp:Button ID="ButtonSend" style="position:absolute; top:800px; left:200px" runat="server" Text="Отправить конфигурацию" OnClick="ButtonSend_Click" />
 
             <asp:TextBox ID="TextBoxConfName" Width="200px" style="position:absolute; top:1000px; left:200px;" runat="server"></asp:TextBox>
 
