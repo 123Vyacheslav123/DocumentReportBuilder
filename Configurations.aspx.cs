@@ -12,38 +12,30 @@ using System.Web.UI.HtmlControls;
 
 namespace DocumentReportBuilder
 {
-    //internal sealed class Table
-    //{
-    //    public int ID { get; set; }
-    //    public string Name { get; set; }
-    //    public string Date { get; set; }
-    //    public string Createdby { get; set; }
-    //    public bool ActiveRow { get; set; }
-    //}
 
     public partial class Configurations : System.Web.UI.Page
     {
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            // это нужно для того чтобы работало создание конфигурации
+            Session["STYLETEXT"] = "0";
+            Session["STYLETABLE"] = "0";
+            Session["STYLEPIC"] = "0";
+            Session["STYLELIST"] = "0";
+
+
+
             con.Open();
             // находим имя текущего пользвателя
             string UserMail = (string)Session["USERMAIL"];
-            string sqlName = "SELECT [Firstname], [Surname], [Patronymic], [Typeofaccount] FROM [USERS] WHERE [Mail]='" + UserMail + "' ";
+            string sqlName = "SELECT [ShortUserName] FROM [USERS] WHERE [Mail]='" + UserMail + "' ";
             SqlCommand profile = new SqlCommand(sqlName, con);
             SqlDataReader ProfileReader = profile.ExecuteReader();
             while (ProfileReader.Read())
             {
-                string Firstname = (string)ProfileReader["Firstname"];
-                string Surname = (string)ProfileReader["Surname"];
-                string Patronymic = (string)ProfileReader["Patronymic"];
-
-                // фамилия и иницаиалы текущего пользователя
-
-                char name = Firstname.FirstOrDefault();
-                char pat = Patronymic.FirstOrDefault();
-                string ShortUserName = string.Concat(Surname, ".", name, ".", pat);
-                Session["SHORTUSERNAME"] = ShortUserName;
+                string ShortUserName = (string)ProfileReader["ShortUserName"];
                 ////// Генерация меня в правом верхнем углу
 
                 HtmlGenericControl li = new HtmlGenericControl("li");
@@ -90,18 +82,7 @@ namespace DocumentReportBuilder
             }
             finduserid.Close();
 
-            string userconfs = "SELECT [CONFNAME] FROM [CONFIGURATION] WHERE [CREATEDBY] ='"+UserMail+"'";
-            SqlCommand getconfnames = new SqlCommand(userconfs, con);
-            //  SqlDataReader
-
-            string ShrtUserName = (string)Session["SHORTUSERNAME"];
-
-            //List<Table> tables = new List<Table>()
-            //{
-            //    new Table{ID=1,Name=UserMail,Date="24.04.2022",Createdby=ShrtUserName,ActiveRow=false }
-            //};
-
-            string conftable = "SELECT [CONFNAME],[CREATEDBY],[Firstname], [Surname], [Patronymic] FROM [CONFIGURATION] INNER JOIN [USERS] ON CREATEDBY=Mail WHERE Mail='"+UserMail+"'  ";
+            string conftable = "SELECT [CONFNAME],[CREATEDBY],[ShortUserName] FROM [CONFIGURATION] INNER JOIN [USERS] ON CREATEDBY=Mail WHERE Mail='"+UserMail+"'  ";
             SqlCommand tableconf = new SqlCommand(conftable, con);
             SqlDataReader tableofconf = tableconf.ExecuteReader();
 

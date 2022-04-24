@@ -17,24 +17,25 @@ namespace DocumentReportBuilder
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            // это нужно для того чтобы работало создание конфигурации
+            Session["STYLETEXT"] = "0";
+            Session["STYLETABLE"] = "0";
+            Session["STYLEPIC"] = "0";
+            Session["STYLELIST"] = "0";
+
+
+
             con.Open();
             // находим имя текущего пользвателя
             string UserMail = (string)Session["USERMAIL"];
-            string sqlName = "SELECT [Firstname], [Surname], [Patronymic], [Typeofaccount] FROM [USERS] WHERE [Mail]='" + UserMail + "' ";
+            string sqlName = "SELECT [ShortUserName] FROM [USERS] WHERE [Mail]='" + UserMail + "' ";
             SqlCommand profile = new SqlCommand(sqlName, con);
             SqlDataReader ProfileReader = profile.ExecuteReader();
             while (ProfileReader.Read())
             {
-                string Firstname = (string)ProfileReader["Firstname"];
-                string Surname = (string)ProfileReader["Surname"];
-                string Patronymic = (string)ProfileReader["Patronymic"];
+                string ShortUserName = (string)ProfileReader["ShortUserName"];
 
-                // фамилия и иницаиалы текущего пользователя
-
-                char name = Firstname.FirstOrDefault();
-                char pat = Patronymic.FirstOrDefault();
-                string ShortUserName = string.Concat(Surname, ".", name, ".", pat);
-                Session["SHORTUSERNAME"] = ShortUserName;
                 ////// Генерация меня в правом верхнем углу
 
                 HtmlGenericControl li = new HtmlGenericControl("li");
@@ -84,7 +85,7 @@ namespace DocumentReportBuilder
             if (!IsPostBack)
             {
 
-                string UsersTable = "SELECT [Firstname], [Surname], [Patronymic],[Mail] FROM [USERS] WHERE [TypeofAccount]= 'Student'";
+                string UsersTable = "SELECT [ShortUserName],[Mail] FROM [USERS] WHERE [TypeofAccount]= 'Student'";
 
                 SqlCommand users = new SqlCommand(UsersTable, con);
                 SqlDataReader usersreader = users.ExecuteReader();
@@ -109,7 +110,7 @@ namespace DocumentReportBuilder
             //находим на какую кнопку нажали
             Button btn = (Button)sender;
             GridViewRow row = (GridViewRow)btn.NamingContainer;
-            string mailtosend = row.Cells[3].Text;
+            string mailtosend = row.Cells[1].Text;
 
 
             // берем текст из текстбокса для даты

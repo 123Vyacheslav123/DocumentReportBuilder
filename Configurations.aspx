@@ -131,9 +131,7 @@
                 <%-- <asp:BoundField DataField ="ID" HeaderText ="№" ReadOnly="true" />--%>
                  <asp:BoundField DataField ="CONFNAME" HeaderText ="Название" ReadOnly="true" />
                  <%--<asp:BoundField DataField ="Date" HeaderText ="Дата" ReadOnly="true" />--%>
-                 <asp:BoundField DataField ="FIRSTNAME" HeaderText ="Имя" ReadOnly="true" />
-                  <asp:BoundField DataField ="SURNAME" HeaderText ="Фамилия" ReadOnly="true" />
-                  <asp:BoundField DataField ="PATRONYMIC" HeaderText ="Отчество" ReadOnly="true" />
+                 <asp:BoundField DataField ="ShortUserName" HeaderText ="Кем создано" ReadOnly="true" />
                  <asp:TemplateField>
                      <ItemTemplate>
                         <asp:Button runat="server" Text="Изменить" />

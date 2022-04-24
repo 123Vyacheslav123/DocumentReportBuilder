@@ -8,27 +8,59 @@
     <link href="Styles/Registration/Menu.css" rel="stylesheet" />
     <link href="Styles/Registration/MAIN.css" rel="stylesheet" />
     <title></title>
+    <script type="text/javascript">
+		<!--//--><![CDATA[//><!--
+    var images = new Array()
+    function preload() {
+        for (i = 0; i < preload.arguments.length; i++) {
+            images[i] = new Image()
+            images[i].src = preload.arguments[i]
+        }
+    }
+    preload(
+        "images/1.png",
+        "images/2.png",
+        "images/3.png",
+        "images/4.png"
+    )
+		//--><!]]>
+</script>
+
+
     <script>
         function changeItem() {
             document.getElementById('FIRST').style.visibility = "visible"; // show
             document.getElementById('SECOND').style.visibility = "hidden"; // show
             document.getElementById('THIRD').style.visibility = "hidden"; // show  
+            document.body.style.backgroundImage = "url('images/2.png')";
         };
         function changeItem_2() {
             document.getElementById('SECOND').style.visibility = "visible"; // show
             document.getElementById('FIRST').style.visibility = "hidden"; // show
             document.getElementById('THIRD').style.visibility = "hidden"; // show
+            document.body.style.backgroundImage = "url('images/3.png')";
         };
         function changeItem_3() {
             document.getElementById('SECOND').style.visibility = "hidden"; // show
             document.getElementById('FIRST').style.visibility = "hidden"; // show
             document.getElementById('THIRD').style.visibility = "visible"; // show
+            document.body.style.backgroundImage = "url('images/4.png')";
         };
        
     </script>
 </head>
 <body>
     <form id="form1" runat="server">
+
+        <style>
+            body{
+               background-image:url('images/1.png');
+               background-repeat:no-repeat;
+               background-size:cover;
+            }
+
+        </style>
+
         <nav>
   <ul class="topmenu">
     <li><a class="down">Авторизация</a>

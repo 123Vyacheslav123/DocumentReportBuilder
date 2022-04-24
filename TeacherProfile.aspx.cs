@@ -18,12 +18,20 @@ namespace DocumentReportBuilder
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            // это нужно для того чтобы работало создание конфигурации
+            Session["STYLETEXT"] = "0";
+            Session["STYLETABLE"] = "0";
+            Session["STYLEPIC"] = "0";
+            Session["STYLELIST"] = "0";
+
+
             con.Open();
             // находим имя текущего пользвателя
             Image1.ImageUrl = "Images/Empty.png";
             Image2.ImageUrl = "Images/Empty.png";
             string UserMail = (string)Session["USERMAIL"];
-            string sqlName = "SELECT [Firstname], [Surname], [Patronymic], [Typeofaccount] FROM [USERS] WHERE [Mail]='" + UserMail + "' ";
+            string sqlName = "SELECT [Firstname], [Surname], [Patronymic],[ShortUserName], [Typeofaccount] FROM [USERS] WHERE [Mail]='" + UserMail + "' ";
             SqlCommand profile = new SqlCommand(sqlName, con);
             SqlDataReader ProfileReader = profile.ExecuteReader();
             while (ProfileReader.Read())
@@ -38,11 +46,7 @@ namespace DocumentReportBuilder
                 TextBoxUserName.Text = UserName;
                 TextBoxUserMail.Text = UserMail;
 
-                // фамилия и иницаиалы текущего пользователя
-
-                char name = Firstname.FirstOrDefault();
-                char pat = Patronymic.FirstOrDefault();
-                string ShortUserName = string.Concat(Surname, ".", name, ".", pat);
+                string ShortUserName = (string)ProfileReader["ShortUserName"];
 
                 ////// Генерация меня в правом верхнем углу
 

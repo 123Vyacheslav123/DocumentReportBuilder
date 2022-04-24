@@ -121,8 +121,19 @@ namespace DocumentReportBuilder
 
                 if (status == false) ///////////// проверка на наличие уже зарегистрированной почты
                 {
+                    string Firstname = TextBoxFirstNameReg.Text; // Имя
+                    string Surname = TextBoxLastNameReg.Text; // Фамилия
+                    string Patronymic = TextBoxPatronymicReg.Text; // Отчество
+
+                    // фамилия и иницаиалы текущего пользователя
+
+                    char name = Firstname.FirstOrDefault();
+                    char pat = Patronymic.FirstOrDefault();
+
+                    string ShortUserName = string.Concat(Surname, ".", name, ".", pat);
+
                     /////////////// вставка пользователя в бд
-                    string SqlInsertUser = "INSERT INTO[USERS]([Firstname],[Surname],[Patronymic],[Mail],[Typeofaccount],[Password]) VALUES('" + TextBoxFirstNameReg.Text + "', '" + TextBoxLastNameReg.Text + "', '" + TextBoxPatronymicReg.Text + "', '" + TextBoxMailReg.Text + "', '" + TypeOfAccount + "', '" + TextBoxPassReg.Text + "')";
+                    string SqlInsertUser = "INSERT INTO[USERS]([Firstname],[Surname],[Patronymic],[Mail],[Typeofaccount],[Password]) VALUES('" + Firstname + "', '" + Surname + "', '" + Patronymic + "', '" + TextBoxMailReg.Text + "', '" + TypeOfAccount + "', '" + TextBoxPassReg.Text + "')";
                     SqlCommand cmd = new SqlCommand(SqlInsertUser, con);
                     cmd.ExecuteNonQuery();
                 }

@@ -129,9 +129,7 @@
 
     <asp:GridView ID="GridViewTableUsers" AutoGenerateColumns="false" style="left:300px;top:400px;position:absolute" runat="server">
              <Columns>
-                 <asp:BoundField DataField ="Firstname" HeaderText ="Имя" ReadOnly="true" />
-                  <asp:BoundField DataField ="Surname" HeaderText ="Фамилия" ReadOnly="true" />
-                  <asp:BoundField DataField ="Patronymic" HeaderText ="Отчество" ReadOnly="true" />
+                 <asp:BoundField DataField ="ShortUserName" HeaderText ="ФИО" ReadOnly="true" />
                  <asp:BoundField DataField ="Mail" HeaderText ="Почта" ReadOnly="true" />
                  <asp:TemplateField HeaderText="Дата сдачи">
                      <ItemTemplate>

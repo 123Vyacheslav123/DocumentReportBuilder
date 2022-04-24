@@ -20,20 +20,12 @@ namespace DocumentReportBuilder
             con.Open();
             // находим имя текущего пользвателя
             string UserMail = (string)Session["USERMAIL"];
-            string sqlName = "SELECT [Firstname], [Surname], [Patronymic], [Typeofaccount] FROM [USERS] WHERE [Mail]='" + UserMail + "' ";
+            string sqlName = "SELECT [ShortUserName] FROM [USERS] WHERE [Mail]='" + UserMail + "' ";
             SqlCommand profile = new SqlCommand(sqlName, con);
             SqlDataReader ProfileReader = profile.ExecuteReader();
             while (ProfileReader.Read())
             {
-                string Firstname = (string)ProfileReader["Firstname"];
-                string Surname = (string)ProfileReader["Surname"];
-                string Patronymic = (string)ProfileReader["Patronymic"];
-
-                // фамилия и иницаиалы текущего пользователя
-
-                char name = Firstname.FirstOrDefault();
-                char pat = Patronymic.FirstOrDefault();
-                string ShortUserName = string.Concat(Surname, ".", name, ".", pat);
+                string ShortUserName = (string)ProfileReader["ShortUserName"];
 
                 ////// Генерация меня в правом верхнем углу
 

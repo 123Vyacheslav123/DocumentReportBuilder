@@ -365,6 +365,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\1.png" />
+    <Content Include="Images\2.png" />
+    <Content Include="Images\3.png" />
+    <Content Include="Images\4.png" />
     <Content Include="Images\Empty.png" />
     <Content Include="Main.aspx" />
     <Content Include="Profile.aspx" />
