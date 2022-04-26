@@ -13,15 +13,62 @@ using System.Drawing;
 using System.IO;
 using Syroot.Windows.IO;
 using Image = Xceed.Document.NET.Image;
+using System.Web.UI.HtmlControls;
+using System.Data.SqlClient;
+using System.Data;
+using System.Configuration;
 
 namespace DocumentReportBuilder
 {
     public partial class StudentBuilder : System.Web.UI.Page
-    { 
-
+    {
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            con.Open();
+            // находим имя текущего пользвателя
+            string UserMail = (string)Session["USERMAIL"];
+            string sqlName = "SELECT [ShortUserName] FROM [USERS] WHERE [Mail]='" + UserMail + "' ";
+            SqlCommand profile = new SqlCommand(sqlName, con);
+            SqlDataReader ProfileReader = profile.ExecuteReader();
+            while (ProfileReader.Read())
+            {
+                string ShortUserName = (string)ProfileReader["ShortUserName"];
+
+                ////// Генерация меня в правом верхнем углу
+
+                HtmlGenericControl li = new HtmlGenericControl("li");
+                MenuList.Controls.Add(li);
+
+                HtmlGenericControl anchor = new HtmlGenericControl("a");
+                anchor.Attributes.Add("href", "/Profile.aspx");
+                anchor.Attributes.Add("class", "down");
+                anchor.InnerText = ShortUserName;
+
+                li.Controls.Add(anchor);
+
+
+
+                HtmlGenericControl ul = new HtmlGenericControl("ul");
+                ul.Attributes.Add("class", "submenu");
+                li.Controls.Add(ul);
+
+                HtmlGenericControl li1 = new HtmlGenericControl("li");
+                ul.Controls.Add(li1);
+
+
+                HtmlGenericControl anchor1 = new HtmlGenericControl("a");
+                anchor1.Attributes.Add("href", "/Profile.aspx");
+                anchor1.InnerText = "Профиль";
+                li1.Controls.Add(anchor1);
+
+                HtmlGenericControl anchor2 = new HtmlGenericControl("a");
+                anchor2.Attributes.Add("href", "/Reg.aspx");
+                anchor2.InnerText = "Выход";
+                li1.Controls.Add(anchor2);
+            }
+            ProfileReader.Close();
+            con.Close();
         }
 
         protected void Page_PreInit(object sender, EventArgs e)
@@ -32,58 +79,49 @@ namespace DocumentReportBuilder
             this.CreateTextBoxes(Rows, Columns, style);
         }
 
-        protected void TextBoxEditing_TextChanged1(object sender, EventArgs e)
-        {
-           
-        }
+        //protected void ButtonChoose_Click(object sender, EventArgs e)  // поиск по Value из DropDownListForElements
+        //{
+        //    string status = (string)Session["STATUSSTUDENT"]; // стиль для чего создает пользователь
+        //    ButtonAddTtitle.Visible = false;
+        //    string redline = "\u2007\u2007\u2007\u2007\u2007"; // красная строка
+        //    TopBoxes.Style.Add("visibility", "hidden");
+        //    LeftBoxes.Style.Add("visibility", "hidden");
+        //    RightBoxes.Style.Add("visibility", "hidden");
+        //    BotBoxes.Style.Add("visibility", "hidden");
+        //    Images.Style.Add("visibility", "hidden");
+        //    List.Style.Add("visibility", "hidden");
+        //    TextAndList.Style.Add("visibility", "hidden");
+        //    Title.Style.Add("visibility", "hidden");
+        //    Tables.Style.Add("visibility", "hidden");
 
-        protected void DropDownListForElements_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        //    if (status == "Text") // если найдено Value для текста
+        //    {
+        //        TextAndList.Style.Add("visibility", "visible");
+        //        TextBoxEditing.Text = redline; // красная строка
+        //    }  
+        //    else if ((DropDownListForElements.SelectedItem.Value) == "1") // если найдено Value для Таблицы
+        //    {
+        //        Tables.Style.Add("visibility", "visible");
 
-        }
-
-        protected void ButtonChoose_Click(object sender, EventArgs e)  // поиск по Value из DropDownListForElements
-        {
-             ButtonAddTtitle.Visible = false;
-            string redline = "\u2007\u2007\u2007\u2007\u2007"; // красная строка
-            TopBoxes.Style.Add("visibility", "hidden");
-            LeftBoxes.Style.Add("visibility", "hidden");
-            RightBoxes.Style.Add("visibility", "hidden");
-            BotBoxes.Style.Add("visibility", "hidden");
-            Images.Style.Add("visibility", "hidden");
-            List.Style.Add("visibility", "hidden");
-            TextAndList.Style.Add("visibility", "hidden");
-            Title.Style.Add("visibility", "hidden");
-            Tables.Style.Add("visibility", "hidden");
-
-            if ((DropDownListForElements.SelectedItem.Value) == "0") // если найдено Value для текста
-            {
-                TextAndList.Style.Add("visibility", "visible");
-                TextBoxEditing.Text = redline; // красная строка
-            }  
-            else if ((DropDownListForElements.SelectedItem.Value) == "1") // если найдено Value для Таблицы
-            {
-                Tables.Style.Add("visibility", "visible");
-
-            }   
-            else if ((DropDownListForElements.SelectedItem.Value) == "2") // если найдено Value для Списка
-            {
-                TextAndList.Style.Add("visibility", "visible");
-                List.Style.Add("visibility", "visible");
-                TextBoxEditing.Text = String.Concat(redline,"1.","\u2007"); // красная строка
-            }   
+        //    }   
+        //    else if ((DropDownListForElements.SelectedItem.Value) == "2") // если найдено Value для Списка
+        //    {
+        //        TextAndList.Style.Add("visibility", "visible");
+        //        List.Style.Add("visibility", "visible");
+        //        TextBoxEditing.Text = String.Concat(redline,"1.","\u2007"); // красная строка
+        //    }   
                 
-            else if ((DropDownListForElements.SelectedItem.Value) == "3") // если найдено Value для картинки
-            {
-                Images.Style.Add("visibility", "visible");
-            }
-            else
-            {
-                ButtonAddList.Visible = false;
-                TextBoxEditing.Visible = true;
-                TextBoxEditing.Text = "Ошибка";
-            }
-        }
+        //    else if ((DropDownListForElements.SelectedItem.Value) == "3") // если найдено Value для картинки
+        //    {
+        //        Images.Style.Add("visibility", "visible");
+        //    }
+        //    else
+        //    {
+        //        ButtonAddList.Visible = false;
+        //        TextBoxEditing.Visible = true;
+        //        TextBoxEditing.Text = "Ошибка";
+        //    }
+        //}
 
         protected void ButtonAddToMain_Click(object sender, EventArgs e)   // добавление текста на главный лист
         {
@@ -103,7 +141,7 @@ namespace DocumentReportBuilder
             TextBoxEditing.Text = "\u2007\u2007\u2007\u2007\u2007"; // очистка листа после добавления текста
         }
 
-        protected void ButtonAddTitle_Click(object sender, EventArgs e)   // добавление текста на главный лист
+        protected void ButtonAddTitle_Click(object sender, EventArgs e)   // добавление титульника в документ
         {
             string tbt1 = TextBoxTop1.Text;
             string tbt2 = TextBoxTop2.Text;
@@ -554,6 +592,15 @@ namespace DocumentReportBuilder
 
         }
         protected void TextBoxBot9_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void TextBoxEditing_TextChanged1(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void DropDownListForElements_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

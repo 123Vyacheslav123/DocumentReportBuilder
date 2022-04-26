@@ -6,22 +6,100 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="Styles/Boxes.css" />
+    <link href="Styles/Builder/FIR.css" rel="stylesheet" />
+    <link href="Styles/Builder/Menu.css" rel="stylesheet" />
+    <link href="Styles/Builder/STYLE.css" rel="stylesheet" />
     <title></title>
+    <style>
+        .ZAD_TIT {
+            position: absolute;
+            background-color: gray;
+            left: 30%;
+            top: 20%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+         padding-left: 15px;
+         padding-right: 15px;
+            border: none;
+            border-radius: 15px;
+             font-size: 16px; /*меняем размер шрифта*/
+            font-weight: bold;
+            transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
+        }
+        .ZAD_TIT:hover {
+            background-color: cornflowerblue;
+        }
+         .Buttons {
+    position: absolute;
+    left: 2%;
+    top: 25%;
+    border: 2px solid black;
+    list-style-type: none;
+    width: 17%;
+    height: 60%;
+    padding-top: 20px;
+    text-align: center;
+    padding-left: 0;
+                    }
+         #Button2, #Button3, #Button4 {
+             border: none;
+             background-color: gainsboro;
+             transition: .3s;
+         }
+          #Button2:hover, #Button3:hover, #Button4:hover {
+             background-color: cornflowerblue;
+         }
+
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
+        <div>
+
+            <ul class="FIR">
+              <<li class="CL1"><a class="CL1a" href="/Main.aspx">Главная</a></li>
+              <li class="CL2"><a class="CL2a" href="/Tasks.aspx">Задания</a></li>
+              <li class="CL3"><a class="CL3a" href="#">Отправленные</a></li>
+              <li class="CL4"><a class="CL4a" href="#">Сохранённые</a></li>
+           
+  <nav>
+
+<ul class="topmenu" id ="MenuList" runat="server">
+
+    <%--Заменено генерацией в Page_load--%>
+
+    <%--<li><a href="/TeacherProfile.aspx" class="down">СОН.Х.М</a>
+      <ul class="submenu">
+        <li><a href="/TeacherProfile.aspx">Профиль</a></li>
+        <li><a href="/Reg.aspx">Выход</a></li>
+      </ul>
+    </li>--%>
+  </ul>
+
+
+      </nav>   
+             </ul>
+
+            
+        </div>
+        
+        <ul class="Buttons">
+            <p>Сохранённые стили</p>
+
+            <li id="SavedStyles" runat="server">
+                 
+                <%--Динамическое заполнение--%>
+
+                <%--<asp:Button ID="Button2" runat="server" Height="22px" style="margin-left: 0px; margin-bottom: 20px" Text="Таблица" Width="152px"/>
+                <asp:Button ID="Button3" runat="server" Height="22px" style="margin-left: 0px; margin-bottom: 20px" Text="Стиль текста" Width="152px" />
+                <asp:Button ID="Button4" runat="server" Height="22px" style="margin-left: 0px; margin-bottom: 20px" Text="Изображение" Width="152px" />--%>
+
+            </li>
+           
+            </ul>
+
 
         <div id="Based" style="visibility:visible" runat="server">
-
-            <asp:Button ID="ButtonChoose" runat="server" Height="40px" Width="120px" OnClick="ButtonChoose_Click" style="position:absolute; top: 146px; left: 638px;" Text="Выбрать" /> <%-- Кнопка выбора элемента --%>
-            <asp:Button ID="ButtonTitle" Height="40px" Width="250px" style="position:absolute; top: 80px; width: 251px; left: 30px;" runat="server" Text="Заполнить Титульник" OnClick="ButtonTitle_Click" />
-            <asp:Button ID="ButtonToWebForm2" runat="server" Height="40px" Width="250px" style="position:absolute; top: 80px; width: 251px; left: 307px;" OnClick="ButtonToWebForm2_Click" Text="Создание конфигурации" />
-            <asp:DropDownList ID="DropDownListForElements" Width="250px" runat="server" style="position:absolute; top: 156px; left: 190px;" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged"> <%-- Список элементов --%>
-                <asp:ListItem Value="0">Текст</asp:ListItem>
-                <asp:ListItem Value="1">Таблица</asp:ListItem>
-                <asp:ListItem Value="2">Список</asp:ListItem>
-                <asp:ListItem Value="3">Рисунок</asp:ListItem>
-            </asp:DropDownList>
 
             <asp:Button ID="ButtonCreateFile" runat="server" Height="40px" Width="200px" style="position:absolute; top: 503px; left: 583px;" Text="Создать документ" OnClick="ButtonCreateFile_Click" />
 
@@ -108,6 +186,18 @@
                 <asp:Button ID="ButtonToWord" style="position:absolute;left:120px; bottom:550px" runat="server" OnClick="ButtonToWord_Click" Text="Добавить" />
 
         </div>
+
+
+        <div id="sql" runat="server">
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [USERS]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [TEXT]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [TABLE]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [LIST]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [IMAGE]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [CONFIGURATION]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [ReportUsers]"></asp:SqlDataSource>     
+        </div>
+
 
 
 

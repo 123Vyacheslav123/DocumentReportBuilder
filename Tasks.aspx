@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Tasks.aspx.cs" Inherits="DocumentReportBuilder.Tasks" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Tasks.aspx.cs" Inherits="DocumentReportBuilder.Tasks" %>
 
 <!DOCTYPE html>
 

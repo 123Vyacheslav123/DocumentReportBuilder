@@ -21,10 +21,6 @@ namespace DocumentReportBuilder
 
     }
 
-
-
-
-
     public partial class Tasks : System.Web.UI.Page
     {
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
@@ -176,7 +172,7 @@ namespace DocumentReportBuilder
             GridViewRow row = (GridViewRow)btn.NamingContainer;
             Session["NAMEOFTASK"] = row.Cells[1].Text;
             Session["TASKFROM"] = row.Cells[2].Text;
-            Server.Transfer("~/TeacherBuilder.aspx");
+            Server.Transfer("~/StudentBuilder.aspx");
         }
 
 
