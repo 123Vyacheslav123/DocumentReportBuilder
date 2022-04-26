@@ -98,7 +98,7 @@
 
             <ul class="FIR">
               <li class="CL1"><a class="CL1a" href="/Main.aspx">Главная</a></li>
-              <li class="CL2"><a class="CL2a" href="#">Задания</a></li>
+              <li class="CL2"><a class="CL2a" href="/Tasks.aspx">Задания</a></li>
               <li class="CL3"><a class="CL3a" href="#">Отправленные</a></li>
               <li class="CL4"><a class="CL4a" href="#">Сохранённые</a></li>
            
@@ -129,6 +129,31 @@
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [USERS]"></asp:SqlDataSource>
        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [ReportUsers]"></asp:SqlDataSource> 
+
+
+
+         <asp:GridView ID="GridViewTableTask" AutoGenerateColumns="false" style="left:300px;top:400px;position:absolute" runat="server">
+             <Columns>
+                 <asp:BoundField DataField ="ID" HeaderText ="№" ReadOnly="true" />
+                 <asp:BoundField DataField ="CONFNAME" HeaderText ="Название" ReadOnly="true" />
+                 <asp:BoundField DataField ="ShortUserName" HeaderText ="Кем отправлено" ReadOnly="true" />
+                 <asp:BoundField DataField ="Date" HeaderText ="Срок сдачи" ReadOnly="true" />
+                 <asp:TemplateField>
+                     <ItemTemplate>
+                         <asp:Button runat="server" Text="Открыть" OnClick="ButtonOpen_Click" />
+                     </ItemTemplate>
+                 </asp:TemplateField>
+                     
+             </Columns>
+
+
+         </asp:GridView>
+                     
+             </Columns>
+
+
+         </asp:GridView>
+
 
 
        
