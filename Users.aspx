@@ -8,6 +8,7 @@
     <link href="Styles/Main/FIR.css" rel="stylesheet" />
     <link href="Styles/Main/MENU.css" rel="stylesheet" />
     <link href="Styles/Main/CARDS.css" rel="stylesheet" />
+     <link href="Styles/TABLES.css" rel="stylesheet" />
     <title></title>
 
 </head>
@@ -127,7 +128,7 @@
 
         <asp:Label runat="server"  ID="LabelTest" style="position:absolute;left:300px;top:250px"></asp:Label>
 
-    <asp:GridView ID="GridViewTableUsers" AutoGenerateColumns="false" style="left:300px;top:400px;position:absolute" runat="server">
+    <asp:GridView ID="GridViewTableUsers" AutoGenerateColumns="false" style="left:300px;top:400px;position:absolute" runat="server" CssClass="TABLE1">
              <Columns>
                  <asp:BoundField DataField ="ShortUserName" HeaderText ="ФИО" ReadOnly="true" />
                  <asp:BoundField DataField ="Mail" HeaderText ="Почта" ReadOnly="true" />
@@ -138,7 +139,7 @@
                  </asp:TemplateField>
                  <asp:TemplateField HeaderText="Отправить">
                      <ItemTemplate>
-                        <asp:Button runat="server" Text="Выбрать" OnClick="ButtonChoose_Click" />
+                        <asp:Button runat="server" Text="Выбрать" OnClick="ButtonChoose_Click" CssClass="BUTTON_STYLE" />
                      </ItemTemplate>    
                  </asp:TemplateField>
                      

@@ -914,6 +914,7 @@
     <Content Include="Styles\Boxes.css" />
     <Content Include="StudentBuilder.aspx" />
     <Content Include="Styles\Profile\MENU.css" />
+    <Content Include="Styles\TABLES.css" />
     <Content Include="Tasks.aspx" />
     <Content Include="TeacherBuilder.aspx" />
     <Content Include="packages\Antlr.3.5.0.2\.signature.p7s" />

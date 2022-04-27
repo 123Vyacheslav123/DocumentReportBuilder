@@ -83,8 +83,6 @@ namespace DocumentReportBuilder
             }
             shortnamereader.Close();
 
-            LabelTest.Text = shortname;
-
             //находим айдишники в присланной конфигурации
             string styles = "SELECT [CONFNAME],[CREATEDBY],[TEXT1],[TEXT2],[TEXT3],[TEXT4],[TEXT5],[TABLE1],[TABLE2],[TABLE3],[TABLE4],[TABLE5],[LIST1],[LIST2],[LIST3],[LIST4],[LIST5],[IMG1],[IMG2],[IMG3],[IMG4],[IMG5] FROM [CONFIGURATION] WHERE [CONFNAME] = '"+confname+"' AND [CREATEDBY] = '"+mailfrom+"' ";
             SqlCommand taskstyles = new SqlCommand(styles,con);
