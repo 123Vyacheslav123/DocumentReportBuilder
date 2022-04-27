@@ -115,6 +115,21 @@ namespace DocumentReportBuilder
             }
             confnamereader.Close();
 
+            // короткие имена тех кто отправил конфигурацию
+            string[] shortusernames = new string[1000]; //все короткие имена преподов отправивших конфигурацию
+            string[] shortusername = new string[1000]; // те короткие имена которые нужны
+            string[] confname = new string[1000];
+            string sqlshortnames = "SELECT [ShortUserName],[CONFNAME] FROM [USERS] INNER JOIN [CONFIGURATION] ON [Mail] = [CREATEDBY] ORDER BY [USERS].[ID] DESC";
+            SqlCommand getshortusernames = new SqlCommand(sqlshortnames, con);
+            SqlDataReader shortusernamesreader = getshortusernames.ExecuteReader();
+            int n = 0;
+            while (shortusernamesreader.Read())
+            {
+                confname[n] = (string)shortusernamesreader["CONFNAME"];
+                shortusernames[n] = (string)shortusernamesreader["ShortUserName"];
+                n++;
+            }
+
 
             int count = 0;
             for (int k = 0; k < j; k++)
@@ -130,23 +145,23 @@ namespace DocumentReportBuilder
 
             }
 
-            //// генерация таблицы конфигураций у пользователя
-            //int postopCounter = 200;
-            //for (int k = 0; k < i; k++)
-            //{
-            //    Button config = new Button();
-            //    // config.Click += ButtonRecreateStyle_Click;
-            //    config.Text = confnames[k];
-            //    // config.ID = String.Concat("config_", id);
-            //    config.Height = 40;
-            //    config.Width = 200;
-            //    config.Style.Add("position", "absolute");
-            //    config.Style.Add("left", "550px");
-            //    config.Style["top"] = postopCounter.ToString() + "px";
-            //    postopCounter = postopCounter + 50;
-            //    config.Attributes.Add("runat", "server");
-            //    Configs.Controls.Add(config);
-            //}
+
+
+            count = 0;
+            for (int k = 0; k < j; k++)
+            {
+                for (int l = 0; l < j; l++)
+                {
+                    if (confname[k] == confnames[l])
+                    {
+                        shortusername[count] = shortusernames[k];
+                        count++;
+                    }
+                }
+
+            }
+
+
 
             List<Task> tasks = new List<Task>();
             for (int k = 0; k < i; k++)
@@ -154,7 +169,7 @@ namespace DocumentReportBuilder
                 Task table = new Task();
                 table.ID = (k + 1);
                 table.CONFNAME = confnames[k];
-                table.ShortUserName =
+                table.ShortUserName = shortusername[k];
                 table.Date = confdates[k];
                 tasks.Add(table);
             }

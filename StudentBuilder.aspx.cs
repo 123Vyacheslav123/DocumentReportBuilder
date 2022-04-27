@@ -68,15 +68,308 @@ namespace DocumentReportBuilder
                 li1.Controls.Add(anchor2);
             }
             ProfileReader.Close();
+
+            
+            string confname = (string)Session["NAMEOFTASK"];
+            string shortname = (string)Session["TASKFROM"];
+            // находим почту пользователя кто отправил конфигурацию
+            string taskfrom = "SELECT [Mail] FROM [USERS] WHERE [ShortUserName] = '"+shortname+"' ";
+            SqlCommand fromshortname = new SqlCommand(taskfrom, con);
+            SqlDataReader shortnamereader = fromshortname.ExecuteReader();
+            string mailfrom="test";
+            while (shortnamereader.Read())
+            {
+                mailfrom = (string)shortnamereader["Mail"];
+            }
+            shortnamereader.Close();
+
+            LabelTest.Text = shortname;
+
+            //находим айдишники в присланной конфигурации
+            string styles = "SELECT [CONFNAME],[CREATEDBY],[TEXT1],[TEXT2],[TEXT3],[TEXT4],[TEXT5],[TABLE1],[TABLE2],[TABLE3],[TABLE4],[TABLE5],[LIST1],[LIST2],[LIST3],[LIST4],[LIST5],[IMG1],[IMG2],[IMG3],[IMG4],[IMG5] FROM [CONFIGURATION] WHERE [CONFNAME] = '"+confname+"' AND [CREATEDBY] = '"+mailfrom+"' ";
+            SqlCommand taskstyles = new SqlCommand(styles,con);
+            SqlDataReader stylesreader = taskstyles.ExecuteReader();
+
+            int text1=0;
+            int text2=0;
+            int text3=0;
+            int text4=0;
+            int text5=0;
+            int table1=0;
+            int table2=0;
+            int table3=0;
+            int table4=0;
+            int table5=0;
+            int list1=0;
+            int list2=0;
+            int list3=0;
+            int list4=0;
+            int list5=0;
+            int img1=0;
+            int img2=0;
+            int img3=0;
+            int img4=0;
+            int img5=0;
+            while (stylesreader.Read())
+            {
+                text1 = stylesreader.GetInt32(stylesreader.GetOrdinal("TEXT1"));
+                text2 = stylesreader.GetInt32(stylesreader.GetOrdinal("TEXT2"));
+                text3 = stylesreader.GetInt32(stylesreader.GetOrdinal("TEXT3"));
+                text4 = stylesreader.GetInt32(stylesreader.GetOrdinal("TEXT4"));
+                text5 = stylesreader.GetInt32(stylesreader.GetOrdinal("TEXT5"));
+                table1 = stylesreader.GetInt32(stylesreader.GetOrdinal("TABLE1"));
+                table2 = stylesreader.GetInt32(stylesreader.GetOrdinal("TABLE2"));
+                table3 = stylesreader.GetInt32(stylesreader.GetOrdinal("TABLE3"));
+                table4 = stylesreader.GetInt32(stylesreader.GetOrdinal("TABLE4"));
+                table5 = stylesreader.GetInt32(stylesreader.GetOrdinal("TABLE5"));
+                list1 = stylesreader.GetInt32(stylesreader.GetOrdinal("LIST1"));
+                list2 = stylesreader.GetInt32(stylesreader.GetOrdinal("LIST2"));
+                list3 = stylesreader.GetInt32(stylesreader.GetOrdinal("LIST3"));
+                list4 = stylesreader.GetInt32(stylesreader.GetOrdinal("LIST4"));
+                list5 = stylesreader.GetInt32(stylesreader.GetOrdinal("LIST5"));
+                img1 = stylesreader.GetInt32(stylesreader.GetOrdinal("IMG1"));
+                img2 = stylesreader.GetInt32(stylesreader.GetOrdinal("IMG2"));
+                img3 = stylesreader.GetInt32(stylesreader.GetOrdinal("IMG3"));
+                img4 = stylesreader.GetInt32(stylesreader.GetOrdinal("IMG4"));
+                img5 = stylesreader.GetInt32(stylesreader.GetOrdinal("IMG5"));
+            }
+            stylesreader.Close();
+
+
+            string[] text = new string[5]; // массив для названий стилей текста
+            string[] table = new string[5]; // массив для названий стилей таблицы
+            string[] list = new string[5]; // массив для названий стилей списка
+            string[] img = new string[5]; // массив для названий стилей картинки
+
+            //находим названия стилей текста
+            string textstylenames = "SELECT [StyleName] FROM [TEXT] WHERE [ID] = '" + text1 + "' OR [ID] = '" + text2 + "' OR [ID] = '" + text3 + "' OR [ID] = '" + text4 + "' OR [ID] = '" + text5 + "'ORDER BY [ID] ASC";
+            SqlCommand textstyles = new SqlCommand(textstylenames, con);
+            SqlDataReader textstylesreader = textstyles.ExecuteReader();
+            int i = 0;
+            
+            while (textstylesreader.Read())
+            {
+                text[i] = (string)textstylesreader["StyleName"];
+                i++;
+            }
+            textstylesreader.Close();
+            i = 0;
+
+            //находим названия стилей таблиц
+            string tablestylenames = "SELECT [StyleName] FROM [TABLE] WHERE [ID] = '" + table1 + "' OR [ID] = '" + table2 + "' OR [ID] = '" + table3 + "' OR [ID] = '" + table4 + "' OR [ID] = '" + table5 + "'ORDER BY [ID] ASC";
+            SqlCommand tablestyles = new SqlCommand(tablestylenames, con);
+            SqlDataReader tablestylesreader = tablestyles.ExecuteReader();
+
+            while (tablestylesreader.Read())
+            {
+                table[i] = (string)tablestylesreader["StyleName"];
+                i++;
+            }
+            tablestylesreader.Close();
+            i = 0;
+
+            //находим названия стилей списка
+            string liststylenames = "SELECT [StyleName] FROM [LIST] WHERE [ID] = '" + list1 + "' OR [ID] = '" + list2 + "' OR [ID] = '" + list3 + "' OR [ID] = '" + list4 + "' OR [ID] = '" + list5 + "'ORDER BY [ID] ASC";
+            SqlCommand liststyles = new SqlCommand(liststylenames, con);
+            SqlDataReader liststylesreader = liststyles.ExecuteReader();
+
+            while (liststylesreader.Read())
+            {
+                list[i] = (string)liststylesreader["StyleName"];
+                i++;
+            }
+            liststylesreader.Close();
+            i = 0;
+
+            //находим названия стилей картинки
+            string imgstylenames = "SELECT [StyleName] FROM [IMAGE] WHERE [ID] = '" + table1 + "' OR [ID] = '" + table2 + "' OR [ID] = '" + table3 + "' OR [ID] = '" + table4 + "' OR [ID] = '" + table5 + "'ORDER BY [ID] ASC";
+            SqlCommand imgstyles = new SqlCommand(imgstylenames, con);
+            SqlDataReader imgstylesreader = imgstyles.ExecuteReader();
+
+            while (imgstylesreader.Read())
+            {
+                img[i] = (string)imgstylesreader["StyleName"];
+                i++;
+            }
+            imgstylesreader.Close();
+            i = 0;
+            if (text1 != 0)
+            {
+                AddSavedStyleToList(text[i], 1, "text");
+                i++;
+            }
+            if (text2 != 0)
+            {
+                AddSavedStyleToList(text[i], 2, "text");
+                i++;
+            }
+            if (text3 != 0)
+            {
+                AddSavedStyleToList(text[i], 3, "text");
+                i++;
+            }
+            if (text4 != 0)
+            {
+                AddSavedStyleToList(text[i], 4, "text");
+                i++;
+            }
+            if (text5 != 0)
+            {
+                AddSavedStyleToList(text[i], 5, "text");
+                
+            }
+            i = 0;
+            if (table1 != 0)
+            {
+                AddSavedStyleToList(table[i], 1, "table");
+                i++;
+            }
+            if (table2 != 0)
+            {
+                AddSavedStyleToList(table[i], 2, "table");
+                i++;
+            }
+            if (table3 != 0)
+            {
+                AddSavedStyleToList(table[i], 3, "table");
+                i++;
+            }
+            if (table4 != 0)
+            {
+                AddSavedStyleToList(table[i], 4, "table");
+                i++;
+            }
+            if (table5 != 0)
+            {
+                AddSavedStyleToList(table[i], 5, "table");
+               
+            }
+            i = 0;
+            if (list1 != 0)
+            {
+                AddSavedStyleToList(list[i], 1, "list");
+                i++;
+            }
+            if (list2 != 0)
+            {
+                AddSavedStyleToList(list[i], 2, "list");
+                i++;
+            }
+            if (list3 != 0)
+            {
+                AddSavedStyleToList(list[i], 3, "list");
+                i++;
+            }
+            if (list4 != 0)
+            {
+                AddSavedStyleToList(list[i], 4, "list");
+                i++;
+            }
+            if (list5 != 0)
+            {
+                AddSavedStyleToList(list[i], 5, "list");
+                
+            }
+            i = 0;
+            if (img1 != 0)
+            {
+                AddSavedStyleToList(list[i], 1, "img");
+                i++;
+            }
+            if (img2 != 0)
+            {
+                AddSavedStyleToList(list[i], 2, "img");
+                i++;
+            }
+            if (img3 != 0)
+            {
+                AddSavedStyleToList(list[i], 3, "img");
+                i++;
+            }
+            if (img4 != 0)
+            {
+                AddSavedStyleToList(list[i], 4, "img");
+                i++;
+            }
+            if (img5 != 0)
+            {
+                AddSavedStyleToList(list[i], 5, "img");
+            }
+            i = 0;
+
+
+
+
             con.Close();
         }
 
+
+        protected void AddSavedStyleToList(string Text, int id,string type)
+        {
+            Button style = new Button();
+          //  style.Click += ;
+            style.Text = Text;
+            style.ID = String.Concat("style_",type, id);
+            style.Height = 22;
+            style.Width = 152;
+            style.Attributes.Add("margin-left", "0px");
+            style.Attributes.Add("magin-bottom", "20px");
+            style.Attributes.Add("runat", "server");
+            SavedStyles.Controls.Add(style);
+        }
+
+
+
         protected void Page_PreInit(object sender, EventArgs e)
         {
+            // текстбоксы преинит
             int Columns = 10;
             int Rows = 10;
             string style = "hidden";
             this.CreateTextBoxes(Rows, Columns, style);
+
+
+            //кнопки преинит
+
+            for(int i = 0; i < 5; i++) 
+            { 
+                Button btn = new Button();
+                btn.ID = String.Concat("style_","text", i);
+                btn.Style.Add("position","absolute");
+                btn.Attributes.Add("runat", "server");
+                btn.Style["visibility"] = "hidden";
+                SavedStyles.Controls.Add(btn);
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                Button btn = new Button();
+                btn.ID = String.Concat("style_", "table", i);
+                btn.Style.Add("position", "absolute");
+                btn.Attributes.Add("runat", "server");
+                btn.Style["visibility"] = "hidden";
+                SavedStyles.Controls.Add(btn);
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                Button btn = new Button();
+                btn.ID = String.Concat("style_", "list", i);
+                btn.Style.Add("position", "absolute");
+                btn.Attributes.Add("runat", "server");
+                btn.Style["visibility"] = "hidden";
+                SavedStyles.Controls.Add(btn);
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                Button btn = new Button();
+                btn.ID = String.Concat("style_", "img", i);
+                btn.Style.Add("position", "absolute");
+                btn.Attributes.Add("runat", "server");
+                btn.Style["visibility"] = "hidden";
+                SavedStyles.Controls.Add(btn);
+            }
         }
 
         //protected void ButtonChoose_Click(object sender, EventArgs e)  // поиск по Value из DropDownListForElements
