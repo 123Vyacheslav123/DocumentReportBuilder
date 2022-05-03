@@ -10,6 +10,7 @@
     <link href="Styles/Builder/Menu.css" rel="stylesheet" />
     <link href="Styles/Builder/STYLE.css" rel="stylesheet" />
     <title></title>
+
     <style>
         .ZAD_TIT {
             position: absolute;
@@ -57,7 +58,7 @@
         <div>
 
             <ul class="FIR">
-              <<li class="CL1"><a class="CL1a" href="/Main.aspx">Главная</a></li>
+              <li class="CL1"><a class="CL1a" href="/Main.aspx">Главная</a></li>
               <li class="CL2"><a class="CL2a" href="/Tasks.aspx">Задания</a></li>
               <li class="CL3"><a class="CL3a" href="#">Отправленные</a></li>
               <li class="CL4"><a class="CL4a" href="#">Сохранённые</a></li>
@@ -101,29 +102,29 @@
 
         <div id="Based" style="visibility:visible" runat="server">
 
-            <asp:Button ID="ButtonCreateFile" runat="server" Height="40px" Width="200px" style="position:absolute; top: 503px; left: 583px;" Text="Создать документ" OnClick="ButtonCreateFile_Click" />
+            <asp:Button ID="ButtonCreateFile" runat="server" Height="40px" Width="200px" style="position:absolute; top: 800px; left: 583px;" Text="Создать документ" OnClick="ButtonCreateFile_Click" />
 
         </div>
 
         <div id ="TextAndList" style="visibility:hidden" runat="server">
 
-            <asp:TextBox ID="TextBoxEditing" runat="server" Height="200px" Width="700px" AcceptsTab="True" TextAlign="Distribute" Wrap="true" style="position:absolute;bottom:516px; left: 92px;" TextMode="MultiLine" OnTextChanged="TextBoxEditing_TextChanged1"></asp:TextBox> <%-- Вспомогательный ТекстБокс --%>
-            <asp:Button ID="ButtonAddToMain" Height="40px" Width="200px" runat="server" style="position:absolute; top: 418px; left: 588px;" OnClick="ButtonAddToMain_Click" Text="Добавить Текст" />
+            <asp:TextBox ID="TextBoxEditing" runat="server" Height="300px" Width="500px" AcceptsTab="True" TextAlign="Distribute" Wrap="true" style="position:absolute; top:270px; left: 400px;" TextMode="MultiLine" OnTextChanged="TextBoxEditing_TextChanged1"></asp:TextBox> <%-- Вспомогательный ТекстБокс --%>
+            <asp:Button ID="ButtonAddToMain" Height="40px" Width="200px" runat="server" style="position:absolute; top:600px; left: 700px;" OnClick="ButtonAddToMain_Click" Text="Добавить Текст" />
 
         </div>
 
         <div id="List" style="visibility:hidden" runat="server">
 
-            <asp:Button ID="ButtonAddList" runat="server" style="position:absolute; top: 523px; left: 120px;" OnClick="ButtonAddList_Click" Text="Следующий пункт" Visible="False" />
+            <asp:Button ID="ButtonAddList" runat="server" style="position:absolute; top:700px; left: 600px;" OnClick="ButtonAddList_Click" Text="Следующий пункт" Visible="False" />
 
         </div>
 
         <div id="Images" style="visibility:hidden" runat="server">
          
-            <asp:Button ID="ButtonAddImage" runat="server" Height="40px" Width="200px" style="position:absolute; top: 550px; left: 200px;" OnClick="ButtonAddImage_Click" Text="Добавить фото" />
-            <asp:FileUpload ID="FileUpload" style="position:absolute;top:500px; left: 300px;" runat="server" /><br/>
-            <asp:Button ID="ButtonUploadImg" runat="server" style="position:absolute;top:500px; left: 150px;" Text="Загрузить фото" OnClick="UploadFile" /><br/>
-            <asp:Image ID="Image1" style="position:absolute;top:250px; left: 150px; width:400px; height:250px" runat="server" />
+            <asp:Button ID="ButtonAddImage" runat="server" Height="40px" Width="200px" style="position:absolute; top: 550px; left: 450px;" OnClick="ButtonAddImage_Click" Text="Добавить фото" />
+            <asp:FileUpload ID="FileUpload" style="position:absolute;top:500px; left: 600px;" runat="server" /><br/>
+            <asp:Button ID="ButtonUploadImg" runat="server" style="position:absolute;top:500px; left: 450px;" Text="Загрузить фото" OnClick="UploadFile" /><br/>
+            <asp:Image ID="Image1" style="position:absolute;top:250px; left: 350px; width:400px; height:250px" runat="server" />
             
         </div>
 
@@ -175,15 +176,15 @@
 
                 <asp:Panel ID="pnlTextBoxes" style="position:absolute" runat="server"> </asp:Panel>
             <p>
-                <asp:Label ID="LabelColumn" style="position:absolute; bottom:650px" runat="server" Text="Столбцы"></asp:Label>
-                <asp:TextBox ID="TextBoxColumn" style="position:absolute; left:100px; bottom:650px;" runat="server" Height="16px" TextMode="Number" Width="66px"></asp:TextBox>
+                <asp:Label ID="LabelColumn" style="position:absolute; bottom:600px; left:400px" runat="server" Text="Столбцы"></asp:Label>
+                <asp:TextBox ID="TextBoxColumn" style="position:absolute; left:500px; bottom:600px;" runat="server" Height="16px" TextMode="Number" Width="66px"></asp:TextBox>
             </p>
             <p>
-                <asp:Label ID="LabelRows" style="position:absolute; bottom:600px" runat="server" Text="Строки"></asp:Label>
-                <asp:TextBox ID="TextBoxRows" style="position:absolute; left:100px; bottom:600px" runat="server" TextMode="Number" Width="65px"></asp:TextBox>
+                <asp:Label ID="LabelRows" style="position:absolute; bottom:550px; left:400px" runat="server" Text="Строки"></asp:Label>
+                <asp:TextBox ID="TextBoxRows" style="position:absolute; left:500px; bottom:550px" runat="server" TextMode="Number" Width="65px"></asp:TextBox>
             </p>
-                <asp:Button ID="ButtonTableCreate" style="position:absolute; bottom:550px" runat="server" OnClick="ButtonTableCreate_Click" Text="Выбрать" />
-                <asp:Button ID="ButtonToWord" style="position:absolute;left:120px; bottom:550px" runat="server" OnClick="ButtonToWord_Click" Text="Добавить" />
+                <asp:Button ID="ButtonTableCreate" style="position:absolute; bottom:500px; left:400px" runat="server" OnClick="ButtonTableCreate_Click" Text="Выбрать" />
+                <asp:Button ID="ButtonToWord" style="position:absolute;left:520px; bottom:500px" runat="server" OnClick="ButtonToWord_Click" Text="Добавить" />
 
         </div>
 

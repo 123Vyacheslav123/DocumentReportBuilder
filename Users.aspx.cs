@@ -99,7 +99,6 @@ namespace DocumentReportBuilder
                 usersreader.Close();
 
                 string confname = (string)Session["NAMEOFCONF"];
-                LabelTest.Text = confname;
             }
             con.Close();
         }

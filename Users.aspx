@@ -126,9 +126,7 @@
        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [CONFIGURATION]"></asp:SqlDataSource> 
 
 
-        <asp:Label runat="server"  ID="LabelTest" style="position:absolute;left:300px;top:250px"></asp:Label>
-
-    <asp:GridView ID="GridViewTableUsers" AutoGenerateColumns="false" style="left:300px;top:400px;position:absolute" runat="server" CssClass="TABLE1">
+    <asp:GridView ID="GridViewTableUsers" AutoGenerateColumns="false" Width="700px"  style="left:30%;top:35%;position:absolute; font-size:20px" runat="server" CssClass="TABLE1">
              <Columns>
                  <asp:BoundField DataField ="ShortUserName" HeaderText ="ФИО" ReadOnly="true" />
                  <asp:BoundField DataField ="Mail" HeaderText ="Почта" ReadOnly="true" />
@@ -139,13 +137,11 @@
                  </asp:TemplateField>
                  <asp:TemplateField HeaderText="Отправить">
                      <ItemTemplate>
-                        <asp:Button runat="server" Text="Выбрать" OnClick="ButtonChoose_Click" CssClass="BUTTON_STYLE" />
+                        <asp:Button runat="server" Text="Выбрать" OnClick="ButtonChoose_Click" Font-Size="18px" CssClass="BUTTON_STYLE" />
                      </ItemTemplate>    
                  </asp:TemplateField>
                      
              </Columns>
-
-
          </asp:GridView>
 
 

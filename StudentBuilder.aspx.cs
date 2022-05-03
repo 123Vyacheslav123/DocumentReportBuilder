@@ -83,7 +83,7 @@ namespace DocumentReportBuilder
             }
             shortnamereader.Close();
 
-            //находим айдишники в присланной конфигурации
+            //находим айди в присланной конфигурации
             string styles = "SELECT [CONFNAME],[CREATEDBY],[TEXT1],[TEXT2],[TEXT3],[TEXT4],[TEXT5],[TABLE1],[TABLE2],[TABLE3],[TABLE4],[TABLE5],[LIST1],[LIST2],[LIST3],[LIST4],[LIST5],[IMG1],[IMG2],[IMG3],[IMG4],[IMG5] FROM [CONFIGURATION] WHERE [CONFNAME] = '"+confname+"' AND [CREATEDBY] = '"+mailfrom+"' ";
             SqlCommand taskstyles = new SqlCommand(styles,con);
             SqlDataReader stylesreader = taskstyles.ExecuteReader();
@@ -180,7 +180,7 @@ namespace DocumentReportBuilder
             i = 0;
 
             //находим названия стилей картинки
-            string imgstylenames = "SELECT [StyleName] FROM [IMAGE] WHERE [ID] = '" + table1 + "' OR [ID] = '" + table2 + "' OR [ID] = '" + table3 + "' OR [ID] = '" + table4 + "' OR [ID] = '" + table5 + "'ORDER BY [ID] ASC";
+            string imgstylenames = "SELECT [StyleName] FROM [IMAGE] WHERE [ID] = '" + img1 + "' OR [ID] = '" + img2 + "' OR [ID] = '" + img3 + "' OR [ID] = '" + img4 + "' OR [ID] = '" + img5 + "'ORDER BY [ID] ASC";
             SqlCommand imgstyles = new SqlCommand(imgstylenames, con);
             SqlDataReader imgstylesreader = imgstyles.ExecuteReader();
 
@@ -191,6 +191,7 @@ namespace DocumentReportBuilder
             }
             imgstylesreader.Close();
             i = 0;
+
             if (text1 != 0)
             {
                 AddSavedStyleToList(text[i], 1, "text");
@@ -271,27 +272,27 @@ namespace DocumentReportBuilder
             i = 0;
             if (img1 != 0)
             {
-                AddSavedStyleToList(list[i], 1, "img");
+                AddSavedStyleToList(img[i], 1, "img");
                 i++;
             }
             if (img2 != 0)
             {
-                AddSavedStyleToList(list[i], 2, "img");
+                AddSavedStyleToList(img[i], 2, "img");
                 i++;
             }
             if (img3 != 0)
             {
-                AddSavedStyleToList(list[i], 3, "img");
+                AddSavedStyleToList(img[i], 3, "img");
                 i++;
             }
             if (img4 != 0)
             {
-                AddSavedStyleToList(list[i], 4, "img");
+                AddSavedStyleToList(img[i], 4, "img");
                 i++;
             }
             if (img5 != 0)
             {
-                AddSavedStyleToList(list[i], 5, "img");
+                AddSavedStyleToList(img[i], 5, "img");
             }
             i = 0;
 
@@ -305,7 +306,6 @@ namespace DocumentReportBuilder
         protected void AddSavedStyleToList(string Text, int id,string type)
         {
             Button style = new Button();
-          //  style.Click += ;
             style.Text = Text;
             style.ID = String.Concat("style_",type, id);
             style.Height = 22;
@@ -313,10 +313,58 @@ namespace DocumentReportBuilder
             style.Attributes.Add("margin-left", "0px");
             style.Attributes.Add("magin-bottom", "20px");
             style.Attributes.Add("runat", "server");
+
+            if (type == "text")
+            {
+                style.Click += new EventHandler(this.ButtonChooseText_Click);
+            }
+            else if (type == "table")
+            {
+                style.Click += new EventHandler(this.ButtonChooseTable_Click);
+            }
+            else if (type == "list")
+            {
+                style.Click += new EventHandler(this.ButtonChooseList_Click);
+            }
+            else if (type == "img")
+            {
+                style.Click += new EventHandler(this.ButtonChoosePic_Click);
+            }
+
             SavedStyles.Controls.Add(style);
         }
 
+        protected void CreateTextBoxes(int Rows, int Columns, string style)
+        {
 
+            int counter_rows = 1;
+            int posleftCounter = 400;
+            int postopCounter = 360;
+            for (int i = 0; i < Rows; i++)
+            {
+                for (int j = 0; j < Columns; j++)
+                {
+                    TextBox tb = new TextBox();
+                    tb.ID = "cell_ID" + i + j;
+                    tb.Width = 80;
+                    tb.Style["position"] = "absolute";
+                    tb.Style["left"] = posleftCounter.ToString() + "px";
+                    tb.Style["top"] = postopCounter.ToString() + "px";
+                    tb.Style["visibility"] = style;
+                    posleftCounter = posleftCounter + 100;
+                    pnlTextBoxes.Controls.Add(tb);
+                    counter_rows++;
+
+                    Literal lt = new Literal();
+                    lt.Text = "<br />";
+                    pnlTextBoxes.Controls.Add(lt);
+
+
+                }
+                postopCounter = postopCounter + 30;
+                posleftCounter = 400;
+            }
+        }
 
         protected void Page_PreInit(object sender, EventArgs e)
         {
@@ -332,9 +380,10 @@ namespace DocumentReportBuilder
             for(int i = 0; i < 5; i++) 
             { 
                 Button btn = new Button();
-                btn.ID = String.Concat("style_","text", i);
+              //  btn.ID = String.Concat("style_","text", i);
                 btn.Style.Add("position","absolute");
                 btn.Attributes.Add("runat", "server");
+                btn.Click += new EventHandler(this.ButtonChooseText_Click);
                 btn.Style["visibility"] = "hidden";
                 SavedStyles.Controls.Add(btn);
             }
@@ -342,9 +391,10 @@ namespace DocumentReportBuilder
             for (int i = 0; i < 5; i++)
             {
                 Button btn = new Button();
-                btn.ID = String.Concat("style_", "table", i);
+              //  btn.ID = String.Concat("style_", "table", i);
                 btn.Style.Add("position", "absolute");
                 btn.Attributes.Add("runat", "server");
+                btn.Click += new EventHandler(this.ButtonChooseTable_Click);
                 btn.Style["visibility"] = "hidden";
                 SavedStyles.Controls.Add(btn);
             }
@@ -352,9 +402,10 @@ namespace DocumentReportBuilder
             for (int i = 0; i < 5; i++)
             {
                 Button btn = new Button();
-                btn.ID = String.Concat("style_", "list", i);
+             //   btn.ID = String.Concat("style_", "list", i);
                 btn.Style.Add("position", "absolute");
                 btn.Attributes.Add("runat", "server");
+                btn.Click += new EventHandler(this.ButtonChooseList_Click);
                 btn.Style["visibility"] = "hidden";
                 SavedStyles.Controls.Add(btn);
             }
@@ -362,57 +413,82 @@ namespace DocumentReportBuilder
             for (int i = 0; i < 5; i++)
             {
                 Button btn = new Button();
-                btn.ID = String.Concat("style_", "img", i);
+              //  btn.ID = String.Concat("style_", "img", i);
                 btn.Style.Add("position", "absolute");
                 btn.Attributes.Add("runat", "server");
+                btn.Click += new EventHandler(this.ButtonChoosePic_Click);
                 btn.Style["visibility"] = "hidden";
                 SavedStyles.Controls.Add(btn);
             }
         }
 
-        //protected void ButtonChoose_Click(object sender, EventArgs e)  // поиск по Value из DropDownListForElements
-        //{
-        //    string status = (string)Session["STATUSSTUDENT"]; // стиль для чего создает пользователь
-        //    ButtonAddTtitle.Visible = false;
-        //    string redline = "\u2007\u2007\u2007\u2007\u2007"; // красная строка
-        //    TopBoxes.Style.Add("visibility", "hidden");
-        //    LeftBoxes.Style.Add("visibility", "hidden");
-        //    RightBoxes.Style.Add("visibility", "hidden");
-        //    BotBoxes.Style.Add("visibility", "hidden");
-        //    Images.Style.Add("visibility", "hidden");
-        //    List.Style.Add("visibility", "hidden");
-        //    TextAndList.Style.Add("visibility", "hidden");
-        //    Title.Style.Add("visibility", "hidden");
-        //    Tables.Style.Add("visibility", "hidden");
+        protected void ButtonChooseText_Click(object sender,EventArgs e) // если выбран текст
+        {
+            ButtonAddTtitle.Visible = false;
+            TopBoxes.Style.Add("visibility", "hidden");
+            LeftBoxes.Style.Add("visibility", "hidden");
+            RightBoxes.Style.Add("visibility", "hidden");
+            BotBoxes.Style.Add("visibility", "hidden");
+            Images.Style.Add("visibility", "hidden");
+            List.Style.Add("visibility", "hidden");
+            TextAndList.Style.Add("visibility", "hidden");
+            Title.Style.Add("visibility", "hidden");
+            Tables.Style.Add("visibility", "hidden");
+            string redline = "\u2007\u2007\u2007\u2007\u2007"; // красная строка
 
-        //    if (status == "Text") // если найдено Value для текста
-        //    {
-        //        TextAndList.Style.Add("visibility", "visible");
-        //        TextBoxEditing.Text = redline; // красная строка
-        //    }  
-        //    else if ((DropDownListForElements.SelectedItem.Value) == "1") // если найдено Value для Таблицы
-        //    {
-        //        Tables.Style.Add("visibility", "visible");
+            TextAndList.Style.Add("visibility", "visible");
+            TextBoxEditing.Text = redline; // красная строка
+        }
+        protected void ButtonChooseTable_Click(object sender, EventArgs e) //если выбрана таблица
+        {
+            ButtonAddTtitle.Visible = false;
+            TopBoxes.Style.Add("visibility", "hidden");
+            LeftBoxes.Style.Add("visibility", "hidden");
+            RightBoxes.Style.Add("visibility", "hidden");
+            BotBoxes.Style.Add("visibility", "hidden");
+            Images.Style.Add("visibility", "hidden");
+            List.Style.Add("visibility", "hidden");
+            TextAndList.Style.Add("visibility", "hidden");
+            Title.Style.Add("visibility", "hidden");
+            Tables.Style.Add("visibility", "hidden");
 
-        //    }   
-        //    else if ((DropDownListForElements.SelectedItem.Value) == "2") // если найдено Value для Списка
-        //    {
-        //        TextAndList.Style.Add("visibility", "visible");
-        //        List.Style.Add("visibility", "visible");
-        //        TextBoxEditing.Text = String.Concat(redline,"1.","\u2007"); // красная строка
-        //    }   
-                
-        //    else if ((DropDownListForElements.SelectedItem.Value) == "3") // если найдено Value для картинки
-        //    {
-        //        Images.Style.Add("visibility", "visible");
-        //    }
-        //    else
-        //    {
-        //        ButtonAddList.Visible = false;
-        //        TextBoxEditing.Visible = true;
-        //        TextBoxEditing.Text = "Ошибка";
-        //    }
-        //}
+            Tables.Style.Add("visibility", "visible");
+        }
+
+        protected void ButtonChooseList_Click(object sender, EventArgs e) // если выбран список
+        {
+            ButtonAddTtitle.Visible = false;
+            TopBoxes.Style.Add("visibility", "hidden");
+            LeftBoxes.Style.Add("visibility", "hidden");
+            RightBoxes.Style.Add("visibility", "hidden");
+            BotBoxes.Style.Add("visibility", "hidden");
+            Images.Style.Add("visibility", "hidden");
+            List.Style.Add("visibility", "hidden");
+            TextAndList.Style.Add("visibility", "hidden");
+            Title.Style.Add("visibility", "hidden");
+            Tables.Style.Add("visibility", "hidden");
+            string redline = "\u2007\u2007\u2007\u2007\u2007"; // красная строка
+
+            TextAndList.Style.Add("visibility", "visible");
+            List.Style.Add("visibility", "visible");
+            TextBoxEditing.Text = String.Concat(redline,"1.","\u2007"); // красная строка
+        }
+
+        protected void ButtonChoosePic_Click(object sender, EventArgs e) //если выбрана картинка
+        {
+            ButtonAddTtitle.Visible = false;
+            TopBoxes.Style.Add("visibility", "hidden");
+            LeftBoxes.Style.Add("visibility", "hidden");
+            RightBoxes.Style.Add("visibility", "hidden");
+            BotBoxes.Style.Add("visibility", "hidden");
+            Images.Style.Add("visibility", "hidden");
+            List.Style.Add("visibility", "hidden");
+            TextAndList.Style.Add("visibility", "hidden");
+            Title.Style.Add("visibility", "hidden");
+            Tables.Style.Add("visibility", "hidden");
+
+            Images.Style.Add("visibility", "visible");
+        }
 
         protected void ButtonAddToMain_Click(object sender, EventArgs e)   // добавление текста на главный лист
         {
@@ -764,37 +840,7 @@ namespace DocumentReportBuilder
             doc.Save();
         }
 
-        protected void CreateTextBoxes(int Rows, int Columns, string style)
-        {
-
-            int counter_rows = 1;
-            int posleftCounter = 250;
-            int postopCounter = 160;
-            for (int i = 0; i < Rows; i++)
-            {
-                for (int j = 0; j < Columns; j++)
-                {
-                    TextBox tb = new TextBox();
-                    tb.ID = "cell_ID" + i + j;
-                    tb.Width = 80;
-                    tb.Style["position"] = "absolute";
-                    tb.Style["left"] = posleftCounter.ToString() + "px";
-                    tb.Style["top"] = postopCounter.ToString() + "px";
-                    tb.Style["visibility"] = style;
-                    posleftCounter = posleftCounter + 100;
-                    pnlTextBoxes.Controls.Add(tb);
-                    counter_rows++;
-
-                    Literal lt = new Literal();
-                    lt.Text = "<br />";
-                    pnlTextBoxes.Controls.Add(lt);
-
-
-                }
-                postopCounter = postopCounter + 30;
-                posleftCounter = 250;
-            }
-        }
+        
 
         ////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////

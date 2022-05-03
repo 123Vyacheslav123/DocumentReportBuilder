@@ -8,6 +8,7 @@
     <link href="Styles/Main/FIR.css" rel="stylesheet" />
     <link href="Styles/Main/MENU.css" rel="stylesheet" />
     <link href="Styles/Main/CARDS.css" rel="stylesheet" />
+     <link href="Styles/TABLES.css" rel="stylesheet" />
     <title></title>
 
 </head>
@@ -132,7 +133,7 @@
 
 
 
-         <asp:GridView ID="GridViewTableTask" AutoGenerateColumns="false" style="left:300px;top:400px;position:absolute" runat="server">
+         <asp:GridView ID="GridViewTableTask" AutoGenerateColumns="false" Width="550px" style="left:35%;top:35%;position:absolute; font-size:20px" CssClass="TABLE1" runat="server">
              <Columns>
                  <asp:BoundField DataField ="ID" HeaderText ="№" ReadOnly="true" />
                  <asp:BoundField DataField ="CONFNAME" HeaderText ="Название" ReadOnly="true" />
@@ -140,7 +141,7 @@
                  <asp:BoundField DataField ="Date" HeaderText ="Срок сдачи" ReadOnly="true" />
                  <asp:TemplateField>
                      <ItemTemplate>
-                         <asp:Button runat="server" Text="Открыть" OnClick="ButtonOpen_Click" />
+                         <asp:Button runat="server" Text="Открыть" OnClick="ButtonOpen_Click" Font-Size="18px" CssClass="BUTTON_STYLE" />
                      </ItemTemplate>
                  </asp:TemplateField>
                      
@@ -149,11 +150,6 @@
 
          </asp:GridView>
                      
-             </Columns>
-
-
-         </asp:GridView>
-
 
 
        

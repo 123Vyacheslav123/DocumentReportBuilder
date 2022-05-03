@@ -26,7 +26,6 @@
 		//--><!]]>
 </script>
 
-
     <script>
         function changeItem() {
             document.getElementById('FIRST').style.visibility = "visible"; // show
@@ -54,8 +53,9 @@
 
         <style>
             body{
-               background-image:url('images/1.png');
+               background-image:url('images/2.png');
                background-repeat:no-repeat;
+               height:100vh;
                background-size:cover;
             }
 

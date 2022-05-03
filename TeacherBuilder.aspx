@@ -108,7 +108,7 @@
 
             <li id="SavedStyles" runat="server">
                  
-                <%--Динамическое заполнение--%>
+                <%--<%--<%--Динамическое заполнение--%>
 
                 <%--<asp:Button ID="Button2" runat="server" Height="22px" style="margin-left: 0px; margin-bottom: 20px" Text="Таблица" Width="152px"/>
                 <asp:Button ID="Button3" runat="server" Height="22px" style="margin-left: 0px; margin-bottom: 20px" Text="Стиль текста" Width="152px" />
@@ -166,8 +166,8 @@
         <asp:Button ID="ButtonCreateMainList" style="position:absolute; top:880px; margin-left:600px;margin-right:0px;" runat="server" Text="Сохранить титульник" OnClick="ButtonCreateMainList_Click" />
       </div>
 
-        <div id="TextStyle" style="visibility:hidden" runat="server">
-            <asp:Label ID="Textsettings" runat="server" style="position:absolute; top:300px; margin-left:50px;margin-right:0px;"  Text="Настройка стиля текста"></asp:Label>
+        <div id="TextStyle" style="visibility:hidden; left:200px;top:-20px ;position:absolute" runat="server">
+            <asp:Label ID="Textsettings" runat="server" style="position:absolute; top:300px; left:200px" Width="250px" Font-Size="18px"  Text="Настройка стиля текста"></asp:Label>
 
             <asp:Label ID="LabelName" style="position:absolute; top:350px; left:250px" runat="server" Text="Имя"></asp:Label>
             <asp:TextBox ID="TextBoxName" Width="250px" style="position:absolute; top:350px; left:320px" runat="server"></asp:TextBox>
@@ -212,8 +212,8 @@
             <asp:TextBox ID="TextBoxValue" Width="50px" style="position:absolute; top:750px; left:820px" TextMode="Number" runat="server"></asp:TextBox>
             </div>
 
-             <div id="Liststyle" runat="server" style="visibility:hidden">
-                <asp:Label ID="SSettings_Label" style="position:absolute; top:300px; margin-left:50px;margin-right:0px;" runat="server">Настройка стиля списка</asp:Label>
+             <div id="Liststyle" runat="server" style="visibility:hidden; left:300px;top:-20px ;position:absolute">
+                <asp:Label ID="SSettings_Label" style="position:absolute; top:300px; left:100px" Width="250px" Font-Size="18px" runat="server">Настройка стиля списка</asp:Label>
 
                 <asp:Label ID="TextBoxSName_Label" style="position:absolute; top:350px; margin-left:80px;margin-right:0px;" runat="server">Название:</asp:Label>
                 <asp:TextBox ID="TextBoxSName" Width="300px" style="position:absolute; top:350px; margin-left:200px;margin-right:0px;" runat="server"></asp:TextBox>
@@ -230,8 +230,8 @@
                 <asp:TextBox ID="TextBoxTSize" Width="70px" style="position:absolute; top:400px; margin-left:630px;margin-right:0px;" TextMode="Number" runat="server"></asp:TextBox>
             </div>
 
-            <div id="Picstyle" runat="server" style="visibility:hidden">
-                <asp:Label ID="PSettings_Label" style="position:absolute; top:300px; margin-left:50px;margin-right:0px;" runat="server">Настройка стиля картинки</asp:Label>
+            <div id="Picstyle" runat="server" style="visibility:hidden; left:300px;top:-20px ;position:absolute">
+                <asp:Label ID="PSettings_Label" style="position:absolute; top:300px; left:100px" Width="250px" Font-Size="18px" runat="server">Настройка стиля картинки</asp:Label>
 
                 <asp:Label ID="TextVoxPName_Label" style="position:absolute; top:350px; margin-left:80px;margin-right:0px;" runat="server">Название:</asp:Label>
                 <asp:TextBox ID="TextBoxPName" Width="300px" style="position:absolute; top:350px; margin-left:200px;margin-right:0px;" runat="server"></asp:TextBox>
@@ -248,8 +248,8 @@
                 </asp:DropDownList>
             </div>
 
-        <div id="TableStyle" style="visibility:hidden" runat="server">
-            <asp:Label ID="TableSettings" runat="server" style="position:absolute; top:300px; margin-left:50px;margin-right:0px;"  Text="Настройка стиля таблицы"></asp:Label>
+        <div id="TableStyle" style="visibility:hidden; left:300px;top:-20px ;position:absolute" runat="server">
+            <asp:Label ID="TableSettings" runat="server" style="position:absolute; top:300px; left:100px" Width="250px" Font-Size="18px"  Text="Настройка стиля таблицы"></asp:Label>
 
             <asp:Label ID="TableStyleName" style="position:absolute; top:350px; margin-left:80px;margin-right:0px;" runat="server">Название:</asp:Label>
             <asp:TextBox ID="TableStyleNameBox" Width="300px" style="position:absolute; top:350px; margin-left:170px;margin-right:0px;" runat="server"></asp:TextBox>
