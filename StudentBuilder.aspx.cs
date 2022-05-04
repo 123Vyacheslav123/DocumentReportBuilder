@@ -17,6 +17,8 @@ using System.Web.UI.HtmlControls;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using SautinSoft.Document;
+
 
 namespace DocumentReportBuilder
 {
@@ -334,6 +336,18 @@ namespace DocumentReportBuilder
             SavedStyles.Controls.Add(style);
         }
 
+        protected void workWithPdf() // процедура для создания и показа файла pdf
+        {
+            // конвертация в pdf
+            string getDownloads = new KnownFolder(KnownFolderType.Downloads).Path;
+            string FullFilePath = String.Concat(getDownloads, "/Test.docx");
+            DocumentCore dc = DocumentCore.Load(FullFilePath);
+
+            // сохранение pdf на сервер
+            string savingPath = MapPath("~/Pdfs/");
+            dc.Save(String.Concat(savingPath + "Test.pdf"));
+            showPDF.Src = "~/Pdfs/" + "Test.pdf"; //показать документ
+        }
         protected void CreateTextBoxes(int Rows, int Columns, string style)
         {
 
@@ -506,6 +520,7 @@ namespace DocumentReportBuilder
             .SpacingLine(18);
             doc.Save();
             TextBoxEditing.Text = "\u2007\u2007\u2007\u2007\u2007"; // очистка листа после добавления текста
+            workWithPdf();
         }
 
         protected void ButtonAddTitle_Click(object sender, EventArgs e)   // добавление титульника в документ
@@ -719,10 +734,7 @@ namespace DocumentReportBuilder
             doc.Save();
             Session["COUNTERIMG"] = "1";
             Session["COUNTERLIST"] = "2";
-        }
-        protected void ButtonToWebForm2_Click(object sender, EventArgs e)
-        {
-            Server.Transfer("~/TeacherBuilder.aspx");
+            workWithPdf();
         }
 
         protected void ButtonAddList_Click(object sender, EventArgs e)
@@ -733,7 +745,7 @@ namespace DocumentReportBuilder
             TextBoxEditing.Text += String.Concat(Environment.NewLine,redline,listID,".", "\u2007");
             listID++;
             Session["COUNTERLIST"] = listID.ToString();
-
+            workWithPdf();
         }
 
         protected void UploadFile(object sender, EventArgs e)
@@ -761,12 +773,13 @@ namespace DocumentReportBuilder
             string counterimg = (string)Session["COUNTERIMG"];
             int ImgID = Int32.Parse(counterimg);
             string imginsert = String.Concat("Рисунок ", counterimg," -");
-            Paragraph par = doc.InsertParagraph(imginsert);
+            Xceed.Document.NET.Paragraph par = doc.InsertParagraph(imginsert);
             par.AppendPicture(p);
             doc.Save();
             Session["IMGPATH"]="";
             ImgID++;
             Session["COUNTERIMG"] = ImgID.ToString();
+            workWithPdf();
         }
 
         protected void TextBoxCounter_TextChanged(object sender, EventArgs e)
@@ -838,6 +851,7 @@ namespace DocumentReportBuilder
             doc.InsertTable(table);
             // сохраняем документ
             doc.Save();
+            workWithPdf();
         }
 
         

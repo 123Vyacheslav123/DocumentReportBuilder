@@ -198,7 +198,10 @@
             <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [ReportUsers]"></asp:SqlDataSource>     
         </div>
 
-
+          <%--вывод предпросмотра документа:--%>
+    <div id="preview" style="position:absolute; left:900px; width:1300px; height:1300px;">
+        <iframe id="showPDF" runat="server" width="1000" height="1300"></iframe>
+    </div>
 
 
     </form>

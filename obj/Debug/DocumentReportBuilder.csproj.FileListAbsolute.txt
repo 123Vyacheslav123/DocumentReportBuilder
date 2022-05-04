@@ -65,4 +65,5 @@ C:\Users\Максим\source\repos\123Vyacheslav123\DocumentReportBuilder\bin\ro
 C:\Users\Максим\source\repos\123Vyacheslav123\DocumentReportBuilder\bin\roslyn\vbc.rsp
 C:\Users\Максим\source\repos\123Vyacheslav123\DocumentReportBuilder\bin\roslyn\VBCSCompiler.exe
 C:\Users\Максим\source\repos\123Vyacheslav123\DocumentReportBuilder\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\Максим\source\repos\123Vyacheslav123\DocumentReportBuilder\obj\Debug\DocumentReportBuilder.csproj.AssemblyReference.cache
+C:\Users\Максим\source\repos\123Vyacheslav123\DocumentReportBuilder\bin\SautinSoft.Document.dll
+C:\Users\Максим\source\repos\123Vyacheslav123\DocumentReportBuilder\bin\SautinSoft.Document.xml
