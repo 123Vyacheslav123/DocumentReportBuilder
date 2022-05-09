@@ -167,49 +167,37 @@
       </div>
 
         <div id="TextStyle" style="visibility:hidden; left:200px;top:-20px ;position:absolute" runat="server">
+
             <asp:Label ID="Textsettings" runat="server" style="position:absolute; top:300px; left:200px" Width="250px" Font-Size="18px"  Text="Настройка стиля текста"></asp:Label>
 
-            <asp:Label ID="LabelName" style="position:absolute; top:350px; left:250px" runat="server" Text="Имя"></asp:Label>
+            <asp:Label ID="LabelName" style="position:absolute; top:350px; left:200px" runat="server" Text="Имя"></asp:Label>
             <asp:TextBox ID="TextBoxName" Width="250px" style="position:absolute; top:350px; left:320px" runat="server"></asp:TextBox>
 
             <asp:Label ID="LabelStyle"  style="position:absolute; top:400px; left:200px" runat="server" Text="Шрифт"></asp:Label>
-                <asp:DropDownList ID="TextFontList" Width="300px" runat="server" style="position:absolute; top: 400px; left: 270px;" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
+                <asp:DropDownList ID="TextFontList" Width="250px" runat="server" style="position:absolute; top: 400px; left: 320px;" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
                     <asp:ListItem Value="Times New Roman">Times New Roman</asp:ListItem>
                     <asp:ListItem Value="Courier New">Courier New</asp:ListItem>
                     <asp:ListItem Value="Calibri">Calibri</asp:ListItem>
                     <asp:ListItem Value="Comic Sans MS">Comic Sans</asp:ListItem>
                 </asp:DropDownList>
 
+            <asp:Label ID="LabelTextAlign" style="position:absolute; top:450px;left:200px" runat="server">Выравнивание:</asp:Label>
+                <asp:DropDownList ID="DropDownTextAlign" Width="300px" runat="server" style="position:absolute; top: 500px; left: 200px;" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
+                    <asp:ListItem Value="left">Левый край</asp:ListItem>
+                    <asp:ListItem Value="center">Центр</asp:ListItem>
+                    <asp:ListItem Value="right">Правый край</asp:ListItem>
+                    <asp:ListItem Value="both">По ширине</asp:ListItem>
+                </asp:DropDownList>
+
             <asp:Label ID="LabelSize" style="position:absolute; top:350px; left:600px" runat="server" Text="Размер"></asp:Label>
-            <asp:TextBox ID="TextBoxSize" Width="250px" style="position:absolute; top:400px; left:600px" TextMode="Number" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBoxSize" Width="50px" style="position:absolute; top:400px; left:600px" TextMode="Number" runat="server"></asp:TextBox>
 
-            <asp:Label ID="LabelRight" style="position:absolute; top:500px; left:250px" runat="server" Text="Справа"></asp:Label>
-            <asp:TextBox ID="TextBoxRight" Width="50px" style="position:absolute; top:550px; left:330px" TextMode="Number" runat="server"></asp:TextBox>
+            <asp:Label ID="LabelBefore" style="position:absolute; top:550px; left:270px" runat="server" Text="До"></asp:Label>
+            <asp:TextBox ID="TextBoxBefore" Width="50px" style="position:absolute; top:550px; left:350px" TextMode="Number" runat="server"></asp:TextBox>
 
-            <asp:Label ID="LabelLeft" style="position:absolute; top:550px; left:250px" runat="server" Text="Слева"></asp:Label>
-            <asp:TextBox ID="TextBoxLeft" Width="50px" style="position:absolute; top:500px; left:330px" TextMode="Number" runat="server"></asp:TextBox>
+            <asp:Label ID="LabelAfter" style="position:absolute; top:600px; left:270px" runat="server" Text="После"></asp:Label>
+            <asp:TextBox ID="TextBoxAfter" Width="50px" style="position:absolute; top:600px; left:350px" TextMode="Number" runat="server"></asp:TextBox>
 
-            <asp:Label ID="LabelSpace" style="position:absolute; top:470px; left:170px" runat="server" TextMode="Number" Text="Отступ"></asp:Label>
-
-            <asp:Label ID="LabeL1stString" style="position:absolute; top:500px; left:600px" runat="server" Text="Первая строка"></asp:Label>
-            <asp:TextBox ID="TextBox1stString" Width="100px" style="position:absolute; top:550px; left:600px" TextMode="Number" runat="server"></asp:TextBox>
-
-            <asp:Label ID="LabeLOn" style="position:absolute; top:500px; left:820px" runat="server" Text="На"></asp:Label>
-            <asp:TextBox ID="TextBoxOn" Width="50px" style="position:absolute; top:550px; left:820px" TextMode="Number" runat="server"></asp:TextBox>
-
-            <asp:Label ID="LabelInterval" style="position:absolute; top:650px; left:170px" runat="server" TextMode="Number" Text="Интервал"></asp:Label>
-
-            <asp:Label ID="LabelBefore" style="position:absolute; top:750px; left:250px" runat="server" Text="До"></asp:Label>
-            <asp:TextBox ID="TextBoxBefore" Width="50px" style="position:absolute; top:750px; left:330px" TextMode="Number" runat="server"></asp:TextBox>
-
-            <asp:Label ID="LabelAfter" style="position:absolute; top:700px; left:250px" runat="server" Text="После"></asp:Label>
-            <asp:TextBox ID="TextBoxAfter" Width="50px" style="position:absolute; top:700px; left:330px" TextMode="Number" runat="server"></asp:TextBox>
-
-            <asp:Label ID="LabeLInterline" style="position:absolute; top:700px; left:600px" runat="server" Text="Междустрочный"></asp:Label>
-            <asp:TextBox ID="TextBoxInterline" Width="100px" style="position:absolute; top:750px; left:600px" TextMode="Number" runat="server"></asp:TextBox>
-
-            <asp:Label ID="LabeLValue" style="position:absolute; top:700px; left:820px" runat="server" Text="Значение"></asp:Label>
-            <asp:TextBox ID="TextBoxValue" Width="50px" style="position:absolute; top:750px; left:820px" TextMode="Number" runat="server"></asp:TextBox>
             </div>
 
              <div id="Liststyle" runat="server" style="visibility:hidden; left:300px;top:-20px ;position:absolute">
@@ -244,7 +232,7 @@
                     <asp:ListItem Value="left">Левый край</asp:ListItem>
                     <asp:ListItem Value="center">Центр</asp:ListItem>
                     <asp:ListItem Value="right">Правый край</asp:ListItem>
-                    <asp:ListItem Value="just">По ширине</asp:ListItem>
+                    <asp:ListItem Value="both">По ширине</asp:ListItem>
                 </asp:DropDownList>
             </div>
 
@@ -270,7 +258,7 @@
                     <asp:ListItem Value="left">Левый край</asp:ListItem>
                     <asp:ListItem Value="center">Центр</asp:ListItem>
                     <asp:ListItem Value="right">Правый край</asp:ListItem>
-                    <asp:ListItem Value="just">По ширине</asp:ListItem>
+                    <asp:ListItem Value="both">По ширине</asp:ListItem>
                 </asp:DropDownList>
 
              <asp:Label ID="LabelCellAlign" style="position:absolute; top:500px; margin-left:80px;margin-right:0px;" runat="server">Выравнивание ячейки:</asp:Label>
@@ -278,7 +266,7 @@
                     <asp:ListItem Value="left">Левый край</asp:ListItem>
                     <asp:ListItem Value="center">Центр</asp:ListItem>
                     <asp:ListItem Value="right">Правый край</asp:ListItem>
-                    <asp:ListItem Value="just">По ширине</asp:ListItem>
+                    <asp:ListItem Value="both">По ширине</asp:ListItem>
                 </asp:DropDownList>
 
         </div>

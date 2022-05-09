@@ -117,7 +117,6 @@ namespace DocumentReportBuilder
             
         }
 
-
         protected void ButtonTextStyle_Click(object sender, EventArgs e)
         {
             TopBoxes.Style.Add("visibility", "hidden");
@@ -136,7 +135,6 @@ namespace DocumentReportBuilder
             Session["STATUS"] = "Text";
 
         }
-
 
         protected void ButtonListStyle_Click(object sender, EventArgs e)
         {
@@ -190,8 +188,6 @@ namespace DocumentReportBuilder
         }
 
 
-
-
         protected void ButtonSaveStyle_Click(object sender, EventArgs e)
         {
             con.Open();
@@ -214,21 +210,14 @@ namespace DocumentReportBuilder
             if (status == "Text") // если найдено Value для текста
             {
                 string DropDownValue = TextFontList.SelectedValue.ToString();
+                string DropDownAlign = DropDownTextAlign.SelectedValue.ToString();
                 int textSize = Int32.Parse(TextBoxSize.Text);
-                int indentRight = Int32.Parse(TextBoxRight.Text);
-                int indentLeft = Int32.Parse(TextBoxLeft.Text);
-                int firstLine = Int32.Parse(TextBox1stString.Text);
-                int firstLineTo = Int32.Parse(TextBoxOn.Text);
                 int intervalAfter = Int32.Parse(TextBoxAfter.Text);
                 int intervalBefore = Int32.Parse(TextBoxBefore.Text);
-                int interline = Int32.Parse(TextBoxInterline.Text);
-                int value = Int32.Parse(TextBoxAfter.Text);
                 // заносим стиль текста в базу
-                string TextStyle = "INSERT INTO[TEXT]([CREATEDBY],[StyleName],[Font],[FontSize],[IndentRight],[IndentLeft],[FirstLine],[FirsLineTo],[IntervalAfter],[IntervalBefore],[Interline],[Value])VALUES('"+UserMail+"','"+TextBoxName.Text+"', '"+DropDownValue+"', "+textSize+","+indentRight+","+indentLeft+", "+firstLine+","+firstLineTo+","+intervalAfter+","+intervalBefore+", "+interline+","+value+")";
+                string TextStyle = "INSERT INTO[TEXT]([CREATEDBY],[StyleName],[Font],[Alignment],[FontSize],[IntervalAfter],[IntervalBefore])VALUES('"+UserMail+"','"+TextBoxName.Text+"', '"+DropDownValue+"','"+DropDownAlign+"',"+textSize+","+intervalAfter+","+intervalBefore+")";
                 SqlCommand TextStyleInsert = new SqlCommand(TextStyle, con);
                 TextStyleInsert.ExecuteNonQuery();
-
-
 
                 //string LastTextStyles = "SELECT TOP 1 StyleName FROM [TEXT] ORDER BY ID DESC";
                 //SqlCommand command = new SqlCommand(LastTextStyles, con);

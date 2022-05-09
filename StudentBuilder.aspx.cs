@@ -24,6 +24,38 @@ namespace DocumentReportBuilder
 {
     public partial class StudentBuilder : System.Web.UI.Page
     {
+        ////////// ПЕРЕМЕННЫЕ ДЛЯ СТИЛЯ //////////
+        string TextStyleName = "Text1";
+        Xceed.Document.NET.Font TextFontFont = new Xceed.Document.NET.Font("Times New Roman");
+        int TextFontSize = 14;
+        int TextSpacingBefore = 0;
+        int TextSpacingAfter = 8;
+        string TextAlign = "both";
+
+        string ImageStyleName = "Image1";
+        int ImageSpacingBefore = 0;
+        int ImageSpacingAfter = 0;
+        int ImageSpacingLine = 18;
+        string ImageAlign = "center";
+        //Xceed.Document.NET.Alignment ImageAlign = Xceed.Document.NET.Alignment.center;
+
+        string ListStyleName = "List1";
+        Xceed.Document.NET.Font ListFontFont = new Xceed.Document.NET.Font("Times New Roman");
+        int ListFontSize = 14;
+
+        string TableStyleName = "Table1";
+        Xceed.Document.NET.Font TableFontFont = new Xceed.Document.NET.Font("Times New Roman");
+        //Xceed.Document.NET.Alignment TableAlign = Xceed.Document.NET.Alignment.center;
+        string TableCellAlign = "center";
+        int TableSpacingBefore = 0;
+        int TableSpacingAfter = 0;
+        int TableSpacingLine = 18;
+        int TableIndentLeft = 0;
+        int TableIndentRight = 0;
+        int TableFirstLine = 35;
+
+        ///////////////////////////////////////////
+
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -74,7 +106,8 @@ namespace DocumentReportBuilder
             
             string confname = (string)Session["NAMEOFTASK"];
             string shortname = (string)Session["TASKFROM"];
-            // находим почту пользователя кто отправил конфигурацию
+
+            // находим почту пользователя того, кто отправил конфигурацию
             string taskfrom = "SELECT [Mail] FROM [USERS] WHERE [ShortUserName] = '"+shortname+"' ";
             SqlCommand fromshortname = new SqlCommand(taskfrom, con);
             SqlDataReader shortnamereader = fromshortname.ExecuteReader();
@@ -85,7 +118,7 @@ namespace DocumentReportBuilder
             }
             shortnamereader.Close();
 
-            //находим айди в присланной конфигурации
+            //находим айди стилей в присланной конфигурации
             string styles = "SELECT [CONFNAME],[CREATEDBY],[TEXT1],[TEXT2],[TEXT3],[TEXT4],[TEXT5],[TABLE1],[TABLE2],[TABLE3],[TABLE4],[TABLE5],[LIST1],[LIST2],[LIST3],[LIST4],[LIST5],[IMG1],[IMG2],[IMG3],[IMG4],[IMG5] FROM [CONFIGURATION] WHERE [CONFNAME] = '"+confname+"' AND [CREATEDBY] = '"+mailfrom+"' ";
             SqlCommand taskstyles = new SqlCommand(styles,con);
             SqlDataReader stylesreader = taskstyles.ExecuteReader();
@@ -141,8 +174,13 @@ namespace DocumentReportBuilder
             string[] list = new string[5]; // массив для названий стилей списка
             string[] img = new string[5]; // массив для названий стилей картинки
 
+            int[] textid = new int[5]; // массив для id стилей текста
+            int[] tableid = new int[5]; // массив для id стилей таблицы
+            int[] listid = new int[5]; // массив для id стилей списка
+            int[] imgid = new int[5]; // массив для id стилей картинки
+
             //находим названия стилей текста
-            string textstylenames = "SELECT [StyleName] FROM [TEXT] WHERE [ID] = '" + text1 + "' OR [ID] = '" + text2 + "' OR [ID] = '" + text3 + "' OR [ID] = '" + text4 + "' OR [ID] = '" + text5 + "'ORDER BY [ID] ASC";
+            string textstylenames = "SELECT [ID],[StyleName] FROM [TEXT] WHERE [ID] = '" + text1 + "' OR [ID] = '" + text2 + "' OR [ID] = '" + text3 + "' OR [ID] = '" + text4 + "' OR [ID] = '" + text5 + "'ORDER BY [ID] ASC";
             SqlCommand textstyles = new SqlCommand(textstylenames, con);
             SqlDataReader textstylesreader = textstyles.ExecuteReader();
             int i = 0;
@@ -150,151 +188,156 @@ namespace DocumentReportBuilder
             while (textstylesreader.Read())
             {
                 text[i] = (string)textstylesreader["StyleName"];
+                textid[i]= textstylesreader.GetInt32(textstylesreader.GetOrdinal("ID"));
                 i++;
             }
             textstylesreader.Close();
             i = 0;
 
             //находим названия стилей таблиц
-            string tablestylenames = "SELECT [StyleName] FROM [TABLE] WHERE [ID] = '" + table1 + "' OR [ID] = '" + table2 + "' OR [ID] = '" + table3 + "' OR [ID] = '" + table4 + "' OR [ID] = '" + table5 + "'ORDER BY [ID] ASC";
+            string tablestylenames = "SELECT [ID],[StyleName] FROM [TABLE] WHERE [ID] = '" + table1 + "' OR [ID] = '" + table2 + "' OR [ID] = '" + table3 + "' OR [ID] = '" + table4 + "' OR [ID] = '" + table5 + "'ORDER BY [ID] ASC";
             SqlCommand tablestyles = new SqlCommand(tablestylenames, con);
             SqlDataReader tablestylesreader = tablestyles.ExecuteReader();
 
             while (tablestylesreader.Read())
             {
                 table[i] = (string)tablestylesreader["StyleName"];
+                tableid[i] = tablestylesreader.GetInt32(tablestylesreader.GetOrdinal("ID"));
                 i++;
             }
             tablestylesreader.Close();
             i = 0;
 
             //находим названия стилей списка
-            string liststylenames = "SELECT [StyleName] FROM [LIST] WHERE [ID] = '" + list1 + "' OR [ID] = '" + list2 + "' OR [ID] = '" + list3 + "' OR [ID] = '" + list4 + "' OR [ID] = '" + list5 + "'ORDER BY [ID] ASC";
+            string liststylenames = "SELECT [ID],[StyleName] FROM [LIST] WHERE [ID] = '" + list1 + "' OR [ID] = '" + list2 + "' OR [ID] = '" + list3 + "' OR [ID] = '" + list4 + "' OR [ID] = '" + list5 + "'ORDER BY [ID] ASC";
             SqlCommand liststyles = new SqlCommand(liststylenames, con);
             SqlDataReader liststylesreader = liststyles.ExecuteReader();
 
             while (liststylesreader.Read())
             {
                 list[i] = (string)liststylesreader["StyleName"];
+                listid[i] = liststylesreader.GetInt32(liststylesreader.GetOrdinal("ID"));
                 i++;
             }
             liststylesreader.Close();
             i = 0;
 
             //находим названия стилей картинки
-            string imgstylenames = "SELECT [StyleName] FROM [IMAGE] WHERE [ID] = '" + img1 + "' OR [ID] = '" + img2 + "' OR [ID] = '" + img3 + "' OR [ID] = '" + img4 + "' OR [ID] = '" + img5 + "'ORDER BY [ID] ASC";
+            string imgstylenames = "SELECT [ID],[StyleName] FROM [IMAGE] WHERE [ID] = '" + img1 + "' OR [ID] = '" + img2 + "' OR [ID] = '" + img3 + "' OR [ID] = '" + img4 + "' OR [ID] = '" + img5 + "'ORDER BY [ID] ASC";
             SqlCommand imgstyles = new SqlCommand(imgstylenames, con);
             SqlDataReader imgstylesreader = imgstyles.ExecuteReader();
 
             while (imgstylesreader.Read())
             {
                 img[i] = (string)imgstylesreader["StyleName"];
+                imgid[i] = imgstylesreader.GetInt32(imgstylesreader.GetOrdinal("ID"));
                 i++;
             }
             imgstylesreader.Close();
             i = 0;
 
+
             if (text1 != 0)
             {
-                AddSavedStyleToList(text[i], 1, "text");
+                AddSavedStyleToList(text[i], textid[i], "text");
                 i++;
             }
             if (text2 != 0)
             {
-                AddSavedStyleToList(text[i], 2, "text");
+                AddSavedStyleToList(text[i], textid[i], "text");
                 i++;
             }
             if (text3 != 0)
             {
-                AddSavedStyleToList(text[i], 3, "text");
+                AddSavedStyleToList(text[i], textid[i], "text");
                 i++;
             }
             if (text4 != 0)
             {
-                AddSavedStyleToList(text[i], 4, "text");
+                AddSavedStyleToList(text[i], textid[i], "text");
                 i++;
             }
             if (text5 != 0)
             {
-                AddSavedStyleToList(text[i], 5, "text");
+                AddSavedStyleToList(text[i], textid[i], "text");
                 
             }
             i = 0;
             if (table1 != 0)
             {
-                AddSavedStyleToList(table[i], 1, "table");
+                AddSavedStyleToList(table[i], tableid[i], "table");
                 i++;
             }
             if (table2 != 0)
             {
-                AddSavedStyleToList(table[i], 2, "table");
+                AddSavedStyleToList(table[i], tableid[i], "table");
                 i++;
             }
             if (table3 != 0)
             {
-                AddSavedStyleToList(table[i], 3, "table");
+                AddSavedStyleToList(table[i], tableid[i], "table");
                 i++;
             }
             if (table4 != 0)
             {
-                AddSavedStyleToList(table[i], 4, "table");
+                AddSavedStyleToList(table[i], tableid[i], "table");
                 i++;
             }
             if (table5 != 0)
             {
-                AddSavedStyleToList(table[i], 5, "table");
+                AddSavedStyleToList(table[i], tableid[i], "table");
                
             }
             i = 0;
             if (list1 != 0)
             {
-                AddSavedStyleToList(list[i], 1, "list");
+                AddSavedStyleToList(list[i], listid[i], "list");
                 i++;
             }
             if (list2 != 0)
             {
-                AddSavedStyleToList(list[i], 2, "list");
+                AddSavedStyleToList(list[i], listid[i], "list");
                 i++;
             }
             if (list3 != 0)
             {
-                AddSavedStyleToList(list[i], 3, "list");
+                AddSavedStyleToList(list[i], listid[i], "list");
                 i++;
             }
             if (list4 != 0)
             {
-                AddSavedStyleToList(list[i], 4, "list");
+                AddSavedStyleToList(list[i], listid[i], "list");
                 i++;
             }
             if (list5 != 0)
             {
-                AddSavedStyleToList(list[i], 5, "list");
+                AddSavedStyleToList(list[i], listid[i], "list");
                 
             }
             i = 0;
             if (img1 != 0)
             {
-                AddSavedStyleToList(img[i], 1, "img");
+                AddSavedStyleToList(img[i], imgid[i], "img");
                 i++;
             }
             if (img2 != 0)
             {
-                AddSavedStyleToList(img[i], 2, "img");
+                AddSavedStyleToList(img[i], imgid[i], "img");
                 i++;
             }
             if (img3 != 0)
             {
-                AddSavedStyleToList(img[i], 3, "img");
+                AddSavedStyleToList(img[i], imgid[i], "img");
                 i++;
             }
             if (img4 != 0)
             {
-                AddSavedStyleToList(img[i], 4, "img");
+                AddSavedStyleToList(img[i], imgid[i], "img");
                 i++;
             }
             if (img5 != 0)
             {
-                AddSavedStyleToList(img[i], 5, "img");
+                AddSavedStyleToList(img[i], imgid[i], "img");
             }
             i = 0;
 
@@ -390,7 +433,6 @@ namespace DocumentReportBuilder
 
 
             //кнопки преинит
-
             for(int i = 0; i < 5; i++) 
             { 
                 Button btn = new Button();
@@ -438,6 +480,18 @@ namespace DocumentReportBuilder
 
         protected void ButtonChooseText_Click(object sender,EventArgs e) // если выбран текст
         {
+            Button button = sender as Button;
+            if (button != null)
+            {
+                int value;
+                string buttonid = button.ID;
+                int.TryParse(string.Join("", buttonid.Where(c => char.IsDigit(c))), out value);
+                int buttonnumb = value;
+                string style = value.ToString();
+                Session["TEXTADD"] = style;
+                Session["ADDSTATUS"] = "Text";
+            }
+
             ButtonAddTtitle.Visible = false;
             TopBoxes.Style.Add("visibility", "hidden");
             LeftBoxes.Style.Add("visibility", "hidden");
@@ -452,9 +506,21 @@ namespace DocumentReportBuilder
 
             TextAndList.Style.Add("visibility", "visible");
             TextBoxEditing.Text = redline; // красная строка
+
         }
         protected void ButtonChooseTable_Click(object sender, EventArgs e) //если выбрана таблица
         {
+            Button button = sender as Button;
+            if (button != null)
+            {
+                int value;
+                string buttonid = button.ID;
+                int.TryParse(string.Join("", buttonid.Where(c => char.IsDigit(c))), out value);
+                int buttonnumb = value;
+                string style = value.ToString();
+                Session["TABLEADD"] = style;
+            }
+
             ButtonAddTtitle.Visible = false;
             TopBoxes.Style.Add("visibility", "hidden");
             LeftBoxes.Style.Add("visibility", "hidden");
@@ -471,6 +537,18 @@ namespace DocumentReportBuilder
 
         protected void ButtonChooseList_Click(object sender, EventArgs e) // если выбран список
         {
+            Button button = sender as Button;
+            if (button != null)
+            {
+                int value;
+                string buttonid = button.ID;
+                int.TryParse(string.Join("", buttonid.Where(c => char.IsDigit(c))), out value);
+                int buttonnumb = value;
+                string style = value.ToString();
+                Session["LISTADD"] = style;
+                Session["ADDSTATUS"] = "List";
+            }
+
             ButtonAddTtitle.Visible = false;
             TopBoxes.Style.Add("visibility", "hidden");
             LeftBoxes.Style.Add("visibility", "hidden");
@@ -490,6 +568,17 @@ namespace DocumentReportBuilder
 
         protected void ButtonChoosePic_Click(object sender, EventArgs e) //если выбрана картинка
         {
+            Button button = sender as Button;
+            if (button != null)
+            {
+                int value;
+                string buttonid = button.ID;
+                int.TryParse(string.Join("", buttonid.Where(c => char.IsDigit(c))), out value);
+                int buttonnumb = value;
+                string style = value.ToString();
+                Session["PICADD"] = style;
+            }
+
             ButtonAddTtitle.Visible = false;
             TopBoxes.Style.Add("visibility", "hidden");
             LeftBoxes.Style.Add("visibility", "hidden");
@@ -500,27 +589,103 @@ namespace DocumentReportBuilder
             TextAndList.Style.Add("visibility", "hidden");
             Title.Style.Add("visibility", "hidden");
             Tables.Style.Add("visibility", "hidden");
-
             Images.Style.Add("visibility", "visible");
         }
 
         protected void ButtonAddToMain_Click(object sender, EventArgs e)   // добавление текста на главный лист
         {
-            string TextToAdd;
-            TextToAdd =String.Concat(TextBoxEditing.Text, "\n");
-            string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
-            string filepath = String.Concat(downloadsPath, "/Test.docx");
-            var doc = DocX.Load(filepath);
-            var par = doc.InsertParagraph();
-            par.Append(TextToAdd)    // форматирование документа
-            .Font(new Xceed.Document.NET.Font("Times New Roman"))
-            .FontSize(14)
-            .SpacingBefore(0)
-            .SpacingAfter(6)
-            .SpacingLine(18);
-            doc.Save();
-            TextBoxEditing.Text = "\u2007\u2007\u2007\u2007\u2007"; // очистка листа после добавления текста
+            con.Open();
+            string status = (string)Session["ADDSTATUS"];
+            if (status == "Text")
+            {
+                // id  стиля
+                string styleid = (string)Session["TEXTADD"];
+                int idforstring = Int32.Parse(styleid);
+                string textstylenames = "SELECT [ID],[Font],[Alignment],[FontSize],[IntervalAfter],[IntervalBefore] FROM [TEXT] WHERE [ID] ='"+idforstring+"' ";
+                SqlCommand textstyles = new SqlCommand(textstylenames, con);
+                SqlDataReader textstylesreader = textstyles.ExecuteReader();
+                while (textstylesreader.Read())
+                {
+                    TextFontFont = new Xceed.Document.NET.Font((string)textstylesreader["Font"]);
+                    TextFontSize = textstylesreader.GetInt32(textstylesreader.GetOrdinal("FontSize"));
+                    TextSpacingAfter = textstylesreader.GetInt32(textstylesreader.GetOrdinal("IntervalAfter"));
+                    TextSpacingBefore = textstylesreader.GetInt32(textstylesreader.GetOrdinal("IntervalBefore"));
+                    TextAlign = (string)textstylesreader["Alignment"];
+                }
+                textstylesreader.Close();
+                string TextToAdd;
+                TextToAdd = String.Concat(TextBoxEditing.Text, "\n");
+                string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
+                string filepath = String.Concat(downloadsPath, "/Test.docx");
+                var doc = DocX.Load(filepath);
+                var par = doc.InsertParagraph();
+                if (TextAlign == "both")
+                {
+                    par.Append(TextToAdd)    // форматирование документа
+                    .Font(TextFontFont)
+                    .FontSize(TextFontSize)
+                    .SpacingBefore(TextSpacingBefore)
+                    .SpacingAfter(TextSpacingAfter)
+                    .Alignment = Alignment.both;
+                } 
+                else if (TextAlign == "left")
+                {
+                    par.Append(TextToAdd)    // форматирование документа
+                    .Font(TextFontFont)
+                    .FontSize(TextFontSize)
+                    .SpacingBefore(TextSpacingBefore)
+                    .SpacingAfter(TextSpacingAfter)
+                    .Alignment = Alignment.left;
+                }
+                else if (TextAlign == "right")
+                {
+                    par.Append(TextToAdd)    // форматирование документа
+                    .Font(TextFontFont)
+                    .FontSize(TextFontSize)
+                    .SpacingBefore(TextSpacingBefore)
+                    .SpacingAfter(TextSpacingAfter)
+                    .Alignment = Alignment.right;
+                }
+                else if (TextAlign == "center")
+                {
+                    par.Append(TextToAdd)    // форматирование документа
+                    .Font(TextFontFont)
+                    .FontSize(TextFontSize)
+                    .SpacingBefore(TextSpacingBefore)
+                    .SpacingAfter(TextSpacingAfter)
+                    .Alignment = Alignment.center;
+                }
+                doc.Save();
+                TextBoxEditing.Text = "\u2007\u2007\u2007\u2007\u2007"; // очистка листа после добавления текста
+            }
+            else // для списка
+            {
+                // id  стиля
+                string styleid = (string)Session["LISTADD"];
+                int idforstring = Int32.Parse(styleid);
+                string liststylenames = "SELECT [ID],[Font],[FontSize] FROM [LIST] WHERE [ID] ='" + idforstring + "' ";
+                SqlCommand liststyles = new SqlCommand(liststylenames, con);
+                SqlDataReader liststylesreader = liststyles.ExecuteReader();
+                while (liststylesreader.Read())
+                {
+                    ListFontFont = new Xceed.Document.NET.Font((string)liststylesreader["Font"]);
+                    ListFontSize = liststylesreader.GetInt32(liststylesreader.GetOrdinal("FontSize"));
+                }
+                liststylesreader.Close();
+                string TextToAdd;
+                TextToAdd = String.Concat(TextBoxEditing.Text, "\n");
+                string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
+                string filepath = String.Concat(downloadsPath, "/Test.docx");
+                var doc = DocX.Load(filepath);
+                var par = doc.InsertParagraph();
+                par.Append(TextToAdd)    // форматирование документа
+                    .Font(ListFontFont)
+                    .FontSize(ListFontSize);
+                doc.Save();
+                TextBoxEditing.Text = "\u2007\u2007\u2007\u2007\u2007"; // очистка листа после добавления текста
+            }
             workWithPdf();
+            con.Close();
         }
 
         protected void ButtonAddTitle_Click(object sender, EventArgs e)   // добавление титульника в документ
@@ -731,6 +896,10 @@ namespace DocumentReportBuilder
             string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
             string filepath = String.Concat(downloadsPath, "/Test.docx");
             var doc = DocX.Create(filepath);
+            doc.Sections[0].MarginTop = 56;
+            doc.Sections[0].MarginFooter = 56;
+            doc.Sections[0].MarginLeft = 84;
+            doc.Sections[0].MarginRight = 42;
             doc.Save();
             Session["COUNTERIMG"] = "1";
             Session["COUNTERLIST"] = "2";
@@ -745,7 +914,7 @@ namespace DocumentReportBuilder
             TextBoxEditing.Text += String.Concat(Environment.NewLine,redline,listID,".", "\u2007");
             listID++;
             Session["COUNTERLIST"] = listID.ToString();
-            workWithPdf();
+            
         }
 
         protected void UploadFile(object sender, EventArgs e)
