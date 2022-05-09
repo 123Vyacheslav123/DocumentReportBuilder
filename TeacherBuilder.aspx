@@ -263,10 +263,9 @@
 
              <asp:Label ID="LabelCellAlign" style="position:absolute; top:500px; margin-left:80px;margin-right:0px;" runat="server">Выравнивание ячейки:</asp:Label>
              <asp:DropDownList ID="CellAlignList" Width="300px" runat="server" style="position:absolute; top: 500px; left: 270px;" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
-                    <asp:ListItem Value="left">Левый край</asp:ListItem>
+                    <asp:ListItem Value="top">Верх</asp:ListItem>
                     <asp:ListItem Value="center">Центр</asp:ListItem>
-                    <asp:ListItem Value="right">Правый край</asp:ListItem>
-                    <asp:ListItem Value="both">По ширине</asp:ListItem>
+                    <asp:ListItem Value="bottom">Низ</asp:ListItem>
                 </asp:DropDownList>
 
         </div>

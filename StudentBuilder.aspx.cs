@@ -18,7 +18,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
 using SautinSoft.Document;
-
+using VerticalAlignment = Xceed.Document.NET.VerticalAlignment;
 
 namespace DocumentReportBuilder
 {
@@ -27,6 +27,7 @@ namespace DocumentReportBuilder
         ////////// ПЕРЕМЕННЫЕ ДЛЯ СТИЛЯ //////////
         string TextStyleName = "Text1";
         Xceed.Document.NET.Font TextFontFont = new Xceed.Document.NET.Font("Times New Roman");
+        Xceed.Document.NET.Alignment TextAlignment = Xceed.Document.NET.Alignment.both;
         int TextFontSize = 14;
         int TextSpacingBefore = 0;
         int TextSpacingAfter = 8;
@@ -45,14 +46,10 @@ namespace DocumentReportBuilder
 
         string TableStyleName = "Table1";
         Xceed.Document.NET.Font TableFontFont = new Xceed.Document.NET.Font("Times New Roman");
-        //Xceed.Document.NET.Alignment TableAlign = Xceed.Document.NET.Alignment.center;
+        Xceed.Document.NET.Alignment TableAlignment = Xceed.Document.NET.Alignment.center;
         string TableCellAlign = "center";
-        int TableSpacingBefore = 0;
-        int TableSpacingAfter = 0;
-        int TableSpacingLine = 18;
-        int TableIndentLeft = 0;
-        int TableIndentRight = 0;
-        int TableFirstLine = 35;
+        string TableAlign = "center";
+        int TableFontSize = 14;
 
         ///////////////////////////////////////////
 
@@ -621,39 +618,43 @@ namespace DocumentReportBuilder
                 var par = doc.InsertParagraph();
                 if (TextAlign == "both")
                 {
+                    Xceed.Document.NET.Alignment TextAlignment = Xceed.Document.NET.Alignment.both;
                     par.Append(TextToAdd)    // форматирование документа
                     .Font(TextFontFont)
                     .FontSize(TextFontSize)
                     .SpacingBefore(TextSpacingBefore)
                     .SpacingAfter(TextSpacingAfter)
-                    .Alignment = Alignment.both;
+                    .Alignment = TextAlignment;
                 } 
                 else if (TextAlign == "left")
                 {
+                    Xceed.Document.NET.Alignment TextAlignment = Xceed.Document.NET.Alignment.left;
                     par.Append(TextToAdd)    // форматирование документа
                     .Font(TextFontFont)
                     .FontSize(TextFontSize)
                     .SpacingBefore(TextSpacingBefore)
                     .SpacingAfter(TextSpacingAfter)
-                    .Alignment = Alignment.left;
+                    .Alignment = TextAlignment;
                 }
                 else if (TextAlign == "right")
                 {
+                    Xceed.Document.NET.Alignment TextAlignment = Xceed.Document.NET.Alignment.right;
                     par.Append(TextToAdd)    // форматирование документа
                     .Font(TextFontFont)
                     .FontSize(TextFontSize)
                     .SpacingBefore(TextSpacingBefore)
                     .SpacingAfter(TextSpacingAfter)
-                    .Alignment = Alignment.right;
+                    .Alignment = TextAlignment;
                 }
                 else if (TextAlign == "center")
                 {
+                    Xceed.Document.NET.Alignment TextAlignment = Xceed.Document.NET.Alignment.center;
                     par.Append(TextToAdd)    // форматирование документа
                     .Font(TextFontFont)
                     .FontSize(TextFontSize)
                     .SpacingBefore(TextSpacingBefore)
                     .SpacingAfter(TextSpacingAfter)
-                    .Alignment = Alignment.center;
+                    .Alignment = TextAlignment;
                 }
                 doc.Save();
                 TextBoxEditing.Text = "\u2007\u2007\u2007\u2007\u2007"; // очистка листа после добавления текста
@@ -990,6 +991,22 @@ namespace DocumentReportBuilder
 
         protected void ButtonToWord_Click(object sender, EventArgs e)
         {
+            con.Open();
+            // id  стиля
+            string styleid = (string)Session["TABLEADD"];
+            int idforstring = Int32.Parse(styleid);
+            string tablestylenames = "SELECT [ID],[Font],[FontSize],[TableAlignment],[CellAlignment] FROM [TABLE] WHERE [ID] ='" + idforstring + "' ";
+            SqlCommand tablestyles = new SqlCommand(tablestylenames, con);
+            SqlDataReader tablestylesreader = tablestyles.ExecuteReader();
+            while (tablestylesreader.Read())
+            {
+                TableFontFont = new Xceed.Document.NET.Font((string)tablestylesreader["Font"]);
+                TableFontSize = tablestylesreader.GetInt32(tablestylesreader.GetOrdinal("FontSize"));
+                TableAlign = (string)tablestylesreader["TableAlignment"];
+                TableCellAlign = (string)tablestylesreader["CellAlignment"];
+            }
+            tablestylesreader.Close();
+
             int Columns = Int32.Parse(TextBoxColumn.Text);
             int Rows = Int32.Parse(TextBoxRows.Text);
             string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
@@ -998,22 +1015,83 @@ namespace DocumentReportBuilder
 
             // создаём таблицу
             Xceed.Document.NET.Table table = doc.AddTable(Rows, Columns);
-
-            // располагаем таблицу по центру
-            table.Alignment = Alignment.center;
-
             // меняем стандартный дизайн таблицы
             table.Design = TableDesign.TableGrid;
 
-            //заполнение ячейки текстом
-            for (int Rows_X = 0; Rows_X < Rows; Rows_X++)
-            {
-                for (int Columns_Y = 0; Columns_Y < Columns; Columns_Y++)
-                {
-                    string cellid = "cell_ID" + Columns_Y + Rows_X;
-                    TextBox text = (TextBox)pnlTextBoxes.FindControl(cellid);
-                    table.Rows[Rows_X].Cells[Columns_Y].Paragraphs.First().Append(text.Text);
 
+            if (TableAlign == "center")
+            {
+                Xceed.Document.NET.Alignment TableAlignment = Xceed.Document.NET.Alignment.center;
+                table.Alignment = TableAlignment;
+            }
+            else if(TableAlign == "left")
+            {
+                Xceed.Document.NET.Alignment TableAlignment = Xceed.Document.NET.Alignment.left;
+                table.Alignment = TableAlignment;
+            }
+            else if (TableAlign == "right")
+            {
+                Xceed.Document.NET.Alignment TableAlignment = Xceed.Document.NET.Alignment.right;
+                table.Alignment = TableAlignment;
+            }
+            else if (TableAlign == "both")
+            {
+                Xceed.Document.NET.Alignment TableAlignment = Xceed.Document.NET.Alignment.both;
+                table.Alignment = TableAlignment;
+            }
+
+            if(TableCellAlign == "top")
+            {
+                //заполнение ячеек текстом
+                for (int Rows_X = 0; Rows_X < Rows; Rows_X++)
+                {
+                    for (int Columns_Y = 0; Columns_Y < Columns; Columns_Y++)
+                    {
+                        string cellid = "cell_ID" + Rows_X + Columns_Y;
+                        TextBox text = (TextBox)pnlTextBoxes.FindControl(cellid);
+                        string cell = text.Text;
+                        cell = cell.Remove(0, 1);
+                        table.Rows[Rows_X].Cells[Columns_Y].Paragraphs.First().Append(cell)
+                            .Font(TableFontFont)
+                            .FontSize(TableFontSize);
+                        table.Rows[Rows_X].Cells[Columns_Y].VerticalAlignment = VerticalAlignment.Top;
+                    }
+                }
+            }
+            else if (TableCellAlign == "center")
+            {
+                //заполнение ячеек текстом
+                for (int Rows_X = 0; Rows_X < Rows; Rows_X++)
+                {
+                    for (int Columns_Y = 0; Columns_Y < Columns; Columns_Y++)
+                    {
+                        string cellid = "cell_ID" + Rows_X + Columns_Y;
+                        TextBox text = (TextBox)pnlTextBoxes.FindControl(cellid);
+                        string cell = text.Text;
+                        cell = cell.Remove(0, 1);
+                        table.Rows[Rows_X].Cells[Columns_Y].Paragraphs.First().Append(cell)
+                            .Font(TableFontFont)
+                            .FontSize(TableFontSize);
+                        table.Rows[Rows_X].Cells[Columns_Y].VerticalAlignment = VerticalAlignment.Center;
+                    }
+                }
+            }
+            else if (TableCellAlign == "bottom")
+            {
+                //заполнение ячеек текстом
+                for (int Rows_X = 0; Rows_X < Rows; Rows_X++)
+                {
+                    for (int Columns_Y = 0; Columns_Y < Columns; Columns_Y++)
+                    {
+                        string cellid = "cell_ID" + Rows_X + Columns_Y;
+                        TextBox text = (TextBox)pnlTextBoxes.FindControl(cellid);
+                        string cell = text.Text;
+                        cell = cell.Remove(0, 1);
+                        table.Rows[Rows_X].Cells[Columns_Y].Paragraphs.First().Append(cell)
+                            .Font(TableFontFont)
+                            .FontSize(TableFontSize);
+                        table.Rows[Rows_X].Cells[Columns_Y].VerticalAlignment = VerticalAlignment.Bottom;
+                    }
                 }
             }
             // создаём параграф и вставляем таблицу
@@ -1021,6 +1099,7 @@ namespace DocumentReportBuilder
             // сохраняем документ
             doc.Save();
             workWithPdf();
+            con.Close();
         }
 
         
