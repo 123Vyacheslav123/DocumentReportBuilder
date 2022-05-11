@@ -534,6 +534,7 @@ namespace DocumentReportBuilder
 
         protected void ButtonChooseList_Click(object sender, EventArgs e) // если выбран список
         {
+            Session["COUNTERLIST"] = "2";
             Button button = sender as Button;
             if (button != null)
             {
@@ -546,7 +547,6 @@ namespace DocumentReportBuilder
                 Session["ADDSTATUS"] = "List";
             }
 
-            ButtonAddTtitle.Visible = false;
             TopBoxes.Style.Add("visibility", "hidden");
             LeftBoxes.Style.Add("visibility", "hidden");
             RightBoxes.Style.Add("visibility", "hidden");
@@ -565,6 +565,7 @@ namespace DocumentReportBuilder
 
         protected void ButtonChoosePic_Click(object sender, EventArgs e) //если выбрана картинка
         {
+            Session["COUNTERIMG"] = "1";
             Button button = sender as Button;
             if (button != null)
             {

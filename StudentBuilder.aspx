@@ -115,7 +115,7 @@
 
         <div id="List" style="visibility:hidden" runat="server">
 
-            <asp:Button ID="ButtonAddList" runat="server" style="position:absolute; top:700px; left: 600px;" OnClick="ButtonAddList_Click" Text="Следующий пункт" Visible="False" />
+            <asp:Button ID="ButtonAddList" runat="server" Height="40px" Width="200px" style="position:absolute; top:600px; left: 400px;" OnClick="ButtonAddList_Click" Text="Следующий пункт" />
 
         </div>
 
@@ -199,8 +199,8 @@
         </div>
 
           <%--вывод предпросмотра документа:--%>
-    <div id="preview" style="position:absolute; left:900px; width:1300px; height:1300px;">
-        <iframe id="showPDF" runat="server" width="1000" height="1300"></iframe>
+    <div id="preview" style="position:absolute;top:100px; left:1000px; width:620px; height:800px;">
+        <iframe id="showPDF" runat="server" width="620" height="800"></iframe>
     </div>
 
 
