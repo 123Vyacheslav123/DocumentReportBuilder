@@ -27,7 +27,6 @@ namespace DocumentReportBuilder
         ////////// ПЕРЕМЕННЫЕ ДЛЯ СТИЛЯ //////////
         string TextStyleName = "Text1";
         Xceed.Document.NET.Font TextFontFont = new Xceed.Document.NET.Font("Times New Roman");
-        Xceed.Document.NET.Alignment TextAlignment = Xceed.Document.NET.Alignment.both;
         int TextFontSize = 14;
         int TextSpacingBefore = 0;
         int TextSpacingAfter = 8;
@@ -46,7 +45,6 @@ namespace DocumentReportBuilder
 
         string TableStyleName = "Table1";
         Xceed.Document.NET.Font TableFontFont = new Xceed.Document.NET.Font("Times New Roman");
-        Xceed.Document.NET.Alignment TableAlignment = Xceed.Document.NET.Alignment.center;
         string TableCellAlign = "center";
         string TableAlign = "center";
         int TableFontSize = 14;
@@ -66,7 +64,7 @@ namespace DocumentReportBuilder
             {
                 string ShortUserName = (string)ProfileReader["ShortUserName"];
 
-                ////// Генерация меня в правом верхнем углу
+                ////// Генерация меню в правом верхнем углу
 
                 HtmlGenericControl li = new HtmlGenericControl("li");
                 MenuList.Controls.Add(li);
@@ -590,7 +588,7 @@ namespace DocumentReportBuilder
             Images.Style.Add("visibility", "visible");
         }
 
-        protected void ButtonAddToMain_Click(object sender, EventArgs e)   // добавление текста на главный лист
+        protected void ButtonAddToMain_Click(object sender, EventArgs e)   // добавление текста в документ
         {
             con.Open();
             string status = (string)Session["ADDSTATUS"];

@@ -27,7 +27,7 @@ namespace DocumentReportBuilder
             {
                 string ShortUserName = (string)ProfileReader["ShortUserName"];
 
-                ////// Генерация меня в правом верхнем углу
+                ////// Генерация меню в правом верхнем углу
 
                 HtmlGenericControl li = new HtmlGenericControl("li");
                 MenuList.Controls.Add(li);

@@ -54,9 +54,6 @@ namespace DocumentReportBuilder
 
 
 
-
-
-
             con.Close();
         }
 
@@ -78,11 +75,6 @@ namespace DocumentReportBuilder
             {
                 /// если введено не правильно
             }
-
-
-
-
-
 
             con.Close();
         }
