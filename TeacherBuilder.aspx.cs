@@ -215,7 +215,7 @@ namespace DocumentReportBuilder
                 int intervalAfter = Int32.Parse(TextBoxAfter.Text);
                 int intervalBefore = Int32.Parse(TextBoxBefore.Text);
                 // заносим стиль текста в базу
-                string TextStyle = "INSERT INTO[TEXT]([CREATEDBY],[StyleName],[Font],[Alignment],[FontSize],[IntervalAfter],[IntervalBefore])VALUES('"+UserMail+"','"+TextBoxName.Text+"', '"+DropDownValue+"','"+DropDownAlign+"',"+textSize+","+intervalAfter+","+intervalBefore+")";
+                string TextStyle = "INSERT INTO[TEXT]([CREATEDBY],[StyleName],[Font],[Alignment],[FontSize],[IntervalAfter],[IntervalBefore])VALUES('"+UserMail+"', N'"+TextBoxName.Text+"', '"+DropDownValue+"','"+DropDownAlign+"',"+textSize+","+intervalAfter+","+intervalBefore+")";
                 SqlCommand TextStyleInsert = new SqlCommand(TextStyle, con);
                 TextStyleInsert.ExecuteNonQuery();
 
@@ -244,7 +244,7 @@ namespace DocumentReportBuilder
                 string DropDownCellAlignment = CellAlignList.SelectedValue.ToString();
 
                 // заносим стиль таблицы в базу
-                string TableStyle = "INSERT INTO [TABLE] ([CREATEDBY],[StyleName],[Font],[FontSize],[TableAlignment],[CellAlignment])VALUES('"+UserMail+"','"+TableStyleNameBox.Text+"', '"+DropDownName+"',"+textSize+", '"+DropDownTableAlignment+"', '"+DropDownCellAlignment+"')";
+                string TableStyle = "INSERT INTO [TABLE] ([CREATEDBY],[StyleName],[Font],[FontSize],[TableAlignment],[CellAlignment])VALUES('"+UserMail+"', N'"+TableStyleNameBox.Text+"', '"+DropDownName+"',"+textSize+", '"+DropDownTableAlignment+"', '"+DropDownCellAlignment+"')";
                 SqlCommand TableStyleInsert = new SqlCommand(TableStyle, con);
                 TableStyleInsert.ExecuteNonQuery();
                 //AddSavedStyleToList(TableStyleNameBox.Text, stylenumber);
@@ -257,7 +257,7 @@ namespace DocumentReportBuilder
                 int ListSize = Int32.Parse(TextBoxTSize.Text);
 
                 // заносим стиль списка в базу
-                string ListStyle = "INSERT INTO [LIST] ([CREATEDBY],[StyleName],[Font],[FontSize])VALUES('"+UserMail+"','" +TextBoxSName.Text+"','"+DropDownListValue+"','"+ListSize+"')";
+                string ListStyle = "INSERT INTO [LIST] ([CREATEDBY],[StyleName],[Font],[FontSize])VALUES('"+UserMail+"', N'" +TextBoxSName.Text+"','"+DropDownListValue+"','"+ListSize+"')";
                 SqlCommand ListStyleInsert = new SqlCommand(ListStyle, con);
                 ListStyleInsert.ExecuteNonQuery();
                 //AddSavedStyleToList(TextBoxSName.Text, stylenumber);
@@ -270,7 +270,7 @@ namespace DocumentReportBuilder
                 string DropDownIMGValue = PAlign_List.SelectedValue.ToString();
 
                 // заносим стиль картинки в базу
-                string ImageStyle = "INSERT INTO [IMAGE] ([CREATEDBY],[StyleName],[Name],[Alignment])VALUES('"+ UserMail + "','"+TextBoxPName.Text+"', '"+TextBoxPTitle.Text+"', '"+DropDownIMGValue+"')";
+                string ImageStyle = "INSERT INTO [IMAGE] ([CREATEDBY],[StyleName],[Name],[Alignment])VALUES('"+ UserMail + "', N'"+TextBoxPName.Text+"', N'"+TextBoxPTitle.Text+"', '"+DropDownIMGValue+"')";
                 SqlCommand IMGStyleInsert = new SqlCommand(ImageStyle, con);
                 IMGStyleInsert.ExecuteNonQuery();
                 //AddSavedStyleToList(TextBoxPName.Text,stylenumber);
@@ -392,7 +392,7 @@ namespace DocumentReportBuilder
 
             // Заносим айди стилей в общую конфигурацию
             
-            string confinsert = "INSERT INTO [CONFIGURATION] ([CONFNAME],[CREATEDBY],[TEXT1],[TEXT2],[TEXT3],[TEXT4],[TEXT5],[TABLE1],[TABLE2],[TABLE3],[TABLE4],[TABLE5],[LIST1],[LIST2],[LIST3],[LIST4],[LIST5],[IMG1],[IMG2],[IMG3],[IMG4],[IMG5]) VALUES('"+TextBoxConfName.Text+"','"+UserMail+"','" + text[0] + "','" + text[1] + "','" + text[2] + "','" + text[3] + "','" + text[4] + "','" + table[0] + "','" + table[1] + "','" + table[2] + "','" + table[3] + "','" + table[4] + "','" + list[0] + "','" + list[1] + "','" + list[2] + "','" + list[3] + "','" + list[4] + "','" + pic[0] + "','" + pic[1] + "','" + pic[2] + "','" + pic[3] + "','" + pic[4] + "')";
+            string confinsert = "INSERT INTO [CONFIGURATION] ([CONFNAME],[CREATEDBY],[TEXT1],[TEXT2],[TEXT3],[TEXT4],[TEXT5],[TABLE1],[TABLE2],[TABLE3],[TABLE4],[TABLE5],[LIST1],[LIST2],[LIST3],[LIST4],[LIST5],[IMG1],[IMG2],[IMG3],[IMG4],[IMG5]) VALUES(N'"+TextBoxConfName.Text+"','"+UserMail+"','" + text[0] + "','" + text[1] + "','" + text[2] + "','" + text[3] + "','" + text[4] + "','" + table[0] + "','" + table[1] + "','" + table[2] + "','" + table[3] + "','" + table[4] + "','" + list[0] + "','" + list[1] + "','" + list[2] + "','" + list[3] + "','" + list[4] + "','" + pic[0] + "','" + pic[1] + "','" + pic[2] + "','" + pic[3] + "','" + pic[4] + "')";
             SqlCommand insertconf = new SqlCommand(confinsert, con);
             insertconf.ExecuteNonQuery();
 
