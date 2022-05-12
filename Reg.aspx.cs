@@ -125,7 +125,7 @@ namespace DocumentReportBuilder
                     string ShortUserName = string.Concat(Surname, ".", name, ".", pat);
 
                     /////////////// вставка пользователя в бд
-                    string SqlInsertUser = "INSERT INTO[USERS]([Firstname],[Surname],[Patronymic],[ShortUserName],[Mail],[Typeofaccount],[Password]) VALUES('" + Firstname + "', '" + Surname + "', '" + Patronymic + "','"+ShortUserName+"', '" + TextBoxMailReg.Text + "', '" + TypeOfAccount + "', '" + TextBoxPassReg.Text + "')";
+                    string SqlInsertUser = "INSERT INTO[USERS]([Firstname],[Surname],[Patronymic],[ShortUserName],[Mail],[Typeofaccount],[Password]) VALUES(N'" + Firstname + "', N'" + Surname + "', N'" + Patronymic + "', N'"+ShortUserName + "', '" + TextBoxMailReg.Text + "', '" + TypeOfAccount + "', '" + TextBoxPassReg.Text + "')";
                     SqlCommand cmd = new SqlCommand(SqlInsertUser, con);
                     cmd.ExecuteNonQuery();
                 }
