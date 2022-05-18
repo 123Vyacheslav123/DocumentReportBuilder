@@ -168,6 +168,15 @@ namespace DocumentReportBuilder
         protected global::System.Web.UI.WebControls.Button ButtonAddTtitle;
 
         /// <summary>
+        /// TitleBoxes элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TitleBoxes;
+
+        /// <summary>
         /// TopBoxes элемент управления.
         /// </summary>
         /// <remarks>

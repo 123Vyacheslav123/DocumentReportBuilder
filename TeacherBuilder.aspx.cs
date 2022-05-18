@@ -93,18 +93,27 @@ namespace DocumentReportBuilder
 
         protected void ButtonCreateMainList_Click(object sender, EventArgs e)
         {
-            Session["TBT1"] = TextBoxTop1.Text;
-            Session["TBT2"] = TextBoxTop2.Text;
-            Session["TBT3"] = TextBoxTop3.Text;
-            Session["TBT4"] = TextBoxTop4.Text;
-            Session["TBL1"] = TextBoxLeft1.Text;
-            Session["TBR1"] = TextBoxRight1.Text;
-            Session["TBB1"] = TextBoxBot1.Text;
-            Session["TBB3"] = TextBoxBot3.Text;
-            Session["TBB5"] = TextBoxBot5.Text;
-            Session["TBB7"] = TextBoxBot7.Text;
-            Session["TBB9"] = TextBoxBot9.Text;
+            con.Open();
 
+            string UserMail = (string)Session["USERMAIL"]; // почта пользователя
+
+            string TBT1 = TextBoxTop1.Text;
+            string TBT2 = TextBoxTop2.Text;
+            string TBT3 = TextBoxTop3.Text;
+            string TBT4 = TextBoxTop4.Text;
+            string TBL1 = TextBoxLeft1.Text;
+            string TBR1 = TextBoxRight1.Text;
+            string TBB1 = TextBoxBot1.Text;
+            string TBB3 = TextBoxBot3.Text;
+            string TBB5 = TextBoxBot5.Text;
+            string TBB7 = TextBoxBot7.Text;
+            string TBB9 = TextBoxBot9.Text;
+
+            string titleinsert = "INSERT INTO [TitleList]([CREATEDBY],[TBT1],[TBT2],[TBT3],[TBT4],[TBL1],[TBR1],[TBB1],[TBB3],[TBB5],[TBB7],[TBB9]) VALUES('" + UserMail + "', N'" + TBT1 +  "', N'" + TBT2 + "', N'" + TBT3 + "', N'" + TBT4 + "', N'" + TBL1 + "', N'" + TBR1 + "', N'" + TBB1 + "', N'" + TBB3 + "', N'" + TBB5 + "', N'" + TBB7 + "', N'" + TBB9 + "')";
+            SqlCommand TitleInsert = new SqlCommand(titleinsert, con);
+            TitleInsert.ExecuteNonQuery();
+            Session["STYLETITLE"] = "Yes";
+            con.Close();
         }
 
         protected void ButtonCreateTitleList_Click(object sender, EventArgs e)
@@ -317,7 +326,8 @@ namespace DocumentReportBuilder
             string Stylepic = (string)Session["STYLEPIC"]; // количество созданных стилей для картинки
             int stylepic = Int32.Parse(Stylepic);
 
-            
+            string StyleTitle = (string)Session["STYLETITLE"]; // создан ли стиль для титульника
+
             string UserMail = (string)Session["USERMAIL"]; // почта пользователя
 
             int[] text = new int[5]; // массив для айди созданных стилей текста
@@ -390,9 +400,27 @@ namespace DocumentReportBuilder
             picreader.Close();
             i = 0;
 
+            int title = 0;
+            if (StyleTitle == "Yes")
+            {
+                
+                string titleselect = "SELECT TOP 1 * FROM [TitleList] WHERE [CREATEDBY]='" + UserMail + "' ORDER BY [ID] DESC ";
+                SqlCommand selecttitle = new SqlCommand(titleselect, con);
+                SqlDataReader titlereader = selecttitle.ExecuteReader();
+
+                while (titlereader.Read())
+                {
+                    title = titlereader.GetInt32(titlereader.GetOrdinal("ID"));
+
+                }
+                titlereader.Close();
+            }
+            else { }
+
+
             // Заносим айди стилей в общую конфигурацию
-            
-            string confinsert = "INSERT INTO [CONFIGURATION] ([CONFNAME],[CREATEDBY],[TEXT1],[TEXT2],[TEXT3],[TEXT4],[TEXT5],[TABLE1],[TABLE2],[TABLE3],[TABLE4],[TABLE5],[LIST1],[LIST2],[LIST3],[LIST4],[LIST5],[IMG1],[IMG2],[IMG3],[IMG4],[IMG5]) VALUES(N'"+TextBoxConfName.Text+"','"+UserMail+"','" + text[0] + "','" + text[1] + "','" + text[2] + "','" + text[3] + "','" + text[4] + "','" + table[0] + "','" + table[1] + "','" + table[2] + "','" + table[3] + "','" + table[4] + "','" + list[0] + "','" + list[1] + "','" + list[2] + "','" + list[3] + "','" + list[4] + "','" + pic[0] + "','" + pic[1] + "','" + pic[2] + "','" + pic[3] + "','" + pic[4] + "')";
+
+            string confinsert = "INSERT INTO [CONFIGURATION] ([CONFNAME],[CREATEDBY],[TEXT1],[TEXT2],[TEXT3],[TEXT4],[TEXT5],[TABLE1],[TABLE2],[TABLE3],[TABLE4],[TABLE5],[LIST1],[LIST2],[LIST3],[LIST4],[LIST5],[IMG1],[IMG2],[IMG3],[IMG4],[IMG5],[TITLELIST]) VALUES(N'"+TextBoxConfName.Text+"','"+UserMail+"','" + text[0] + "','" + text[1] + "','" + text[2] + "','" + text[3] + "','" + text[4] + "','" + table[0] + "','" + table[1] + "','" + table[2] + "','" + table[3] + "','" + table[4] + "','" + list[0] + "','" + list[1] + "','" + list[2] + "','" + list[3] + "','" + list[4] + "','" + pic[0] + "','" + pic[1] + "','" + pic[2] + "','" + pic[3] + "','" + pic[4] + "','" + title + "')";
             SqlCommand insertconf = new SqlCommand(confinsert, con);
             insertconf.ExecuteNonQuery();
 

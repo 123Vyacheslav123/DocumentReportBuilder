@@ -126,6 +126,8 @@
        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [CONFIGURATION]"></asp:SqlDataSource> 
 
 
+        <asp:label ID="labeltest" runat ="server" style="left:300px; top:300px; position:absolute; font-size:20px"></asp:label>
+
     <asp:GridView ID="GridViewTableUsers" AutoGenerateColumns="false" Width="700px"  style="left:30%;top:35%;position:absolute; font-size:20px" runat="server" CssClass="TABLE1">
              <Columns>
                  <asp:BoundField DataField ="ShortUserName" HeaderText ="ФИО" ReadOnly="true" />

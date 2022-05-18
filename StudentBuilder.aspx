@@ -102,7 +102,7 @@
 
         <div id="Based" style="visibility:visible" runat="server">
 
-            <asp:Button ID="ButtonCreateFile" runat="server" Height="40px" Width="200px" style="position:absolute; top: 800px; left: 583px;" Text="Создать документ" OnClick="ButtonCreateFile_Click" />
+            <asp:Button ID="ButtonCreateFile" runat="server" Height="40px" Width="200px" style="position:absolute; top: 800px; left: 520px;" Text="Создать документ" OnClick="ButtonCreateFile_Click" />
 
         </div>
 
@@ -130,47 +130,49 @@
 
         <div id="Title" style="visibility:hidden" runat="server">
 
-             <asp:Button ID="ButtonAddTtitle" runat="server" Height="40px" Width="200px" Visible="False" style="position:absolute; top: 418px; left: 588px;" OnClick="ButtonAddTitle_Click" Text="Добавить титульник" />
+             <asp:Button ID="ButtonAddTtitle" runat="server" Height="40px" Width="200px" style="position:absolute;top:800px; left: 720px;" OnClick="ButtonAddTitle_Click" Text="Добавить титульник" />
 
         </div>
        
-        
-        <div id="TopBoxes" style="visibility:hidden" runat="server">
-        <asp:TextBox ID="TextBoxTop1" Width="600px" ReadOnly="true" CssClass="AllBoxes" style="position:absolute; top:100px; margin-left:1100px;margin-right:0px;" runat="server" OnTextChanged="TextBoxTop1_TextChanged"></asp:TextBox>
-        <asp:TextBox ID="TextBoxTop2" Width="600px" ReadOnly="true" CssClass="AllBoxes" style="position:absolute; top:150px; margin-left:1100px;margin-right:0px;" runat="server" OnTextChanged="TextBoxTop2_TextChanged"></asp:TextBox>
-        <asp:TextBox ID="TextBoxTop3" Width="600px" ReadOnly="true" CssClass="AllBoxes" style="position:absolute; top:200px; margin-left:1100px;margin-right:0px;" runat="server" OnTextChanged="TextBoxTop3_TextChanged"></asp:TextBox>
-        <asp:TextBox ID="TextBoxTop4" Width="600px" ReadOnly="true" CssClass="AllBoxes" style="position:absolute; top:250px; margin-left:1100px;margin-right:0px;" runat="server" OnTextChanged="TextBoxTop4_TextChanged"></asp:TextBox>
+      <div id="TitleBoxes" runat ="server" style="visibility:hidden">
+
+        <div id="TopBoxes" runat="server">
+        <asp:TextBox ID="TextBoxTop1" Width="600px" ReadOnly="true" CssClass="AllBoxes" style="position:absolute; top:150px; left:20%" runat="server" OnTextChanged="TextBoxTop1_TextChanged"></asp:TextBox>
+        <asp:TextBox ID="TextBoxTop2" Width="600px" ReadOnly="true" CssClass="AllBoxes" style="position:absolute; top:190px; left:20%" runat="server" OnTextChanged="TextBoxTop2_TextChanged"></asp:TextBox>
+        <asp:TextBox ID="TextBoxTop3" Width="600px" ReadOnly="true" CssClass="AllBoxes" style="position:absolute; top:240px; left:20%" runat="server" OnTextChanged="TextBoxTop3_TextChanged"></asp:TextBox>
+        <asp:TextBox ID="TextBoxTop4" Width="600px" ReadOnly="true" CssClass="AllBoxes" style="position:absolute; top:270px; left:20%" runat="server" OnTextChanged="TextBoxTop4_TextChanged"></asp:TextBox>
             </div>
 
-            <div id="LeftBoxes" style="visibility:hidden" runat="server">
-                <asp:TextBox ID="TextBoxLeft1" Width="300px" ReadOnly="true" CssClass="AllBoxes" style="position:absolute; top:350px; margin-left:900px;margin-right:0px;" runat="server" OnTextChanged="TextBoxLeft1_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxLeft2" Width="300px" CssClass="AllBoxes" style="position:absolute; top:400px; margin-left:900px;margin-right:0px;" runat="server" OnTextChanged="TextBoxLeft3_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxLeft3" Width="300px" CssClass="AllBoxes" style="position:absolute; top:450px; margin-left:900px;margin-right:0px;" runat="server" OnTextChanged="TextBoxLeft3_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxLeft4" Width="300px" CssClass="AllBoxes" style="position:absolute; top:500px; margin-left:900px;margin-right:0px;" runat="server" OnTextChanged="TextBoxLeft4_TextChanged"></asp:TextBox>
-            </div>
-
-
-            <div id="RightBoxes" style="visibility:hidden" runat="server">
-                <asp:TextBox ID="TextBoxRight1" Width="300px" CssClass="AllBoxes" ReadOnly="true" style="position:absolute; top:350px; margin-left:1600px;margin-right:0px;" runat="server" OnTextChanged="TextBoxRight1_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxRight2" Width="300px" CssClass="AllBoxes" style="position:absolute; top:400px; margin-left:1600px;margin-right:0px;" runat="server" OnTextChanged="TextBoxRight2_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxRight3" Width="300px" CssClass="AllBoxes" style="position:absolute; top:450px; margin-left:1600px;margin-right:0px;" runat="server" OnTextChanged="TextBoxRight3_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxRight4" Width="300px" CssClass="AllBoxes" style="position:absolute; top:500px; margin-left:1600px;margin-right:0px;" runat="server" OnTextChanged="TextBoxRight4_TextChanged"></asp:TextBox>
-
+            <div id="LeftBoxes" runat="server">
+                <asp:TextBox ID="TextBoxLeft1" Width="200px" ReadOnly="true" CssClass="AllBoxes" style="position:absolute; top:310px; left:20%" runat="server" OnTextChanged="TextBoxLeft1_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxLeft2" Width="200px" CssClass="AllBoxes" style="position:absolute; top:350px; left:20%" runat="server" OnTextChanged="TextBoxLeft3_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxLeft3" Width="200px" CssClass="AllBoxes" style="position:absolute; top:390px; left:20%" runat="server" OnTextChanged="TextBoxLeft3_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxLeft4" Width="200px" CssClass="AllBoxes" style="position:absolute; top:430px; left:20%" runat="server" OnTextChanged="TextBoxLeft4_TextChanged"></asp:TextBox>
             </div>
 
 
-            <div id="BotBoxes" style="visibility:hidden" runat="server">
-                <asp:TextBox ID="TextBoxBot1" Width="600px" CssClass="AllBoxes" style="position:absolute; top:550px; margin-left:1100px;margin-right:0px;" runat="server" OnTextChanged="TextBoxBot1_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxBot2" Width="30px" CssClass="AllBoxes" style="position:absolute; top:550px; margin-left:1710px;margin-right:0px;" runat="server" OnTextChanged="TextBoxBot2_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxBot3" Width="200px" CssClass="AllBoxes" style="position:absolute; top:600px; margin-left:1300px;margin-right:0px;" runat="server" OnTextChanged="TextBoxBot3_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxBot4" Width="600px" CssClass="AllBoxes" style="position:absolute; top:650px; margin-left:1100px;margin-right:0px;" runat="server" OnTextChanged="TextBoxBot4_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxBot5" Width="200px" CssClass="AllBoxes" style="position:absolute; top:700px; margin-left:1300px;margin-right:0px;" runat="server" OnTextChanged="TextBoxBot5_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxBot6" Width="30px" CssClass="AllBoxes" style="position:absolute; top:700px; margin-left:1510px;margin-right:0px;" runat="server" OnTextChanged="TextBoxBot6_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxBot7" Width="200px" CssClass="AllBoxes" style="position:absolute; top:800px; margin-left:1300px;margin-right:0px;" runat="server" OnTextChanged="TextBoxBot7_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxBot8" Width="600px" CssClass="AllBoxes" style="position:absolute; top:850px; margin-left:1100px;margin-right:0px;" runat="server" OnTextChanged="TextBoxBot8_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxBot9" Width="600px" CssClass="AllBoxes" style="position:absolute; top:1100px; margin-left:1100px;margin-right:0px;" runat="server" OnTextChanged="TextBoxBot9_TextChanged"></asp:TextBox>
+            <div id="RightBoxes" runat="server">
+                <asp:TextBox ID="TextBoxRight1" Width="200px" CssClass="AllBoxes" ReadOnly="true" style="position:absolute; top:310px;left:45%" runat="server" OnTextChanged="TextBoxRight1_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxRight2" Width="200px" CssClass="AllBoxes" style="position:absolute; top:350px; left:45%" runat="server" OnTextChanged="TextBoxRight2_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxRight3" Width="200px" CssClass="AllBoxes" style="position:absolute; top:390px; left:45%" runat="server" OnTextChanged="TextBoxRight3_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxRight4" Width="200px" CssClass="AllBoxes" style="position:absolute; top:430px; left:45%" runat="server" OnTextChanged="TextBoxRight4_TextChanged"></asp:TextBox>
+
             </div>
 
+
+            <div id="BotBoxes" runat="server">
+                <asp:TextBox ID="TextBoxBot1" Width="400px" CssClass="AllBoxes" ReadOnly="true" style="position:absolute; top:470px; left:25%" runat="server" OnTextChanged="TextBoxBot1_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxBot2" Width="30px" CssClass="AllBoxes" style="position:absolute; top:470px; left:50%" runat="server" OnTextChanged="TextBoxBot2_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxBot3" Width="150px" CssClass="AllBoxes" ReadOnly="true" style="position:absolute; top:510px; left:35%" runat="server" OnTextChanged="TextBoxBot3_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxBot4" Width="400px" CssClass="AllBoxes" style="position:absolute; top:550px; left:27%" runat="server" OnTextChanged="TextBoxBot4_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxBot5" Width="150px" CssClass="AllBoxes" ReadOnly="true" style="position:absolute; top:590px; left:32%" runat="server" OnTextChanged="TextBoxBot5_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxBot6" Width="30px" CssClass="AllBoxes" style="position:absolute; top:590px; left:42%" runat="server" OnTextChanged="TextBoxBot6_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxBot7" Width="150px" CssClass="AllBoxes" ReadOnly="true" style="position:absolute; top:630px; left:35%" runat="server" OnTextChanged="TextBoxBot7_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxBot8" Width="400px" CssClass="AllBoxes" style="position:absolute; top:670px; left:28%" runat="server" OnTextChanged="TextBoxBot8_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxBot9" Width="400px" CssClass="AllBoxes" ReadOnly="true" style="position:absolute; top:710px; left:28%" runat="server" OnTextChanged="TextBoxBot9_TextChanged"></asp:TextBox>
+            </div>
+
+          </div>
 
         <div id ="Tables" style="visibility:hidden"  runat="server" >   <%--Кнопки для таблиц --%>
 

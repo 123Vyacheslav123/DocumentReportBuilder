@@ -70,18 +70,6 @@ namespace DocumentReportBuilder
             }
             ProfileReader.Close();
 
-
-            // находим айди пользователя
-            string getuserid = "SELECT [ID] FROM [USERS] WHERE [Mail] = '" + UserMail + "' ";
-            SqlCommand getid = new SqlCommand(getuserid, con);
-            SqlDataReader finduserid = getid.ExecuteReader();
-            int id = 0;
-            while (finduserid.Read())
-            {
-                id = (int)finduserid["ID"];
-            }
-            finduserid.Close();
-
             string conftable = "SELECT [CONFNAME],[CREATEDBY],[ShortUserName] FROM [CONFIGURATION] INNER JOIN [USERS] ON CREATEDBY=Mail WHERE Mail='"+UserMail+"'  ";
             SqlCommand tableconf = new SqlCommand(conftable, con);
             SqlDataReader tableofconf = tableconf.ExecuteReader();

@@ -103,7 +103,7 @@ namespace DocumentReportBuilder
             string shortname = (string)Session["TASKFROM"];
 
             // находим почту пользователя того, кто отправил конфигурацию
-            string taskfrom = "SELECT [Mail] FROM [USERS] WHERE [ShortUserName] = '"+shortname+"' ";
+            string taskfrom = "SELECT [Mail] FROM [USERS] WHERE [ShortUserName] = N'"+shortname+"' ";
             SqlCommand fromshortname = new SqlCommand(taskfrom, con);
             SqlDataReader shortnamereader = fromshortname.ExecuteReader();
             string mailfrom="test";
@@ -114,7 +114,7 @@ namespace DocumentReportBuilder
             shortnamereader.Close();
 
             //находим айди стилей в присланной конфигурации
-            string styles = "SELECT [CONFNAME],[CREATEDBY],[TEXT1],[TEXT2],[TEXT3],[TEXT4],[TEXT5],[TABLE1],[TABLE2],[TABLE3],[TABLE4],[TABLE5],[LIST1],[LIST2],[LIST3],[LIST4],[LIST5],[IMG1],[IMG2],[IMG3],[IMG4],[IMG5] FROM [CONFIGURATION] WHERE [CONFNAME] = '"+confname+"' AND [CREATEDBY] = '"+mailfrom+"' ";
+            string styles = "SELECT [CONFNAME],[CREATEDBY],[TEXT1],[TEXT2],[TEXT3],[TEXT4],[TEXT5],[TABLE1],[TABLE2],[TABLE3],[TABLE4],[TABLE5],[LIST1],[LIST2],[LIST3],[LIST4],[LIST5],[IMG1],[IMG2],[IMG3],[IMG4],[IMG5],[TITLELIST] FROM [CONFIGURATION] WHERE [CONFNAME] = N'"+confname+"' AND [CREATEDBY] = '"+mailfrom+"' ";
             SqlCommand taskstyles = new SqlCommand(styles,con);
             SqlDataReader stylesreader = taskstyles.ExecuteReader();
 
@@ -138,6 +138,7 @@ namespace DocumentReportBuilder
             int img3=0;
             int img4=0;
             int img5=0;
+            int titlelist = 0;
             while (stylesreader.Read())
             {
                 text1 = stylesreader.GetInt32(stylesreader.GetOrdinal("TEXT1"));
@@ -160,6 +161,7 @@ namespace DocumentReportBuilder
                 img3 = stylesreader.GetInt32(stylesreader.GetOrdinal("IMG3"));
                 img4 = stylesreader.GetInt32(stylesreader.GetOrdinal("IMG4"));
                 img5 = stylesreader.GetInt32(stylesreader.GetOrdinal("IMG5"));
+                titlelist = stylesreader.GetInt32(stylesreader.GetOrdinal("TITLELIST"));
             }
             stylesreader.Close();
 
@@ -231,7 +233,10 @@ namespace DocumentReportBuilder
             imgstylesreader.Close();
             i = 0;
 
-
+            if(titlelist!= 0)
+            {
+                AddSavedStyleToList("Титульник", titlelist, "title");
+            }
             if (text1 != 0)
             {
                 AddSavedStyleToList(text[i], textid[i], "text");
@@ -370,6 +375,10 @@ namespace DocumentReportBuilder
             {
                 style.Click += new EventHandler(this.ButtonChoosePic_Click);
             }
+            else if (type == "title")
+            {
+                style.Click += new EventHandler(this.ButtonTitle_Click);
+            }
 
             SavedStyles.Controls.Add(style);
         }
@@ -487,11 +496,7 @@ namespace DocumentReportBuilder
                 Session["ADDSTATUS"] = "Text";
             }
 
-            ButtonAddTtitle.Visible = false;
-            TopBoxes.Style.Add("visibility", "hidden");
-            LeftBoxes.Style.Add("visibility", "hidden");
-            RightBoxes.Style.Add("visibility", "hidden");
-            BotBoxes.Style.Add("visibility", "hidden");
+            TitleBoxes.Style.Add("visibility", "hidden");
             Images.Style.Add("visibility", "hidden");
             List.Style.Add("visibility", "hidden");
             TextAndList.Style.Add("visibility", "hidden");
@@ -516,11 +521,7 @@ namespace DocumentReportBuilder
                 Session["TABLEADD"] = style;
             }
 
-            ButtonAddTtitle.Visible = false;
-            TopBoxes.Style.Add("visibility", "hidden");
-            LeftBoxes.Style.Add("visibility", "hidden");
-            RightBoxes.Style.Add("visibility", "hidden");
-            BotBoxes.Style.Add("visibility", "hidden");
+            TitleBoxes.Style.Add("visibility", "hidden");
             Images.Style.Add("visibility", "hidden");
             List.Style.Add("visibility", "hidden");
             TextAndList.Style.Add("visibility", "hidden");
@@ -545,10 +546,7 @@ namespace DocumentReportBuilder
                 Session["ADDSTATUS"] = "List";
             }
 
-            TopBoxes.Style.Add("visibility", "hidden");
-            LeftBoxes.Style.Add("visibility", "hidden");
-            RightBoxes.Style.Add("visibility", "hidden");
-            BotBoxes.Style.Add("visibility", "hidden");
+            TitleBoxes.Style.Add("visibility", "hidden");
             Images.Style.Add("visibility", "hidden");
             List.Style.Add("visibility", "hidden");
             TextAndList.Style.Add("visibility", "hidden");
@@ -575,11 +573,7 @@ namespace DocumentReportBuilder
                 Session["PICADD"] = style;
             }
 
-            ButtonAddTtitle.Visible = false;
-            TopBoxes.Style.Add("visibility", "hidden");
-            LeftBoxes.Style.Add("visibility", "hidden");
-            RightBoxes.Style.Add("visibility", "hidden");
-            BotBoxes.Style.Add("visibility", "hidden");
+            TitleBoxes.Style.Add("visibility", "hidden");
             Images.Style.Add("visibility", "hidden");
             List.Style.Add("visibility", "hidden");
             TextAndList.Style.Add("visibility", "hidden");
@@ -887,8 +881,9 @@ namespace DocumentReportBuilder
             parb9.Alignment = Alignment.center;
 
             /////////////////////////////////////////////////////////////
-
+            doc.InsertSectionPageBreak();
             doc.Save();
+            workWithPdf();
         }
 
         protected void ButtonCreateFile_Click(object sender, EventArgs e)
@@ -958,22 +953,41 @@ namespace DocumentReportBuilder
 
         protected void ButtonTitle_Click(object sender, EventArgs e)
         {
-            Title.Style.Add("visibility", "visible"); ;
-            TopBoxes.Style.Add("visibility","visible");
-            LeftBoxes.Style.Add("visibility", "visible");
-            RightBoxes.Style.Add("visibility", "visible");
-            BotBoxes.Style.Add("visibility", "visible");
-            TextBoxTop1.Text = (string)Session["TBT1"];
-            TextBoxTop2.Text = (string)Session["TBT2"];
-            TextBoxTop3.Text = (string)Session["TBT3"];
-            TextBoxTop4.Text = (string)Session["TBT4"];
-            TextBoxLeft1.Text = (string)Session["TBL1"];
-            TextBoxRight1.Text = (string)Session["TBR1"];
-            TextBoxBot1.Text = (string)Session["TBB1"];
-            TextBoxBot3.Text = (string)Session["TBB3"];
-            TextBoxBot5.Text = (string)Session["TBB5"];
-            TextBoxBot7.Text = (string)Session["TBB7"];
-            TextBoxBot9.Text = (string)Session["TBB9"];
+            con.Open();
+            Images.Style.Add("visibility", "hidden");
+            List.Style.Add("visibility", "hidden");
+            TextAndList.Style.Add("visibility", "hidden");
+            Title.Style.Add("visibility", "hidden");
+            Tables.Style.Add("visibility", "hidden");
+
+            Title.Style.Add("visibility", "visible");
+            TitleBoxes.Style.Add("visibility", "visible");
+
+            Button button = sender as Button;
+                int value;
+                string buttonid = button.ID;
+                int.TryParse(string.Join("", buttonid.Where(c => char.IsDigit(c))), out value);
+                int buttonnumb = value;
+
+            string titletext = "SELECT [TBT1],[TBT2],[TBT3],[TBT4],[TBL1],[TBR1],[TBB1],[TBB3],[TBB5],[TBB7],[TBB9] FROM [TitleList] WHERE [ID] ='"+value+"' ";
+            SqlCommand titleText = new SqlCommand(titletext, con);
+            SqlDataReader titletextreader = titleText.ExecuteReader();
+            while (titletextreader.Read())
+            {
+                TextBoxTop1.Text = (string)titletextreader["TBT1"];
+                TextBoxTop2.Text = (string)titletextreader["TBT2"];
+                TextBoxTop3.Text = (string)titletextreader["TBT3"];
+                TextBoxTop4.Text = (string)titletextreader["TBT4"];
+                TextBoxLeft1.Text = (string)titletextreader["TBL1"];
+                TextBoxRight1.Text = (string)titletextreader["TBR1"];
+                TextBoxBot1.Text = (string)titletextreader["TBB1"];
+                TextBoxBot3.Text = (string)titletextreader["TBB3"];
+                TextBoxBot5.Text = (string)titletextreader["TBB5"];
+                TextBoxBot7.Text = (string)titletextreader["TBB7"];
+                TextBoxBot9.Text = (string)titletextreader["TBB9"];
+            }
+            titletextreader.Close();
+            con.Close();
         }
 
 

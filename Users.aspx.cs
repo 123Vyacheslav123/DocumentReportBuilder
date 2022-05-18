@@ -97,8 +97,6 @@ namespace DocumentReportBuilder
                     GridViewTableUsers.DataBind();
                 }
                 usersreader.Close();
-
-                string confname = (string)Session["NAMEOFCONF"];
             }
             con.Close();
         }
@@ -119,13 +117,14 @@ namespace DocumentReportBuilder
 
             string confname = (string)Session["NAMEOFCONF"];
 
+  
 
             con.Open();
             string UserMail = (string)Session["USERMAIL"];
             int conftosend = 0;
 
             // находим нужную конфигурацию
-            string sqldatatosend = "SELECT [ID] FROM [CONFIGURATION] WHERE [CREATEDBY] = '" + UserMail + "' AND [CONFNAME] = '" + confname + "'  ";
+            string sqldatatosend = "SELECT [ID] FROM [CONFIGURATION] WHERE [CREATEDBY] = '" + UserMail + "' AND [CONFNAME] = N'" + confname + "'  ";
             SqlCommand sendconf = new SqlCommand(sqldatatosend, con);
             SqlDataReader datatosend = sendconf.ExecuteReader();
             while (datatosend.Read())
