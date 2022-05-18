@@ -104,6 +104,8 @@
 
             <asp:Button ID="ButtonCreateFile" runat="server" Height="40px" Width="200px" style="position:absolute; top: 800px; left: 520px;" Text="Создать документ" OnClick="ButtonCreateFile_Click" />
 
+            <asp:SqlDataSource ID="SqlDataSource8" runat="server"></asp:SqlDataSource>
+
         </div>
 
         <div id ="TextAndList" style="visibility:hidden" runat="server">
@@ -145,7 +147,7 @@
 
             <div id="LeftBoxes" runat="server">
                 <asp:TextBox ID="TextBoxLeft1" Width="200px" ReadOnly="true" CssClass="AllBoxes" style="position:absolute; top:310px; left:20%" runat="server" OnTextChanged="TextBoxLeft1_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxLeft2" Width="200px" CssClass="AllBoxes" style="position:absolute; top:350px; left:20%" runat="server" OnTextChanged="TextBoxLeft3_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxLeft2" Width="200px" CssClass="AllBoxes" style="position:absolute; left:20%" runat="server" OnTextChanged="TextBoxLeft3_TextChanged"></asp:TextBox>
                 <asp:TextBox ID="TextBoxLeft3" Width="200px" CssClass="AllBoxes" style="position:absolute; top:390px; left:20%" runat="server" OnTextChanged="TextBoxLeft3_TextChanged"></asp:TextBox>
                 <asp:TextBox ID="TextBoxLeft4" Width="200px" CssClass="AllBoxes" style="position:absolute; top:430px; left:20%" runat="server" OnTextChanged="TextBoxLeft4_TextChanged"></asp:TextBox>
             </div>

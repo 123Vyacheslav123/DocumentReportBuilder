@@ -60,6 +60,15 @@ namespace DocumentReportBuilder
         protected global::System.Web.UI.WebControls.Button ButtonCreateFile;
 
         /// <summary>
+        /// SqlDataSource8 элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource8;
+
+        /// <summary>
         /// TextAndList элемент управления.
         /// </summary>
         /// <remarks>
