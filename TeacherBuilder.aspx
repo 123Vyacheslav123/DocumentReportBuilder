@@ -27,6 +27,22 @@
             background-color: cornflowerblue;
         }
 
+        .LIST_Buttons {
+            margin-bottom:10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+         padding-left: 10px;
+         padding-right: 10px;
+            border: none;
+            border-radius: 10px;
+             font-size: 14px; /*меняем размер шрифта*/
+            font-weight: bold;
+            transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
+        }
+        .LIST_Buttons:hover{
+            background-color: cornflowerblue;
+        }
+
 
         .ZAD_TIT {
             position: absolute;

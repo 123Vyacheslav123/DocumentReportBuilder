@@ -60,6 +60,34 @@ namespace DocumentReportBuilder
                 li1.Controls.Add(anchor2);
             }
             ProfileReader.Close();
+            
+
+            string Styletext = (string)Session["STYLETEXT"]; // количество созданных стилей для текста
+            int styletext = Int32.Parse(Styletext);
+
+            string Styletable = (string)Session["STYLETABLE"]; // количество созданных стилей для таблицы
+            int styletable = Int32.Parse(Styletable);
+
+            string Stylelist = (string)Session["STYLELIST"]; // количество созданных стилей для списка
+            int stylelist = Int32.Parse(Stylelist);
+
+            string Stylepic = (string)Session["STYLEPIC"]; // количество созданных стилей для картинки
+            int stylepic = Int32.Parse(Stylepic);
+   
+            
+                string LastTextStyles = "SELECT TOP " + styletext + " * FROM [TEXT] WHERE [CREATEDBY]='" + UserMail + "' ORDER BY [ID] DESC";
+                SqlCommand command = new SqlCommand(LastTextStyles, con);
+                SqlDataReader TextReader = command.ExecuteReader();
+                while (TextReader.Read())
+                {
+
+                    string TextName = (string)TextReader["StyleName"];
+                    int id = TextReader.GetInt32(TextReader.GetOrdinal("ID"));
+                    AddSavedStyleToList(TextName, id);
+                }
+                TextReader.Close();
+
+
             con.Close();
         }
 
@@ -75,11 +103,9 @@ namespace DocumentReportBuilder
             Button style = new Button();
             style.Click += ButtonRecreateStyle_Click;
             style.Text = Text;
-            style.ID =String.Concat("style_" ,id);
-            style.Height = 22;
+            style.CssClass = "LIST_Buttons";
             style.Width = 152;
-            style.Attributes.Add("margin-left", "0px");
-            style.Attributes.Add("magin-bottom", "20px");
+            style.ID = String.Concat("style_", id);
             style.Attributes.Add("runat", "server");
             SavedStyles.Controls.Add(style);
         }
@@ -232,19 +258,7 @@ namespace DocumentReportBuilder
                 SqlCommand TextStyleInsert = new SqlCommand(TextStyle, con);
                 TextStyleInsert.ExecuteNonQuery();
 
-                //string LastTextStyles = "SELECT TOP 1 StyleName FROM [TEXT] ORDER BY ID DESC";
-                //SqlCommand command = new SqlCommand(LastTextStyles, con);
-                ////command.Parameters.AddWithValue("@num", styletext);
-                //SqlDataReader TextReader = command.ExecuteReader();
-
-                //int textcounter = 1;
-                //while (TextReader.Read())
-                //{
-
-                //        string TextName = TextReader.GetString(2);
-                //        AddSavedStyleToList(TextName, textcounter);
-                //}
-                //TextReader.Close();
+                AddSavedStyleToList(TextBoxName.Text, styletext);
 
                 styletext++;
                 Session["STYLETEXT"] = styletext.ToString();
