@@ -33,7 +33,7 @@ namespace DocumentReportBuilder
                 MenuList.Controls.Add(li);
 
                 HtmlGenericControl anchor = new HtmlGenericControl("a");
-                anchor.Attributes.Add("href", "~/TeacherProfile.aspx");
+                anchor.Attributes.Add("href", "/TeacherProfile.aspx");
                 anchor.Attributes.Add("class", "down");
                 anchor.InnerText = ShortUserName;
 
@@ -50,12 +50,12 @@ namespace DocumentReportBuilder
 
 
                 HtmlGenericControl anchor1 = new HtmlGenericControl("a");
-                anchor1.Attributes.Add("href", "~/TeacherProfile.aspx");
+                anchor1.Attributes.Add("href", "/TeacherProfile.aspx");
                 anchor1.InnerText = "Профиль";
                 li1.Controls.Add(anchor1);
 
                 HtmlGenericControl anchor2 = new HtmlGenericControl("a");
-                anchor2.Attributes.Add("href", "~/Reg.aspx");
+                anchor2.Attributes.Add("href", "/Reg.aspx");
                 anchor2.InnerText = "Выход";
                 li1.Controls.Add(anchor2);
             }
@@ -122,7 +122,7 @@ namespace DocumentReportBuilder
             LeftBoxes.Style.Add("visibility", "visible");
             RightBoxes.Style.Add("visibility", "visible");
             BotBoxes.Style.Add("visibility", "visible");
-            ButtonCreateMainList.Style.Add("visibility", "visible");
+            SaveTitle.Style.Add("visibility", "visible");
             
         }
 
@@ -132,6 +132,7 @@ namespace DocumentReportBuilder
             LeftBoxes.Style.Add("visibility", "hidden");
             RightBoxes.Style.Add("visibility", "hidden");
             BotBoxes.Style.Add("visibility", "hidden");
+            SaveTitle.Style.Add("visibility", "hidden");
             TextStyle.Style.Add("visibility", "hidden");
             Liststyle.Style.Add("visibility", "hidden");
             Picstyle.Style.Add("visibility", "hidden");
@@ -151,6 +152,7 @@ namespace DocumentReportBuilder
             LeftBoxes.Style.Add("visibility", "hidden");
             RightBoxes.Style.Add("visibility", "hidden");
             BotBoxes.Style.Add("visibility", "hidden");
+            SaveTitle.Style.Add("visibility", "hidden");
             TextStyle.Style.Add("visibility", "hidden");
             Liststyle.Style.Add("visibility", "hidden");
             Picstyle.Style.Add("visibility", "hidden");
@@ -168,6 +170,7 @@ namespace DocumentReportBuilder
             LeftBoxes.Style.Add("visibility", "hidden");
             RightBoxes.Style.Add("visibility", "hidden");
             BotBoxes.Style.Add("visibility", "hidden");
+            SaveTitle.Style.Add("visibility", "hidden");
             TextStyle.Style.Add("visibility", "hidden");
             Liststyle.Style.Add("visibility", "hidden");
             Picstyle.Style.Add("visibility", "hidden");
@@ -185,6 +188,7 @@ namespace DocumentReportBuilder
             LeftBoxes.Style.Add("visibility", "hidden");
             RightBoxes.Style.Add("visibility", "hidden");
             BotBoxes.Style.Add("visibility", "hidden");
+            SaveTitle.Style.Add("visibility", "hidden");
             TextStyle.Style.Add("visibility", "hidden");
             Liststyle.Style.Add("visibility", "hidden");
             Picstyle.Style.Add("visibility", "hidden");
@@ -224,7 +228,7 @@ namespace DocumentReportBuilder
                 int intervalAfter = Int32.Parse(TextBoxAfter.Text);
                 int intervalBefore = Int32.Parse(TextBoxBefore.Text);
                 // заносим стиль текста в базу
-                string TextStyle = "INSERT INTO[TEXT]([CREATEDBY],[StyleName],[Font],[Alignment],[FontSize],[IntervalAfter],[IntervalBefore])VALUES('"+UserMail+"', N'"+TextBoxName.Text+"', '"+DropDownValue+"','"+DropDownAlign+"',"+textSize+","+intervalAfter+","+intervalBefore+")";
+                string TextStyle = "INSERT INTO[TEXT]([CREATEDBY],[StyleName],[Font],[Alignment],[FontSize],[IntervalAfter],[IntervalBefore])VALUES('" + UserMail + "', N'" + TextBoxName.Text + "', '" + DropDownValue + "','" + DropDownAlign + "',"+textSize+"," + intervalAfter + "," + intervalBefore + ")";
                 SqlCommand TextStyleInsert = new SqlCommand(TextStyle, con);
                 TextStyleInsert.ExecuteNonQuery();
 
@@ -253,7 +257,7 @@ namespace DocumentReportBuilder
                 string DropDownCellAlignment = CellAlignList.SelectedValue.ToString();
 
                 // заносим стиль таблицы в базу
-                string TableStyle = "INSERT INTO [TABLE] ([CREATEDBY],[StyleName],[Font],[FontSize],[TableAlignment],[CellAlignment])VALUES('"+UserMail+"', N'"+TableStyleNameBox.Text+"', '"+DropDownName+"',"+textSize+", '"+DropDownTableAlignment+"', '"+DropDownCellAlignment+"')";
+                string TableStyle = "INSERT INTO [TABLE] ([CREATEDBY],[StyleName],[Font],[FontSize],[TableAlignment],[CellAlignment])VALUES('" + UserMail + "', N'" + TableStyleNameBox.Text + "', '" + DropDownName + "'," + textSize + ", '" + DropDownTableAlignment + "', '" + DropDownCellAlignment + "')";
                 SqlCommand TableStyleInsert = new SqlCommand(TableStyle, con);
                 TableStyleInsert.ExecuteNonQuery();
                 //AddSavedStyleToList(TableStyleNameBox.Text, stylenumber);
@@ -266,7 +270,7 @@ namespace DocumentReportBuilder
                 int ListSize = Int32.Parse(TextBoxTSize.Text);
 
                 // заносим стиль списка в базу
-                string ListStyle = "INSERT INTO [LIST] ([CREATEDBY],[StyleName],[Font],[FontSize])VALUES('"+UserMail+"', N'" +TextBoxSName.Text+"','"+DropDownListValue+"','"+ListSize+"')";
+                string ListStyle = "INSERT INTO [LIST] ([CREATEDBY],[StyleName],[Font],[FontSize])VALUES('" + UserMail + "', N'" + TextBoxSName.Text + "','" + DropDownListValue + "','" + ListSize + "')";
                 SqlCommand ListStyleInsert = new SqlCommand(ListStyle, con);
                 ListStyleInsert.ExecuteNonQuery();
                 //AddSavedStyleToList(TextBoxSName.Text, stylenumber);
@@ -279,7 +283,7 @@ namespace DocumentReportBuilder
                 string DropDownIMGValue = PAlign_List.SelectedValue.ToString();
 
                 // заносим стиль картинки в базу
-                string ImageStyle = "INSERT INTO [IMAGE] ([CREATEDBY],[StyleName],[Name],[Alignment])VALUES('"+ UserMail + "', N'"+TextBoxPName.Text+"', N'"+TextBoxPTitle.Text+"', '"+DropDownIMGValue+"')";
+                string ImageStyle = "INSERT INTO [IMAGE] ([CREATEDBY],[StyleName],[Name],[Alignment])VALUES('"+ UserMail + "', N'" + TextBoxPName.Text + "', N'" + TextBoxPTitle.Text + "', '" + DropDownIMGValue + "')";
                 SqlCommand IMGStyleInsert = new SqlCommand(ImageStyle, con);
                 IMGStyleInsert.ExecuteNonQuery();
                 //AddSavedStyleToList(TextBoxPName.Text,stylenumber);
@@ -298,6 +302,7 @@ namespace DocumentReportBuilder
             TopBoxes.Style.Add("visibility", "hidden");
             LeftBoxes.Style.Add("visibility", "hidden");
             RightBoxes.Style.Add("visibility", "hidden");
+            SaveTitle.Style.Add("visibility", "hidden");
             BotBoxes.Style.Add("visibility", "hidden");
             TextStyle.Style.Add("visibility", "hidden");
             Liststyle.Style.Add("visibility", "hidden");

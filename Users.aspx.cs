@@ -42,7 +42,7 @@ namespace DocumentReportBuilder
                 MenuList.Controls.Add(li);
 
                 HtmlGenericControl anchor = new HtmlGenericControl("a");
-                anchor.Attributes.Add("href", "~/Profile.aspx");
+                anchor.Attributes.Add("href", "/Profile.aspx");
                 anchor.Attributes.Add("class", "down");
                 anchor.InnerText = ShortUserName;
 
@@ -64,7 +64,7 @@ namespace DocumentReportBuilder
                 li1.Controls.Add(anchor1);
 
                 HtmlGenericControl anchor2 = new HtmlGenericControl("a");
-                anchor2.Attributes.Add("href", "~/Reg.aspx");
+                anchor2.Attributes.Add("href", "/Reg.aspx");
                 anchor2.InnerText = "Выход";
                 li1.Controls.Add(anchor2);
             }

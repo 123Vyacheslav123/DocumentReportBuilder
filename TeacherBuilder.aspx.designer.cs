@@ -96,6 +96,24 @@ namespace DocumentReportBuilder
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Title;
 
         /// <summary>
+        /// SaveTitle элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SaveTitle;
+
+        /// <summary>
+        /// ButtonCreateMainList элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonCreateMainList;
+
+        /// <summary>
         /// TopBoxes элемент управления.
         /// </summary>
         /// <remarks>
@@ -321,24 +339,6 @@ namespace DocumentReportBuilder
         protected global::System.Web.UI.WebControls.TextBox TextBoxBot9;
 
         /// <summary>
-        /// SaveButtons элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SaveButtons;
-
-        /// <summary>
-        /// ButtonCreateMainList элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonCreateMainList;
-
-        /// <summary>
         /// TextStyle элемент управления.
         /// </summary>
         /// <remarks>
@@ -373,6 +373,24 @@ namespace DocumentReportBuilder
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxName;
+
+        /// <summary>
+        /// LabelSize элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelSize;
+
+        /// <summary>
+        /// TextBoxSize элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxSize;
 
         /// <summary>
         /// LabelStyle элемент управления.
@@ -411,22 +429,13 @@ namespace DocumentReportBuilder
         protected global::System.Web.UI.WebControls.DropDownList DropDownTextAlign;
 
         /// <summary>
-        /// LabelSize элемент управления.
+        /// LabelIndent элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelSize;
-
-        /// <summary>
-        /// TextBoxSize элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxSize;
+        protected global::System.Web.UI.WebControls.Label LabelIndent;
 
         /// <summary>
         /// LabelBefore элемент управления.
@@ -753,6 +762,15 @@ namespace DocumentReportBuilder
         protected global::System.Web.UI.WebControls.Button ButtonGoBack;
 
         /// <summary>
+        /// LabelConfName элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelConfName;
+
+        /// <summary>
         /// TextBoxConfName элемент управления.
         /// </summary>
         /// <remarks>
@@ -760,6 +778,24 @@ namespace DocumentReportBuilder
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxConfName;
+
+        /// <summary>
+        /// rectangleStyles элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rectangleStyles;
+
+        /// <summary>
+        /// rectangleBoxes элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rectangleBoxes;
 
         /// <summary>
         /// sql элемент управления.

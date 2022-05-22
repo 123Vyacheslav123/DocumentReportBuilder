@@ -11,10 +11,26 @@
     <link href="Styles/Builder/STYLE.css" rel="stylesheet" />
     <title></title>
     <style>
+
+        .SAVE_Buttons {
+            padding-top: 10px;
+            padding-bottom: 10px;
+         padding-left: 15px;
+         padding-right: 15px;
+            border: none;
+            border-radius: 15px;
+             font-size: 16px; /*меняем размер шрифта*/
+            font-weight: bold;
+            transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
+        }
+        .SAVE_Buttons:hover{
+            background-color: cornflowerblue;
+        }
+
+
         .ZAD_TIT {
             position: absolute;
-            background-color: gray;
-            left: 30%;
+            left: 20%;
             top: 20%;
             padding-top: 10px;
             padding-bottom: 10px;
@@ -35,7 +51,7 @@
     top: 25%;
     border: 2px solid black;
     list-style-type: none;
-    width: 17%;
+    width: 12%;
     height: 60%;
     padding-top: 20px;
     text-align: center;
@@ -91,7 +107,7 @@
         </div>
         <asp:Button ID="ButtonCreateTitleList_" CssClass="ZAD_TIT" runat="server" Text="Задать титульник" OnClick="ButtonCreateTitleList_Click" />
         <nav>
-<ul class="topmenu1">
+<ul class="topmenu1" style="left:35%; background-color:white;">
     <li><a href="" class="down1">Задать стиль</a>
       <ul class="submenu1">
         <li><a><asp:Button ID="ButtonTextStyle" BackColor="White" BorderStyle="None" runat="server" Text="Текст" OnClick="ButtonTextStyle_Click" /></a></li>
@@ -103,7 +119,7 @@
   </ul>
       </nav>
         
-        <ul class="Buttons">
+        <ul class="Buttons" >
             <p>Сохранённые стили</p>
 
             <li id="SavedStyles" runat="server">
@@ -126,109 +142,114 @@
 
 
     <div id="Title" runat="server">
-            <div id="TopBoxes" style="visibility:hidden;" runat="server">
-        <asp:TextBox ID="TextBoxTop1" Width="600px" style="position:absolute; top:100px; margin-left:300px;margin-right:0px;left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxTop1_TextChanged"></asp:TextBox>
-        <asp:TextBox ID="TextBoxTop2" Width="600px" style="position:absolute; top:150px; margin-left:300px;margin-right:0px;left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxTop2_TextChanged"></asp:TextBox>
-        <asp:TextBox ID="TextBoxTop3" Width="600px" style="position:absolute; top:200px; margin-left:300px;margin-right:0px;left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxTop3_TextChanged"></asp:TextBox>
-        <asp:TextBox ID="TextBoxTop4" Width="600px" style="position:absolute; top:250px; margin-left:300px;margin-right:0px;left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxTop4_TextChanged"></asp:TextBox>
+
+        <div id ="SaveTitle" style="visibility:hidden" runat="server">
+            <asp:Button ID="ButtonCreateMainList" CssClass="SAVE_Buttons" style="position:absolute; top:90%; left:83%" runat="server" Text="Сохранить титульник" OnClick="ButtonCreateMainList_Click" />
+        </div>
+        
+            <div id="TopBoxes" style="visibility:hidden" runat="server">
+        <asp:TextBox ID="TextBoxTop1" Width="25%" style="position:absolute; top:13%; left:60%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxTop1_TextChanged"></asp:TextBox>
+        <asp:TextBox ID="TextBoxTop2" Width="25%" style="position:absolute; top:18%; left:60%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxTop2_TextChanged"></asp:TextBox>
+        <asp:TextBox ID="TextBoxTop3" Width="25%" style="position:absolute; top:23%; left:60%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxTop3_TextChanged"></asp:TextBox>
+        <asp:TextBox ID="TextBoxTop4" Width="25%" style="position:absolute; top:28%; left:60%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxTop4_TextChanged"></asp:TextBox>
             </div>
 
            <div id="LeftBoxes" style="visibility:hidden" runat="server">
-                <asp:TextBox ID="TextBoxLeft1" Width="300px" style="position:absolute; top:350px; margin-left:100px; margin-right:0px; left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxLeft1_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxLeft2" Width="300px" style="position:absolute; top:400px; margin-left:100px; margin-right:0px; left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxLeft2_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxLeft3" Width="300px" style="position:absolute; top:450px; margin-left:100px; margin-right:0px; left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxLeft3_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxLeft4" Width="300px" style="position:absolute; top:500px; margin-left:100px; margin-right:0px; left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxLeft4_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxLeft1" Width="17%" style="position:absolute; top:35%; left:48%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxLeft1_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxLeft2" Width="17%" style="position:absolute; top:40%; left:48%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxLeft2_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxLeft3" Width="17%" style="position:absolute; top:45%; left:48%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxLeft3_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxLeft4" Width="17%" style="position:absolute; top:50%; left:48%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxLeft4_TextChanged"></asp:TextBox>
             </div>
 
             <div id="RightBoxes" style="visibility:hidden" runat="server">
-                <asp:TextBox ID="TextBoxRight1" Width="300px" style="position:absolute; top:350px; margin-left:800px;margin-right:0px;left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxRight1_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxRight2" Width="300px" style="position:absolute; top:400px; margin-left:800px;margin-right:0px;left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxRight2_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxRight3" Width="300px" style="position:absolute; top:450px; margin-left:800px;margin-right:0px;left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxRight3_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxRight4" Width="300px" style="position:absolute; top:500px; margin-left:800px;margin-right:0px;left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxRight4_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxRight1" Width="17%" style="position:absolute; top:35%; left:77%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxRight1_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxRight2" Width="17%" style="position:absolute; top:40%; left:77%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxRight2_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxRight3" Width="17%" style="position:absolute; top:45%; left:77%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxRight3_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxRight4" Width="17%" style="position:absolute; top:50%; left:77%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxRight4_TextChanged"></asp:TextBox>
             </div>
 
 
            <div id="BotBoxes" style="visibility:hidden" runat="server">
-                <asp:TextBox ID="TextBoxBot1" Width="600px" style="position:absolute; top:550px; margin-left:300px;margin-right:0px;left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot1_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxBot2" Width="30px" style="position:absolute; top:550px; margin-left:910px;margin-right:0px;left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot2_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxBot3" Width="200px" style="position:absolute; top:600px; margin-left:500px;margin-right:0px;left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot3_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxBot4" Width="600px" style="position:absolute; top:650px; margin-left:300px;margin-right:0px;left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot4_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxBot5" Width="200px" style="position:absolute; top:700px; margin-left:500px;margin-right:0px;left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot5_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxBot6" Width="30px" style="position:absolute; top:700px; margin-left:710px;margin-right:0px;left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot6_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxBot7" Width="200px" style="position:absolute; top:800px; margin-left:500px;margin-right:0px;left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot7_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxBot8" Width="600px" style="position:absolute; top:850px; margin-left:300px;margin-right:0px;left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot8_TextChanged"></asp:TextBox>
-                <asp:TextBox ID="TextBoxBot9" Width="600px" style="position:absolute; top:1100px; margin-left:300px;margin-right:0px;left:800px;" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot9_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxBot1" Width="25%" style="position:absolute; top:55%; left:55%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot1_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxBot2" Width="2%" style="position:absolute; top:55%; left:82%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot2_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxBot3" Width="10%" style="position:absolute; top:60%; left:68%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot3_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxBot4" Width="25%" style="position:absolute; top:65%; left:60%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot4_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxBot5" Width="10%" style="position:absolute; top:70%;  left:65%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot5_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxBot6" Width="2%" style="position:absolute; top:70%; left:76%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot6_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxBot7" Width="10%" style="position:absolute; top:75%; left:68%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot7_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxBot8" Width="25%" style="position:absolute; top:80%; left:60%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot8_TextChanged"></asp:TextBox>
+                <asp:TextBox ID="TextBoxBot9" Width="15%" style="position:absolute; top:85%;  left:65%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxBot9_TextChanged"></asp:TextBox>
             </div>
             
         </div>
 
-      <div id="SaveButtons" runat="server" >
-        <asp:Button ID="ButtonCreateMainList" style="position:absolute; top:880px; margin-left:600px;margin-right:0px;" runat="server" Text="Сохранить титульник" OnClick="ButtonCreateMainList_Click" />
-      </div>
+        <div id="TextStyle" style="visibility:hidden;" runat="server">
 
-        <div id="TextStyle" style="visibility:hidden; left:200px;top:-20px ;position:absolute" runat="server">
+            <asp:Label ID="Textsettings" runat="server" style="position:absolute; top:29%; left:17%" Width="12%" Font-Size="18px"  Text="Настройка стиля текста"></asp:Label>
 
-            <asp:Label ID="Textsettings" runat="server" style="position:absolute; top:300px; left:200px" Width="250px" Font-Size="18px"  Text="Настройка стиля текста"></asp:Label>
+            <asp:Label ID="LabelName" style="position:absolute; top:33%; left:17%" runat="server" Text="Название:"></asp:Label>
+            <asp:TextBox ID="TextBoxName" Width="10%" style="position:absolute; top:33%; left:21%" runat="server"></asp:TextBox>
 
-            <asp:Label ID="LabelName" style="position:absolute; top:350px; left:200px" runat="server" Text="Имя"></asp:Label>
-            <asp:TextBox ID="TextBoxName" Width="250px" style="position:absolute; top:350px; left:320px" runat="server"></asp:TextBox>
+             <asp:Label ID="LabelSize" style="position:absolute; top:38%; left:32%" runat="server" Text="Размер шрифта:"></asp:Label>
+            <asp:TextBox ID="TextBoxSize" Width="50px" style="position:absolute; top:38%; left:39%" TextMode="Number" runat="server">12</asp:TextBox>
 
-            <asp:Label ID="LabelStyle"  style="position:absolute; top:400px; left:200px" runat="server" Text="Шрифт"></asp:Label>
-                <asp:DropDownList ID="TextFontList" Width="250px" runat="server" style="position:absolute; top: 400px; left: 320px;" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
+            <asp:Label ID="LabelStyle"  style="position:absolute; top:38%; left:17%" runat="server" Text="Шрифт:"></asp:Label>
+                <asp:DropDownList ID="TextFontList" Width="10%" runat="server" style="position:absolute; top: 38%; left: 21%" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
                     <asp:ListItem Value="Times New Roman">Times New Roman</asp:ListItem>
                     <asp:ListItem Value="Courier New">Courier New</asp:ListItem>
                     <asp:ListItem Value="Calibri">Calibri</asp:ListItem>
                     <asp:ListItem Value="Comic Sans MS">Comic Sans</asp:ListItem>
                 </asp:DropDownList>
 
-            <asp:Label ID="LabelTextAlign" style="position:absolute; top:450px;left:200px" runat="server">Выравнивание:</asp:Label>
-                <asp:DropDownList ID="DropDownTextAlign" Width="300px" runat="server" style="position:absolute; top: 500px; left: 200px;" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
+            <asp:Label ID="LabelTextAlign" style="position:absolute; top:43%;left:17%" runat="server">Выравнивание:</asp:Label>
+                <asp:DropDownList ID="DropDownTextAlign" Width="10%" runat="server" style="position:absolute; top: 46%; left: 17%" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
                     <asp:ListItem Value="left">Левый край</asp:ListItem>
                     <asp:ListItem Value="center">Центр</asp:ListItem>
                     <asp:ListItem Value="right">Правый край</asp:ListItem>
                     <asp:ListItem Value="both">По ширине</asp:ListItem>
                 </asp:DropDownList>
 
-            <asp:Label ID="LabelSize" style="position:absolute; top:350px; left:600px" runat="server" Text="Размер"></asp:Label>
-            <asp:TextBox ID="TextBoxSize" Width="50px" style="position:absolute; top:400px; left:600px" TextMode="Number" runat="server"></asp:TextBox>
+             <asp:Label ID="LabelIndent" style="position:absolute; top:50%; left:17%" runat="server" Text="Отступы:"></asp:Label>
 
-            <asp:Label ID="LabelBefore" style="position:absolute; top:550px; left:270px" runat="server" Text="До"></asp:Label>
-            <asp:TextBox ID="TextBoxBefore" Width="50px" style="position:absolute; top:550px; left:350px" TextMode="Number" runat="server"></asp:TextBox>
+            <asp:Label ID="LabelBefore" style="position:absolute; top:55%; left:17%" runat="server" Text="До:"></asp:Label>
+            <asp:TextBox ID="TextBoxBefore" Width="50px" style="position:absolute; top:55%; left:350px" TextMode="Number" runat="server">0</asp:TextBox>
 
-            <asp:Label ID="LabelAfter" style="position:absolute; top:600px; left:270px" runat="server" Text="После"></asp:Label>
-            <asp:TextBox ID="TextBoxAfter" Width="50px" style="position:absolute; top:600px; left:350px" TextMode="Number" runat="server"></asp:TextBox>
+            <asp:Label ID="LabelAfter" style="position:absolute; top:60%; left:17%" runat="server" Text="После:"></asp:Label>
+            <asp:TextBox ID="TextBoxAfter" Width="50px" style="position:absolute; top:60%; left:350px" TextMode="Number" runat="server">0</asp:TextBox>
 
             </div>
 
-             <div id="Liststyle" runat="server" style="visibility:hidden; left:300px;top:-20px ;position:absolute">
-                <asp:Label ID="SSettings_Label" style="position:absolute; top:300px; left:100px" Width="250px" Font-Size="18px" runat="server">Настройка стиля списка</asp:Label>
+             <div id="Liststyle" runat="server" style="visibility:hidden;">
 
-                <asp:Label ID="TextBoxSName_Label" style="position:absolute; top:350px; margin-left:80px;margin-right:0px;" runat="server">Название:</asp:Label>
-                <asp:TextBox ID="TextBoxSName" Width="300px" style="position:absolute; top:350px; margin-left:200px;margin-right:0px;" runat="server"></asp:TextBox>
+                <asp:Label ID="SSettings_Label" style="position:absolute; top:29%; left:17%" Width="12%" Font-Size="18px" runat="server">Настройка стиля списка</asp:Label>
 
-                <asp:Label ID="TStyle_Label" style="position:absolute; top:400px; margin-left:80px;margin-right:0px;" runat="server">Шрифт:</asp:Label>
-                <asp:DropDownList ID="TStyle_List" Width="300px" runat="server" style="position:absolute; top: 400px; left: 200px;" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
+                <asp:Label ID="TextBoxSName_Label" style="position:absolute; top:33%; left:17%" runat="server">Название:</asp:Label>
+                <asp:TextBox ID="TextBoxSName" Width="10%" style="position:absolute; top:33%; left:21%" runat="server"></asp:TextBox>
+
+                <asp:Label ID="TStyle_Label" style="position:absolute; top:38%; left:17%" runat="server">Шрифт:</asp:Label>
+                <asp:DropDownList ID="TStyle_List" Width="10%" runat="server" style="position:absolute;top: 38%; left: 21%" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
                     <asp:ListItem Value="Times New Roman">Times New Roman</asp:ListItem>
                     <asp:ListItem Value="Courier New">Courier New</asp:ListItem>
                     <asp:ListItem Value="Calibri">Calibri</asp:ListItem>
                     <asp:ListItem Value="Comic Sans MS">Comic Sans</asp:ListItem>
                 </asp:DropDownList>
 
-                <asp:Label ID="TextBoxTSize_Label" style="position:absolute; top:400px; margin-left:550px;margin-right:0px;" runat="server">Размер:</asp:Label>
-                <asp:TextBox ID="TextBoxTSize" Width="70px" style="position:absolute; top:400px; margin-left:630px;margin-right:0px;" TextMode="Number" runat="server"></asp:TextBox>
+                <asp:Label ID="TextBoxTSize_Label" style="position:absolute; top:43%; left:17%" runat="server">Размер:</asp:Label>
+                <asp:TextBox ID="TextBoxTSize" Width="70px" style="position:absolute; top:43%; left:21%" TextMode="Number" runat="server">12</asp:TextBox>
             </div>
 
-            <div id="Picstyle" runat="server" style="visibility:hidden; left:300px;top:-20px ;position:absolute">
-                <asp:Label ID="PSettings_Label" style="position:absolute; top:300px; left:100px" Width="250px" Font-Size="18px" runat="server">Настройка стиля картинки</asp:Label>
+            <div id="Picstyle" runat="server" style="visibility:hidden">
 
-                <asp:Label ID="TextVoxPName_Label" style="position:absolute; top:350px; margin-left:80px;margin-right:0px;" runat="server">Название:</asp:Label>
-                <asp:TextBox ID="TextBoxPName" Width="300px" style="position:absolute; top:350px; margin-left:200px;margin-right:0px;" runat="server"></asp:TextBox>
+                <asp:Label ID="PSettings_Label" style="position:absolute; top:29%; left:17%" Width="12%" Font-Size="18px" runat="server">Настройка стиля картинки</asp:Label>
 
-                <asp:Label ID="TextBoxPTitle_Label" style="position:absolute; top:400px; margin-left:80px;margin-right:0px;" runat="server">Имя:</asp:Label>
-                <asp:TextBox ID="TextBoxPTitle" Width="300px" style="position:absolute; top:400px; margin-left:200px;margin-right:0px;" runat="server"></asp:TextBox>
+                <asp:Label ID="TextVoxPName_Label" style="position:absolute; top:33%; left:17%" runat="server">Название:</asp:Label>
+                <asp:TextBox ID="TextBoxPName" Width="10%" style="position:absolute; top:33%; left:21%" runat="server"></asp:TextBox>
 
-                <asp:Label ID="PAlign_Label" style="position:absolute; top:450px; margin-left:80px;margin-right:0px;" runat="server">Выравнивание:</asp:Label>
-                <asp:DropDownList ID="PAlign_List" Width="300px" runat="server" style="position:absolute; top: 450px; left: 208px;" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
+                <asp:Label ID="TextBoxPTitle_Label" style="position:absolute; top:38%; left:17%" runat="server">Имя:</asp:Label>
+                <asp:TextBox ID="TextBoxPTitle" Width="10%" style="position:absolute; top:38%; left:21%" runat="server"></asp:TextBox>
+
+                <asp:Label ID="PAlign_Label" style="position:absolute; top:43%; left:17%" runat="server">Выравнивание:</asp:Label>
+                <asp:DropDownList ID="PAlign_List" Width="10%" runat="server" style="position:absolute; top:43%; left:24%" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
                     <asp:ListItem Value="left">Левый край</asp:ListItem>
                     <asp:ListItem Value="center">Центр</asp:ListItem>
                     <asp:ListItem Value="right">Правый край</asp:ListItem>
@@ -236,33 +257,33 @@
                 </asp:DropDownList>
             </div>
 
-        <div id="TableStyle" style="visibility:hidden; left:300px;top:-20px ;position:absolute" runat="server">
-            <asp:Label ID="TableSettings" runat="server" style="position:absolute; top:300px; left:100px" Width="250px" Font-Size="18px"  Text="Настройка стиля таблицы"></asp:Label>
+        <div id="TableStyle" style="visibility:hidden" runat="server">
+            <asp:Label ID="TableSettings" runat="server" style="position:absolute; top:29%; left:17%" Width="12%" Font-Size="18px"  Text="Настройка стиля таблицы"></asp:Label>
 
-            <asp:Label ID="TableStyleName" style="position:absolute; top:350px; margin-left:80px;margin-right:0px;" runat="server">Название:</asp:Label>
-            <asp:TextBox ID="TableStyleNameBox" Width="300px" style="position:absolute; top:350px; margin-left:170px;margin-right:0px;" runat="server"></asp:TextBox>
+            <asp:Label ID="TableStyleName" style="position:absolute; top:33%; left:17%" runat="server">Название:</asp:Label>
+            <asp:TextBox ID="TableStyleNameBox" Width="10%" style="position:absolute;top:33%; left:21%" runat="server"></asp:TextBox>
 
-            <asp:Label ID="LabelTableFontSize" style="position:absolute; top:350px; left:600px" runat="server" Text="Размер шрифта"></asp:Label>
-            <asp:TextBox ID="TextBoxTableFontSize" Width="50px" style="position:absolute; top:400px; left:600px" TextMode="Number" runat="server"></asp:TextBox>
+            <asp:Label ID="LabelTableFontSize" style="position:absolute; top:38%; left:32%" runat="server" Text="Размер шрифта:"></asp:Label>
+            <asp:TextBox ID="TextBoxTableFontSize" Width="3%" style="position:absolute; top:38%; left:39%" TextMode="Number" runat="server">12</asp:TextBox>
 
-            <asp:Label ID="LabelTableFont" style="position:absolute; top:400px; margin-left:80px;margin-right:0px;" runat="server">Шрифт:</asp:Label>
-                <asp:DropDownList ID="TableFontList" Width="300px" runat="server" style="position:absolute; top: 400px; left: 170px;" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
+            <asp:Label ID="LabelTableFont" style="position:absolute; top:38%; left:17%" runat="server">Шрифт:</asp:Label>
+                <asp:DropDownList ID="TableFontList" Width="10%" runat="server" style="position:absolute; top: 38%; left: 21%" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
                     <asp:ListItem Value="Times New Roman">Times New Roman</asp:ListItem>
                     <asp:ListItem Value="Courier New">Courier New</asp:ListItem>
                     <asp:ListItem Value="Calibri">Calibri</asp:ListItem>
                     <asp:ListItem Value="Comic Sans MS">Comic Sans</asp:ListItem>
                 </asp:DropDownList>
 
-                <asp:Label ID="LabelTableAlign" style="position:absolute; top:450px; margin-left:80px;margin-right:0px;" runat="server">Выравнивание таблицы:</asp:Label>
-                <asp:DropDownList ID="TableAlignList" Width="300px" runat="server" style="position:absolute; top: 450px; left: 270px;" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
+                <asp:Label ID="LabelTableAlign" style="position:absolute; top:43%;left:17%" runat="server">Выравнивание таблицы:</asp:Label>
+                <asp:DropDownList ID="TableAlignList" Width="10%" runat="server" style="position:absolute; top: 46%; left: 17%" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
                     <asp:ListItem Value="left">Левый край</asp:ListItem>
                     <asp:ListItem Value="center">Центр</asp:ListItem>
                     <asp:ListItem Value="right">Правый край</asp:ListItem>
                     <asp:ListItem Value="both">По ширине</asp:ListItem>
                 </asp:DropDownList>
 
-             <asp:Label ID="LabelCellAlign" style="position:absolute; top:500px; margin-left:80px;margin-right:0px;" runat="server">Выравнивание ячейки:</asp:Label>
-             <asp:DropDownList ID="CellAlignList" Width="300px" runat="server" style="position:absolute; top: 500px; left: 270px;" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
+             <asp:Label ID="LabelCellAlign" style="position:absolute;top:51%;left:17%" runat="server">Выравнивание ячейки:</asp:Label>
+             <asp:DropDownList ID="CellAlignList" Width="10%" runat="server" style="position:absolute; top: 54%; left: 17%" OnSelectedIndexChanged="DropDownListForElements_SelectedIndexChanged">
                     <asp:ListItem Value="top">Верх</asp:ListItem>
                     <asp:ListItem Value="center">Центр</asp:ListItem>
                     <asp:ListItem Value="bottom">Низ</asp:ListItem>
@@ -272,15 +293,24 @@
 
                 <div id="MainButtons" runat="server" >
 
-            <asp:Button ID="ButtonSaveStyle" style="position:absolute; top:800px; left:600px" runat="server" Text="Сохранить стиль" OnClick="ButtonSaveStyle_Click" />
+            <asp:Button ID="ButtonSaveStyle" CssClass="SAVE_Buttons" style="position:absolute; top:69%; left:34%" runat="server" Text="Сохранить стиль" OnClick="ButtonSaveStyle_Click" />
 
-            <asp:Button ID="ButtonSaveConf" style="position:absolute; top:800px; left:400px" runat="server" Text="Сохранить конфигурацию" OnClick="ButtonSaveConf_Click" />
+            <asp:Button ID="ButtonSaveConf" CssClass="SAVE_Buttons" style="position:absolute; top:86%; left:30%" runat="server" Text="Сохранить конфигурацию" OnClick="ButtonSaveConf_Click" />
             
-            <asp:Button ID="ButtonGoBack" style="position:absolute; top:800px; left:800px" runat="server" Text="Отмена" OnClick="ButtonGoBack_Click" />
+            <asp:Button ID="ButtonGoBack" CssClass="SAVE_Buttons" style="position:absolute; top:75%; left:37%" runat="server" Text="Отмена" OnClick="ButtonGoBack_Click" />
 
-            <asp:TextBox ID="TextBoxConfName" Width="200px" style="position:absolute; top:1000px; left:200px;" runat="server"></asp:TextBox>
+            <asp:Label ID="LabelConfName" runat="server" style="position:absolute; top:83%; left:17%" Width="12%" Font-Size="18px"  Text="">Название конфигурации:</asp:Label>
+                    
+            <asp:TextBox ID="TextBoxConfName" CssClass="AllBoxes" Width="12%" Height="2%" style="position:absolute; top:87%; left:17%" runat="server"></asp:TextBox>
 
                </div>
+
+        <div id="rectangleStyles" runat="server" style="position:absolute; background:white; z-index:-1; left:16%; top:27%; width:28%; height:40%; " ></div>
+
+         <div id="rectangleBoxes" runat="server" style="position:absolute; background:white; z-index:-1; left:47%; top:12%; width:48%; height:76%; " ></div>
+
+
+
                 
         <div id="sql" runat="server">
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [USERS]"></asp:SqlDataSource>

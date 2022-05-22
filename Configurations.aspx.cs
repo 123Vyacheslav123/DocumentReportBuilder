@@ -42,7 +42,7 @@ namespace DocumentReportBuilder
                 MenuList.Controls.Add(li);
 
                 HtmlGenericControl anchor = new HtmlGenericControl("a");
-                anchor.Attributes.Add("href", "~/Profile.aspx");
+                anchor.Attributes.Add("href", "/Profile.aspx");
                 anchor.Attributes.Add("class", "down");
                 anchor.InnerText = ShortUserName;
 
@@ -59,18 +59,18 @@ namespace DocumentReportBuilder
 
 
                 HtmlGenericControl anchor1 = new HtmlGenericControl("a");
-                anchor1.Attributes.Add("href", "~/Profile.aspx");
+                anchor1.Attributes.Add("href", "/Profile.aspx");
                 anchor1.InnerText = "Профиль";
                 li1.Controls.Add(anchor1);
 
                 HtmlGenericControl anchor2 = new HtmlGenericControl("a");
-                anchor2.Attributes.Add("href", "~/Reg.aspx");
+                anchor2.Attributes.Add("href", "/Reg.aspx");
                 anchor2.InnerText = "Выход";
                 li1.Controls.Add(anchor2);
             }
             ProfileReader.Close();
 
-            string conftable = "SELECT [CONFNAME],[CREATEDBY],[ShortUserName] FROM [CONFIGURATION] INNER JOIN [USERS] ON CREATEDBY=Mail WHERE Mail='"+UserMail+"'  ";
+            string conftable = "SELECT [CONFNAME],[CREATEDBY],[ShortUserName] FROM [CONFIGURATION] INNER JOIN [USERS] ON CREATEDBY=Mail WHERE Mail='" + UserMail + "'  ";
             SqlCommand tableconf = new SqlCommand(conftable, con);
             SqlDataReader tableofconf = tableconf.ExecuteReader();
 
