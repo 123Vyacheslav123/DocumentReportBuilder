@@ -64,9 +64,9 @@
         <div>
 
             <ul class="FIR">
-              <li class="CL1"><a class="CL1a" href="/TeacherMain.aspx">Главная</a></li>
-              <li class="CL2"><a class="CL2a" href="/TeacherBuilder.aspx">Создать шаблон</a></li>
-              <li class="CL3"><a class="CL3a" href="/Configurations.aspx">Сохранённые конфигурации</a></li>
+              <li class="CL1"><a class="CL1a" href="TeacherMain.aspx">Главная</a></li>
+              <li class="CL2"><a class="CL2a" href="TeacherBuilder.aspx">Создать шаблон</a></li>
+              <li class="CL3"><a class="CL3a" href="Configurations.aspx">Сохранённые конфигурации</a></li>
               <li class="CL4"><a class="CL4a" href="#">Отправленные</a></li>
            
   <nav>
