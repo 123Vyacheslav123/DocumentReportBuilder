@@ -9,6 +9,8 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
 using System.Web.UI.HtmlControls;
+using Xceed.Words.NET;
+using Xceed.Document.NET;
 
 namespace DocumentReportBuilder
 {
@@ -188,8 +190,29 @@ namespace DocumentReportBuilder
             Session["NAMEOFTASK"] = row.Cells[1].Text;
             Session["TASKFROM"] = row.Cells[2].Text;
             Server.Transfer("~/StudentBuilder.aspx");
+            CreateFile();
         }
 
+        protected void CreateFile()
+        {
+            string savingPath = MapPath("~/Docx/");
+            string confname = (string)Session["NAMEOFTASK"];
+
+            string name = (string)Session["FORFILENAME"];
+
+            string filename = String.Concat(confname, " ", name, ".docx");
+
+            string filepath = String.Concat(savingPath, filename);
+
+            var doc = DocX.Create(filepath);
+            doc.Sections[0].MarginTop = 56;
+            doc.Sections[0].MarginFooter = 56;
+            doc.Sections[0].MarginLeft = 84;
+            doc.Sections[0].MarginRight = 42;
+            doc.Save();
+            Session["COUNTERIMG"] = "1";
+            Session["COUNTERLIST"] = "2";
+        }
 
 
     }

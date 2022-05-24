@@ -974,6 +974,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Docx\" />
     <Folder Include="Functions\Db\" />
     <Folder Include="Models\" />
   </ItemGroup>

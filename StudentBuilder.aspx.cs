@@ -63,7 +63,7 @@ namespace DocumentReportBuilder
             while (ProfileReader.Read())
             {
                 string ShortUserName = (string)ProfileReader["ShortUserName"];
-
+                Session["FORFILENAME"] = ShortUserName;
                 ////// Генерация меню в правом верхнем углу
 
                 HtmlGenericControl li = new HtmlGenericControl("li");
@@ -342,8 +342,6 @@ namespace DocumentReportBuilder
             i = 0;
 
 
-
-
             con.Close();
         }
 
@@ -353,10 +351,8 @@ namespace DocumentReportBuilder
             Button style = new Button();
             style.Text = Text;
             style.ID = String.Concat("style_",type, id);
-            style.Height = 22;
             style.Width = 152;
-            style.Attributes.Add("margin-left", "0px");
-            style.Attributes.Add("magin-bottom", "20px");
+            style.CssClass = "LIST_Buttons";
             style.Attributes.Add("runat", "server");
 
             if (type == "text")
@@ -385,22 +381,27 @@ namespace DocumentReportBuilder
 
         protected void workWithPdf() // процедура для создания и показа файла pdf
         {
+            string confname = (string)Session["NAMEOFTASK"];
+            string name = (string)Session["FORFILENAME"];
+
+            string filename = String.Concat(confname, " ", name, ".docx");
             // конвертация в pdf
-            string getDownloads = new KnownFolder(KnownFolderType.Downloads).Path;
-            string FullFilePath = String.Concat(getDownloads, "/Test.docx");
+            string getDownloads = MapPath("~/Docx/"); ;
+            string FullFilePath = String.Concat(getDownloads, filename);
             DocumentCore dc = DocumentCore.Load(FullFilePath);
 
+            string PDFfilename = String.Concat(confname, " ", name, ".pdf");
             // сохранение pdf на сервер
             string savingPath = MapPath("~/Pdfs/");
-            dc.Save(String.Concat(savingPath + "Test.pdf"));
-            showPDF.Src = "~/Pdfs/" + "Test.pdf"; //показать документ
+            dc.Save(String.Concat(savingPath + PDFfilename));
+            showPDF.Src = "~/Pdfs/" + PDFfilename; //показать документ
         }
         protected void CreateTextBoxes(int Rows, int Columns, string style)
         {
 
             int counter_rows = 1;
             int posleftCounter = 400;
-            int postopCounter = 360;
+            int postopCounter = 400;
             for (int i = 0; i < Rows; i++)
             {
                 for (int j = 0; j < Columns; j++)
@@ -429,6 +430,7 @@ namespace DocumentReportBuilder
 
         protected void Page_PreInit(object sender, EventArgs e)
         {
+
             // текстбоксы преинит
             int Columns = 10;
             int Rows = 10;
@@ -480,6 +482,8 @@ namespace DocumentReportBuilder
                 btn.Style["visibility"] = "hidden";
                 SavedStyles.Controls.Add(btn);
             }
+
+            workWithPdf();
         }
 
         protected void ButtonChooseText_Click(object sender,EventArgs e) // если выбран текст
@@ -496,6 +500,7 @@ namespace DocumentReportBuilder
                 Session["ADDSTATUS"] = "Text";
             }
 
+            rectangleTitle.Visible = false;
             TitleBoxes.Style.Add("visibility", "hidden");
             Images.Style.Add("visibility", "hidden");
             List.Style.Add("visibility", "hidden");
@@ -521,6 +526,7 @@ namespace DocumentReportBuilder
                 Session["TABLEADD"] = style;
             }
 
+            rectangleTitle.Visible = false;
             TitleBoxes.Style.Add("visibility", "hidden");
             Images.Style.Add("visibility", "hidden");
             List.Style.Add("visibility", "hidden");
@@ -546,6 +552,7 @@ namespace DocumentReportBuilder
                 Session["ADDSTATUS"] = "List";
             }
 
+            rectangleTitle.Visible = false;
             TitleBoxes.Style.Add("visibility", "hidden");
             Images.Style.Add("visibility", "hidden");
             List.Style.Add("visibility", "hidden");
@@ -573,6 +580,7 @@ namespace DocumentReportBuilder
                 Session["PICADD"] = style;
             }
 
+            rectangleTitle.Visible = false;
             TitleBoxes.Style.Add("visibility", "hidden");
             Images.Style.Add("visibility", "hidden");
             List.Style.Add("visibility", "hidden");
@@ -584,6 +592,10 @@ namespace DocumentReportBuilder
 
         protected void ButtonAddToMain_Click(object sender, EventArgs e)   // добавление текста в документ
         {
+
+            string confname = (string)Session["NAMEOFTASK"];
+            string name = (string)Session["FORFILENAME"];
+
             con.Open();
             string status = (string)Session["ADDSTATUS"];
             if (status == "Text")
@@ -603,10 +615,16 @@ namespace DocumentReportBuilder
                     TextAlign = (string)textstylesreader["Alignment"];
                 }
                 textstylesreader.Close();
+
                 string TextToAdd;
                 TextToAdd = String.Concat(TextBoxEditing.Text, "\n");
-                string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
-                string filepath = String.Concat(downloadsPath, "/Test.docx");
+
+
+                string filename = String.Concat("/", confname, " ", name, ".docx");
+                string downloadsPath = MapPath("~/Docx/");
+                string filepath = String.Concat(downloadsPath, filename);
+
+
                 var doc = DocX.Load(filepath);
                 var par = doc.InsertParagraph();
                 if (TextAlign == "both")
@@ -684,6 +702,10 @@ namespace DocumentReportBuilder
 
         protected void ButtonAddTitle_Click(object sender, EventArgs e)   // добавление титульника в документ
         {
+            string confname = (string)Session["NAMEOFTASK"];
+            string name = (string)Session["FORFILENAME"];
+
+
             string tbt1 = TextBoxTop1.Text;
             string tbt2 = TextBoxTop2.Text;
             string tbt3 = TextBoxTop3.Text;
@@ -711,8 +733,11 @@ namespace DocumentReportBuilder
             ///////////////////    ТЕКСТ ДЛЯ ТИТУЛЬНИКА    ////////////////
             ///////////////////////////////////////////////////////////////
 
-            string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
-            string filepath = String.Concat(downloadsPath, "/Test.docx");
+
+            string filename = String.Concat("/", confname, " ", name, ".docx");
+            string downloadsPath = MapPath("~/Docx/");
+            string filepath = String.Concat(downloadsPath, filename);
+
             var doc = DocX.Load(filepath);
             var part1 = doc.InsertParagraph();
             part1.Append(tbt1)    // форматирование документа
@@ -886,21 +911,6 @@ namespace DocumentReportBuilder
             workWithPdf();
         }
 
-        protected void ButtonCreateFile_Click(object sender, EventArgs e)
-        {
-            string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
-            string filepath = String.Concat(downloadsPath, "/Test.docx");
-            var doc = DocX.Create(filepath);
-            doc.Sections[0].MarginTop = 56;
-            doc.Sections[0].MarginFooter = 56;
-            doc.Sections[0].MarginLeft = 84;
-            doc.Sections[0].MarginRight = 42;
-            doc.Save();
-            Session["COUNTERIMG"] = "1";
-            Session["COUNTERLIST"] = "2";
-            workWithPdf();
-        }
-
         protected void ButtonAddList_Click(object sender, EventArgs e)
         {
             string redline = "\u2007\u2007\u2007\u2007\u2007"; // красная строка
@@ -914,9 +924,11 @@ namespace DocumentReportBuilder
 
         protected void UploadFile(object sender, EventArgs e)
         {
-            
-            string folderPath = MapPath("~/Images/");
+            string confname = (string)Session["NAMEOFTASK"];
+            string name = (string)Session["FORFILENAME"];
 
+            string folderPath = MapPath("~/Images/");
+            
             //Save the File to the Directory (Folder).
             FileUpload.SaveAs(folderPath + Path.GetFileName(FileUpload.FileName));
 
@@ -927,9 +939,12 @@ namespace DocumentReportBuilder
 
         protected void ButtonAddImage_Click(object sender, EventArgs e)
         {
-           
-            string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
-            string filepath = String.Concat(downloadsPath, "/Test.docx");
+            string confname = (string)Session["NAMEOFTASK"];
+            string name = (string)Session["FORFILENAME"];
+
+            string filename = String.Concat("/", confname, " ", name, ".docx");
+            string downloadsPath = MapPath("~/Docx/");
+            string filepath = String.Concat(downloadsPath, filename);
             var doc = DocX.Load(filepath);
             string imgPath = (string)Session["IMGPATH"];
             Image img = doc.AddImage(MapPath("~/Images/")+imgPath);
@@ -954,12 +969,14 @@ namespace DocumentReportBuilder
         protected void ButtonTitle_Click(object sender, EventArgs e)
         {
             con.Open();
+
             Images.Style.Add("visibility", "hidden");
             List.Style.Add("visibility", "hidden");
             TextAndList.Style.Add("visibility", "hidden");
             Title.Style.Add("visibility", "hidden");
             Tables.Style.Add("visibility", "hidden");
 
+            rectangleTitle.Visible = true;
             Title.Style.Add("visibility", "visible");
             TitleBoxes.Style.Add("visibility", "visible");
 
@@ -1004,6 +1021,9 @@ namespace DocumentReportBuilder
 
         protected void ButtonToWord_Click(object sender, EventArgs e)
         {
+            string confname = (string)Session["NAMEOFTASK"];
+            string name = (string)Session["FORFILENAME"];
+
             con.Open();
             // id  стиля
             string styleid = (string)Session["TABLEADD"];
@@ -1022,8 +1042,10 @@ namespace DocumentReportBuilder
 
             int Columns = Int32.Parse(TextBoxColumn.Text);
             int Rows = Int32.Parse(TextBoxRows.Text);
-            string downloadsPath = new KnownFolder(KnownFolderType.Downloads).Path;
-            string filepath = String.Concat(downloadsPath, "/Test.docx");
+
+            string filename = String.Concat("/", confname, " ", name, ".docx");
+            string downloadsPath = MapPath("~/Docx/");
+            string filepath = String.Concat(downloadsPath, filename);
             var doc = DocX.Load(filepath);
 
             // создаём таблицу
@@ -1115,7 +1137,123 @@ namespace DocumentReportBuilder
             con.Close();
         }
 
-        
+        protected void ButtonDownloadWord_Click(object sender, EventArgs e)
+        {
+            string confname = (string)Session["NAMEOFTASK"];
+            string name = (string)Session["FORFILENAME"];
+
+            string fileName = String.Concat("/", confname, " ", name, ".docx");
+            string downloadsPath = MapPath("~/Docx/");
+            string strLocalFilePath = String.Concat(downloadsPath, fileName);
+
+            Response.Clear();
+
+            Stream iStream = null;
+
+            const int bufferSize = 64 * 1024;
+
+            byte[] buffer = new Byte[bufferSize];
+
+            int length;
+
+            long dataToRead;
+
+            try
+            {
+                iStream = new FileStream(strLocalFilePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+                dataToRead = iStream.Length;
+                Response.ContentType = "application/octet-stream";
+                Response.AddHeader("Content-Disposition", "attachment; filename=" + fileName);
+
+                while (dataToRead > 0)
+                {
+                    if (Response.IsClientConnected)
+                    {
+                        length = iStream.Read(buffer, 0, bufferSize);
+                        Response.OutputStream.Write(buffer, 0, length);
+                        Response.Flush();
+                        buffer = new byte[bufferSize];
+                        dataToRead = dataToRead - length;
+                    }
+                    else
+                    {
+                        //prevent infinate loop on disconnect
+                        dataToRead = -1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //Your exception handling here
+            }
+            finally
+            {
+                if (iStream != null)
+                {
+                    iStream.Close();
+                }
+                Response.Close();
+            }
+        }
+
+        protected void ButtonDownloadPdf_Click(object sender, EventArgs e)
+        {
+            string confname = (string)Session["NAMEOFTASK"];
+            string name = (string)Session["FORFILENAME"];
+
+            string fileName = String.Concat("/", confname, " ", name, ".pdf");
+            string downloadsPath = MapPath("~/Pdfs/");
+            string strLocalFilePath = String.Concat(downloadsPath, fileName);
+
+            Response.Clear();
+
+            Stream iStream = null;
+
+            const int bufferSize = 64 * 1024;
+
+            byte[] buffer = new Byte[bufferSize];
+
+            int length;
+
+            long dataToRead;
+
+            try
+            {
+                iStream = new FileStream(strLocalFilePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+                dataToRead = iStream.Length;
+                Response.ContentType = "application/octet-stream";
+                Response.AddHeader("Content-Disposition", "attachment; filename=" + fileName);
+
+                while (dataToRead > 0)
+                {
+                    if (Response.IsClientConnected)
+                    {
+                        length = iStream.Read(buffer, 0, bufferSize);
+                        Response.OutputStream.Write(buffer, 0, length);
+                        Response.Flush();
+                        buffer = new byte[bufferSize];
+                        dataToRead = dataToRead - length;
+                    }
+                    else
+                    {
+                        //prevent infinate loop on disconnect
+                        dataToRead = -1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //Your exception handling here
+            }
+            finally
+            {
+                if (iStream != null)
+                {
+                    iStream.Close();
+                }
+                Response.Close();
+            }
+        }
 
         ////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////
