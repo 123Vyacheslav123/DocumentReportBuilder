@@ -76,8 +76,8 @@ namespace DocumentReportBuilder
    
             
                 string LastTextStyles = "SELECT TOP " + styletext + " * FROM [TEXT] WHERE [CREATEDBY]='" + UserMail + "' ORDER BY [ID] DESC";
-                SqlCommand command = new SqlCommand(LastTextStyles, con);
-                SqlDataReader TextReader = command.ExecuteReader();
+                SqlCommand commandText = new SqlCommand(LastTextStyles, con);
+                SqlDataReader TextReader = commandText.ExecuteReader();
                 while (TextReader.Read())
                 {
 
@@ -86,6 +86,42 @@ namespace DocumentReportBuilder
                     AddSavedStyleToList(TextName, id);
                 }
                 TextReader.Close();
+
+            string LastListStyles = "SELECT TOP " + stylelist + " * FROM [LIST] WHERE [CREATEDBY]='" + UserMail + "' ORDER BY [ID] DESC";
+            SqlCommand commandlist = new SqlCommand(LastListStyles, con);
+            SqlDataReader ListReader = commandlist.ExecuteReader();
+            while (ListReader.Read())
+            {
+
+                string ListName = (string)ListReader["StyleName"];
+                int id = ListReader.GetInt32(ListReader.GetOrdinal("ID"));
+                AddSavedStyleToList(ListName, id);
+            }
+            ListReader.Close();
+
+            string LastTableStyles = "SELECT TOP " + styletable + " * FROM [TABLE] WHERE [CREATEDBY]='" + UserMail + "' ORDER BY [ID] DESC";
+            SqlCommand commandTable = new SqlCommand(LastTableStyles, con);
+            SqlDataReader TableReader = commandTable.ExecuteReader();
+            while (TableReader.Read())
+            {
+
+                string TableName = (string)TableReader["StyleName"];
+                int id = TableReader.GetInt32(TableReader.GetOrdinal("ID"));
+                AddSavedStyleToList(TableName, id);
+            }
+            TableReader.Close();
+
+            string LastPicStyles = "SELECT TOP " + stylepic + " * FROM [IMAGE] WHERE [CREATEDBY]='" + UserMail + "' ORDER BY [ID] DESC";
+            SqlCommand commandPic = new SqlCommand(LastPicStyles, con);
+            SqlDataReader PicReader = commandPic.ExecuteReader();
+            while (PicReader.Read())
+            {
+
+                string PicName = (string)PicReader["StyleName"];
+                int id = PicReader.GetInt32(PicReader.GetOrdinal("ID"));
+                AddSavedStyleToList(PicName, id);
+            }
+            PicReader.Close();
 
 
             con.Close();
@@ -274,7 +310,7 @@ namespace DocumentReportBuilder
                 string TableStyle = "INSERT INTO [TABLE] ([CREATEDBY],[StyleName],[Font],[FontSize],[TableAlignment],[CellAlignment])VALUES('" + UserMail + "', N'" + TableStyleNameBox.Text + "', '" + DropDownName + "'," + textSize + ", '" + DropDownTableAlignment + "', '" + DropDownCellAlignment + "')";
                 SqlCommand TableStyleInsert = new SqlCommand(TableStyle, con);
                 TableStyleInsert.ExecuteNonQuery();
-                //AddSavedStyleToList(TableStyleNameBox.Text, stylenumber);
+                AddSavedStyleToList(TableStyleNameBox.Text, styletable);
                 styletable++;
                 Session["STYLETABLE"] = styletable.ToString();
             }
@@ -287,7 +323,7 @@ namespace DocumentReportBuilder
                 string ListStyle = "INSERT INTO [LIST] ([CREATEDBY],[StyleName],[Font],[FontSize])VALUES('" + UserMail + "', N'" + TextBoxSName.Text + "','" + DropDownListValue + "','" + ListSize + "')";
                 SqlCommand ListStyleInsert = new SqlCommand(ListStyle, con);
                 ListStyleInsert.ExecuteNonQuery();
-                //AddSavedStyleToList(TextBoxSName.Text, stylenumber);
+                AddSavedStyleToList(TextBoxSName.Text, stylelist);
                 stylelist++;
                 Session["STYLELIST"] = stylelist.ToString();
             }
@@ -300,7 +336,7 @@ namespace DocumentReportBuilder
                 string ImageStyle = "INSERT INTO [IMAGE] ([CREATEDBY],[StyleName],[Name],[Alignment])VALUES('"+ UserMail + "', N'" + TextBoxPName.Text + "', N'" + TextBoxPTitle.Text + "', '" + DropDownIMGValue + "')";
                 SqlCommand IMGStyleInsert = new SqlCommand(ImageStyle, con);
                 IMGStyleInsert.ExecuteNonQuery();
-                //AddSavedStyleToList(TextBoxPName.Text,stylenumber);
+                AddSavedStyleToList(TextBoxPName.Text,stylepic);
                 stylepic++;
                 Session["STYLEPIC"] = stylepic.ToString();
             }

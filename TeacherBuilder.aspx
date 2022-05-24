@@ -15,8 +15,8 @@
         .SAVE_Buttons {
             padding-top: 10px;
             padding-bottom: 10px;
-         padding-left: 15px;
-         padding-right: 15px;
+            padding-left: 15px;
+            padding-right: 15px;
             border: none;
             border-radius: 15px;
              font-size: 16px; /*меняем размер шрифта*/
@@ -31,8 +31,8 @@
             margin-bottom:10px;
             padding-top: 5px;
             padding-bottom: 5px;
-         padding-left: 10px;
-         padding-right: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
             border: none;
             border-radius: 10px;
              font-size: 14px; /*меняем размер шрифта*/
@@ -50,8 +50,8 @@
             top: 20%;
             padding-top: 10px;
             padding-bottom: 10px;
-         padding-left: 15px;
-         padding-right: 15px;
+            padding-left: 15px;
+            padding-right: 15px;
             border: none;
             border-radius: 15px;
              font-size: 16px; /*меняем размер шрифта*/
