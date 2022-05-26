@@ -37,7 +37,7 @@ namespace DocumentReportBuilder
             while (ProfileReader.Read())
             {
                 string ShortUserName = (string)ProfileReader["ShortUserName"];
-
+                Session["FORFILENAME"] = ShortUserName;
                 ////// Генерация меню в правом верхнем углу
 
                 HtmlGenericControl li = new HtmlGenericControl("li");
@@ -189,8 +189,8 @@ namespace DocumentReportBuilder
             GridViewRow row = (GridViewRow)btn.NamingContainer;
             Session["NAMEOFTASK"] = row.Cells[1].Text;
             Session["TASKFROM"] = row.Cells[2].Text;
-            Server.Transfer("~/StudentBuilder.aspx");
             CreateFile();
+            Server.Transfer("~/StudentBuilder.aspx");
         }
 
         protected void CreateFile()

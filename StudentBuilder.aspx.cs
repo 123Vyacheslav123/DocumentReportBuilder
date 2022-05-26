@@ -63,7 +63,6 @@ namespace DocumentReportBuilder
             while (ProfileReader.Read())
             {
                 string ShortUserName = (string)ProfileReader["ShortUserName"];
-                Session["FORFILENAME"] = ShortUserName;
                 ////// Генерация меню в правом верхнем углу
 
                 HtmlGenericControl li = new HtmlGenericControl("li");

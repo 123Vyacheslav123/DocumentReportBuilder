@@ -59,7 +59,7 @@ namespace DocumentReportBuilder
 
 
                 HtmlGenericControl anchor1 = new HtmlGenericControl("a");
-                anchor1.Attributes.Add("href", "~/Profile.aspx");
+                anchor1.Attributes.Add("href", "/Profile.aspx");
                 anchor1.InnerText = "Профиль";
                 li1.Controls.Add(anchor1);
 

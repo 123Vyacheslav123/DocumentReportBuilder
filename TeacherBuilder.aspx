@@ -201,7 +201,7 @@
 
         <div id="TextStyle" style="visibility:hidden;" runat="server">
 
-            <asp:Label ID="Textsettings" runat="server" style="position:absolute; top:29%; left:17%" Width="12%" Font-Size="18px"  Text="Настройка стиля текста"></asp:Label>
+            <asp:Label ID="Textsettings" runat="server" style="position:absolute; top:29%; left:17%" Width="15%" Font-Size="18px"  Text="Настройка стиля текста"></asp:Label>
 
             <asp:Label ID="LabelName" style="position:absolute; top:33%; left:17%" runat="server" Text="Название:"></asp:Label>
             <asp:TextBox ID="TextBoxName" Width="10%" style="position:absolute; top:33%; left:21%" runat="server"></asp:TextBox>
@@ -237,7 +237,7 @@
 
              <div id="Liststyle" runat="server" style="visibility:hidden;">
 
-                <asp:Label ID="SSettings_Label" style="position:absolute; top:29%; left:17%" Width="12%" Font-Size="18px" runat="server">Настройка стиля списка</asp:Label>
+                <asp:Label ID="SSettings_Label" style="position:absolute; top:29%; left:17%" Width="15%" Font-Size="18px" runat="server">Настройка стиля списка</asp:Label>
 
                 <asp:Label ID="TextBoxSName_Label" style="position:absolute; top:33%; left:17%" runat="server">Название:</asp:Label>
                 <asp:TextBox ID="TextBoxSName" Width="10%" style="position:absolute; top:33%; left:21%" runat="server"></asp:TextBox>
@@ -256,7 +256,7 @@
 
             <div id="Picstyle" runat="server" style="visibility:hidden">
 
-                <asp:Label ID="PSettings_Label" style="position:absolute; top:29%; left:17%" Width="12%" Font-Size="18px" runat="server">Настройка стиля картинки</asp:Label>
+                <asp:Label ID="PSettings_Label" style="position:absolute; top:29%; left:17%" Width="15%" Font-Size="18px" runat="server">Настройка стиля картинки</asp:Label>
 
                 <asp:Label ID="TextVoxPName_Label" style="position:absolute; top:33%; left:17%" runat="server">Название:</asp:Label>
                 <asp:TextBox ID="TextBoxPName" Width="10%" style="position:absolute; top:33%; left:21%" runat="server"></asp:TextBox>
@@ -274,7 +274,7 @@
             </div>
 
         <div id="TableStyle" style="visibility:hidden" runat="server">
-            <asp:Label ID="TableSettings" runat="server" style="position:absolute; top:29%; left:17%" Width="12%" Font-Size="18px"  Text="Настройка стиля таблицы"></asp:Label>
+            <asp:Label ID="TableSettings" runat="server" style="position:absolute; top:29%; left:17%" Width="15%" Font-Size="18px"  Text="Настройка стиля таблицы"></asp:Label>
 
             <asp:Label ID="TableStyleName" style="position:absolute; top:33%; left:17%" runat="server">Название:</asp:Label>
             <asp:TextBox ID="TableStyleNameBox" Width="10%" style="position:absolute;top:33%; left:21%" runat="server"></asp:TextBox>
