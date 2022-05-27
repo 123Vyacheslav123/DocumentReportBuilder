@@ -203,6 +203,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Check.aspx.cs">
+      <DependentUpon>Check.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Check.aspx.designer.cs">
+      <DependentUpon>Check.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Configurations.aspx.cs">
       <DependentUpon>Configurations.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -279,6 +286,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Check.aspx" />
     <Content Include="Configurations.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

@@ -125,15 +125,15 @@ namespace DocumentReportBuilder
 
 
             con.Close();
+
         }
+
 
         protected void Page_PreInit(object sender, EventArgs e)
         {
             
         }
 
-
-        // пока что не работает(добавление сохраненных стилей в список слева)
         protected void AddSavedStyleToList(string Text, int id)
         {
             Button style = new Button();

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TeacherBuilder.aspx.cs" Inherits="DocumentReportBuilder.TeacherBuilder" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Check.aspx.cs" Inherits="DocumentReportBuilder.Check" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -95,9 +95,9 @@
         <div>
 
             <ul class="FIR">
-              <li class="CL1"><a class="CL1a" href="TeacherMain.aspx">Главная</a></li>
-              <li class="CL2"><a class="CL2a" href="TeacherBuilder.aspx">Создать шаблон</a></li>
-              <li class="CL3"><a class="CL3a" href="Configurations.aspx">Сохранённые конфигурации</a></li>
+              <li class="CL1"><a class="CL1a" href="/TeacherMain.aspx">Главная</a></li>
+              <li class="CL2"><a class="CL2a" href="/TeacherBuilder.aspx">Создать шаблон</a></li>
+              <li class="CL3"><a class="CL3a" href="/Configurations.aspx">Сохранённые конфигурации</a></li>
               <li class="CL4"><a class="CL4a" href="#">Отправленные</a></li>
            
   <nav>
@@ -120,19 +120,6 @@
 
             
         </div>
-        <asp:Button ID="ButtonCreateTitleList_" CssClass="ZAD_TIT" runat="server" Text="Задать титульник" OnClick="ButtonCreateTitleList_Click" />
-        <nav>
-<ul class="topmenu1" style="left:35%; background-color:white;">
-    <li><a href="" class="down1">Задать стиль</a>
-      <ul class="submenu1">
-        <li><a><asp:Button ID="ButtonTextStyle" BackColor="White" BorderStyle="None" runat="server" Text="Текст" OnClick="ButtonTextStyle_Click" /></a></li>
-        <li><a><asp:Button ID="ButtonListStyle" BackColor="White" BorderStyle="None" runat="server" Text="Список" OnClick="ButtonListStyle_Click" /></a></li>
-          <li><a><asp:Button ID="ButtonTableStyle" BackColor="White" BorderStyle="None" runat="server" Text="Таблица" OnClick="ButtonTableStyle_Click"/></a></li>
-          <li><a><asp:Button ID="ButtonPicStyle" BackColor="White" BorderStyle="None" runat="server" Text="Рисунок" OnClick="ButtonPicStyle_Click"/></a></li>
-      </ul>
-    </li>
-  </ul>
-      </nav>
         
         <ul class="Buttons" >
             <p>Сохранённые стили</p>
@@ -149,18 +136,7 @@
            
             </ul>
 
-
-
-
-
-
-
-
     <div id="Title" runat="server">
-
-        <div id ="SaveTitle" style="visibility:hidden" runat="server">
-            <asp:Button ID="ButtonCreateMainList" CssClass="SAVE_Buttons" style="position:absolute; top:90%; left:83%" runat="server" Text="Сохранить титульник" OnClick="ButtonCreateMainList_Click" />
-        </div>
         
             <div id="TopBoxes" style="visibility:hidden" runat="server">
         <asp:TextBox ID="TextBoxTop1" Width="25%" style="position:absolute; top:13%; left:60%; border:2px solid black" CssClass="AllBoxes" runat="server" OnTextChanged="TextBoxTop1_TextChanged"></asp:TextBox>
@@ -308,15 +284,7 @@
 
                 <div id="MainButtons" runat="server" >
 
-            <asp:Button ID="ButtonSaveStyle" CssClass="SAVE_Buttons" style="position:absolute; top:69%; left:34%" runat="server" Text="Сохранить стиль" OnClick="ButtonSaveStyle_Click" />
-
-            <asp:Button ID="ButtonSaveConf" CssClass="SAVE_Buttons" style="position:absolute; top:86%; left:30%" runat="server" Text="Сохранить конфигурацию" OnClick="ButtonSaveConf_Click" />
-            
             <asp:Button ID="ButtonGoBack" CssClass="SAVE_Buttons" style="position:absolute; top:75%; left:37%" runat="server" Text="Отмена" OnClick="ButtonGoBack_Click" />
-
-            <asp:Label ID="LabelConfName" runat="server" style="position:absolute; top:83%; left:17%" Width="20%" Font-Size="18px"  Text="">Название конфигурации:</asp:Label>
-                    
-            <asp:TextBox ID="TextBoxConfName" CssClass="AllBoxes" Width="12%" Height="2%" style="position:absolute; top:87%; left:17%" runat="server"></asp:TextBox>
 
                </div>
 

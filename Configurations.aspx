@@ -127,15 +127,13 @@
        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [CONFIGURATION]"></asp:SqlDataSource> 
 
 
-         <asp:GridView ID="GridViewTableConf" AutoGenerateColumns="false" Width="550px" style="left:35%;top:35%;position:absolute; font-size:20px" runat="server" CssClass="TABLE1" >
+         <asp:GridView ID="GridViewTableConf" AutoGenerateColumns="false" Width="35%" style="left:35%;top:35%;position:absolute; font-size:20px" runat="server" CssClass="TABLE1" >
              <Columns>
-                <%-- <asp:BoundField DataField ="ID" HeaderText ="№" ReadOnly="true" />--%>
                  <asp:BoundField DataField ="CONFNAME" HeaderText ="Название" ReadOnly="true" />
-                 <%--<asp:BoundField DataField ="Date" HeaderText ="Дата" ReadOnly="true" />--%>
                  <asp:BoundField DataField ="ShortUserName" HeaderText ="Кем создано" ReadOnly="true" />
                  <asp:TemplateField>
                      <ItemTemplate>
-                        <asp:Button runat="server" Text="Изменить" Font-Size="18px" CssClass="BUTTON_STYLE" />
+                        <asp:Button runat="server" Text="Просмотр" OnClick="ButtonCheck_Click" Font-Size="18px" CssClass="BUTTON_STYLE" />
                      </ItemTemplate>    
                  </asp:TemplateField>
                  <asp:TemplateField>

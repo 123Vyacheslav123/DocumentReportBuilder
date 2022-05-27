@@ -84,7 +84,14 @@ namespace DocumentReportBuilder
 
         }
 
-
+        protected void ButtonCheck_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            GridViewRow row = (GridViewRow)btn.NamingContainer;
+            Session["NAMEOFCONF"] = row.Cells[0].Text;
+            Session["CREATOR"] = row.Cells[1].Text;
+            Server.Transfer("~/Check.aspx");
+        }
 
         protected void ButtonChoose_Click(object sender, EventArgs e)
         {
